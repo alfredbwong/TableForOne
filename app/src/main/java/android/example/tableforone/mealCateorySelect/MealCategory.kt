@@ -1,4 +1,4 @@
-package android.example.tableforone.mealSelect
+package android.example.tableforone.mealCateorySelect
 
 import com.squareup.moshi.Json
 

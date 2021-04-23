@@ -1,6 +1,6 @@
 package android.example.tableforone.utils
 
-import android.example.tableforone.mealSelect.MealCategory
+import android.example.tableforone.mealCateorySelect.MealCategory
 import android.util.Log
 import org.json.JSONObject
 
