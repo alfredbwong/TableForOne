@@ -9,5 +9,14 @@
         android:id="@+id/mealListFragment"
         android:name="android.example.tableforone.MealListFragment"
         android:label="fragment_meal_list"
-        tools:layout="@layout/fragment_meal_list" />
+        tools:layout="@layout/fragment_meal_list" >
+        <action
+            android:id="@+id/action_mealListFragment_to_mealCategorySelectFragment"
+            app:destination="@id/mealCategorySelectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mealCategorySelectFragment"
+        android:name="android.example.tableforone.MealCategorySelectFragment"
+        android:label="fragment_meal_category_select"
+        tools:layout="@layout/fragment_meal_category_select" />
 </navigation>
