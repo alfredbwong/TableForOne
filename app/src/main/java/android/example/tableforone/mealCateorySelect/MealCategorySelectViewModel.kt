@@ -12,10 +12,10 @@ import retrofit2.Response
 
 class MealCategorySelectViewModel : ViewModel() {
 
-    private val _response = MutableLiveData<String>()
+    private val _mealCategories = MutableLiveData<List<MealCategory>>()
 
-    val response : LiveData<String>
-        get() = _response
+    val mealCategories : LiveData<List<MealCategory>>
+        get() = _mealCategories
 
     init{
         getMealResponse()
@@ -24,16 +24,15 @@ class MealCategorySelectViewModel : ViewModel() {
     private fun getMealResponse(){
         MealApi.retrofitService.getMealCategories().enqueue( object: Callback<String> {
             override fun onFailure(call: Call<String>, t: Throwable) {
-                _response.value = "Failure: " + t.message
+                _mealCategories.value = mutableListOf()
             }
 
 
             override fun onResponse(call: Call<String>, response: Response<String>) {
-                _response.value = parseAsteroidsJsonResult(JSONObject(response.body())).toString()
+                _mealCategories.value = parseAsteroidsJsonResult(JSONObject(response.body()))
 
             }
         })
-        //_response.value = "Set the response here"
     }
 
 

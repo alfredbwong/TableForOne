@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="viewModel"
-            type="android.example.tableforone.mealList.MealListViewModel" />
+            name="viewModelCategories"
+            type="android.example.tableforone.mealCateorySelect.MealCategorySelectViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
