@@ -2,9 +2,11 @@ package android.example.tableforone
 
 import android.example.tableforone.databinding.FragmentMealCategorySelectBinding
 import android.example.tableforone.mealCateorySelect.MealCategory
+import android.example.tableforone.mealCateorySelect.MealCategoryAdapter
 import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModel
 import android.example.tableforone.mealList.MealListViewModel
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -32,19 +34,14 @@ class MealCategorySelectFragment : Fragment() {
 
         binding.viewModelCategories = viewModel
 
-        viewModel.mealCategories.observe(viewLifecycleOwner, Observer { listCategories ->
-            val listCategoriesStr = mutableListOf<String>()
-            for (category in listCategories) {
-                listCategoriesStr.add(category.strCategory)
-            }
-            val spinner = binding.selectMealCategorySpinner
+        val adapter = MealCategoryAdapter()
+        binding.mealCategoryRecyclerView.adapter = adapter
 
-            val spinnerAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
-                requireContext(),
-                android.R.layout.simple_spinner_dropdown_item,
-                listCategoriesStr
-            )
-            spinner.adapter = spinnerAdapter
+        viewModel.mealCategories.observe(viewLifecycleOwner, Observer{
+            it?.let {
+                Log.i("MealCategorySelect", "list of meals :  ${it.size} ${it[0].strCategory}")
+                adapter.submitList(it)
+            }
         })
 
         return binding.root

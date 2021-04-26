@@ -14,7 +14,9 @@ fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<MealCategory> {
         val mealCategoryObj = mealCategoriesJson.getJSONObject(i)
         val id = mealCategoryObj.getString("idCategory")
         val category = mealCategoryObj.getString("strCategory")
-        val mealCategory = MealCategory(id, category, "")
+        val imgUrl = mealCategoryObj.getString("strCategoryThumb")
+        val mealCategory = MealCategory(id, category, imgUrl)
+        Log.i("Util", "$mealCategory")
         mealCategoryList.add(mealCategory)
     }
     return mealCategoryList
