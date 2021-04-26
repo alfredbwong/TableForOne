@@ -1,7 +1,6 @@
 package android.example.tableforone.mealCateorySelect
 
 import android.example.tableforone.databinding.MealCategoryListItemBinding
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,13 +8,15 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 
-class MealCategoryAdapter : ListAdapter<MealCategory,
+class MealCategoryAdapter (private val listener: (MealCategory) -> Unit): ListAdapter<MealCategory,
         MealCategoryAdapter.ViewHolder>(MealCategoryDiffCallback()) {
+
     class ViewHolder private constructor(val binding: MealCategoryListItemBinding)
-        : RecyclerView.ViewHolder(binding.root) {
+        : RecyclerView.ViewHolder(binding.root){
         fun bind(item: MealCategory?) {
             binding.mealCategory = item
             binding.executePendingBindings()
+            
         }
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
@@ -35,6 +36,7 @@ class MealCategoryAdapter : ListAdapter<MealCategory,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
+        holder.itemView.setOnClickListener{listener(item)}
     }
 }
 
@@ -52,4 +54,7 @@ class MealCategoryDiffCallback : DiffUtil.ItemCallback<MealCategory>() {
     override fun areContentsTheSame(oldItem: MealCategory, newItem: MealCategory): Boolean {
         return oldItem == newItem
     }
+}
+interface OnItemClickListener {
+    fun onItemClick(item: MealCategory)
 }

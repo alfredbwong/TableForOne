@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 
 
 /**
@@ -34,12 +35,16 @@ class MealCategorySelectFragment : Fragment() {
 
         binding.viewModelCategories = viewModel
 
-        val adapter = MealCategoryAdapter()
+        //Pass in a lambda function to control what happens after every click
+        val adapter = MealCategoryAdapter{
+            it ->
+            val navController = findNavController()
+            navController.popBackStack()
+        }
         binding.mealCategoryRecyclerView.adapter = adapter
 
         viewModel.mealCategories.observe(viewLifecycleOwner, Observer{
             it?.let {
-                Log.i("MealCategorySelect", "list of meals :  ${it.size} ${it[0].strCategory}")
                 adapter.submitList(it)
             }
         })
