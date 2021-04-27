@@ -7,4 +7,5 @@
     <string name="meal_select_recipe_title">Recipe Title</string>
     <string name="date_time_select_info_text">Select a Time/Date:</string>
     <string name="date_time_select_button_text">Pick A Date/Time</string>
+    <string name="save_button_text">Save</string>
 </resources>
