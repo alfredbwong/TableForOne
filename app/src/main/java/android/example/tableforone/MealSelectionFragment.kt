@@ -33,7 +33,8 @@ class MealSelectionFragment : Fragment() {
         binding.viewModelCategories = viewModel
 
         val adapter = MealSelectAdapter{
-            findNavController().popBackStack()
+            val action = MealSelectionFragmentDirections.actionMealSelectionFragmentToTimeDateSelectFragment()
+            findNavController().navigate(action)
         }
         binding.mealSelectRecyclerView.adapter = adapter
 
