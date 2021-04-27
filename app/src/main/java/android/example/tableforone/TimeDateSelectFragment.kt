@@ -65,7 +65,11 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         viewModel.onTimeSetFun(hourOfDay, minute)
 
-        binding.textView.text = "Year: " + viewModel.myYear + "\n" + "Month: " + viewModel.myMonth + "\n" + "Day: " + viewModel.myDay + "\n" + "Hour: " + viewModel.myHour + "\n" + "Minute: " + viewModel.myMinute
+        binding.textView.text = "Year: " + viewModel.myYear +
+                "\n" + "Month: " + viewModel.myMonth + 
+                "\n" + "Day: " + viewModel.myDay +
+                "\n" + "Hour: " + viewModel.myHour +
+                "\n" + "Minute: " + viewModel.myMinute
     }
 
 
