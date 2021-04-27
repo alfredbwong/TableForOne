@@ -18,5 +18,14 @@
         android:id="@+id/mealCategorySelectFragment"
         android:name="android.example.tableforone.MealCategorySelectFragment"
         android:label="fragment_meal_category_select"
-        tools:layout="@layout/fragment_meal_category_select" />
+        tools:layout="@layout/fragment_meal_category_select" >
+        <action
+            android:id="@+id/action_mealCategorySelectFragment_to_mealSelectionFragment"
+            app:destination="@id/mealSelectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mealSelectionFragment"
+        android:name="android.example.tableforone.MealSelectionFragment"
+        android:label="fragment_meal_selection"
+        tools:layout="@layout/fragment_meal_selection" />
 </navigation>

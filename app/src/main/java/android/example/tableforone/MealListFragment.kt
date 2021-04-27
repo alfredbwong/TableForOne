@@ -1,6 +1,7 @@
 package android.example.tableforone
 
 import android.example.tableforone.databinding.FragmentMealListBinding
+import android.example.tableforone.databinding.FragmentMealSelectionBinding
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

@@ -1,17 +1,14 @@
 package android.example.tableforone
 
 import android.example.tableforone.databinding.FragmentMealCategorySelectBinding
-import android.example.tableforone.mealCateorySelect.MealCategory
 import android.example.tableforone.mealCateorySelect.MealCategoryAdapter
 import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModel
-import android.example.tableforone.mealList.MealListViewModel
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -24,9 +21,8 @@ import androidx.navigation.fragment.findNavController
  */
 class MealCategorySelectFragment : Fragment() {
 
-    private val viewModel: MealCategorySelectViewModel by lazy {
-        ViewModelProvider(this).get(MealCategorySelectViewModel::class.java)
-    }
+    private val viewModel: MealCategorySelectViewModel by activityViewModels()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -37,9 +33,12 @@ class MealCategorySelectFragment : Fragment() {
 
         //Pass in a lambda function to control what happens after every click
         val adapter = MealCategoryAdapter{
-            it ->
+            mealCategory->
+            //Save the selection to the viewmodel
+            viewModel._mealCategorySelected.value = mealCategory.strCategory
+
             val navController = findNavController()
-            navController.popBackStack()
+            navController.navigate(MealCategorySelectFragmentDirections.actionMealCategorySelectFragmentToMealSelectionFragment())
         }
         binding.mealCategoryRecyclerView.adapter = adapter
 

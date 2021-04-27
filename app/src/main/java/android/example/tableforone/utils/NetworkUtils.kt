@@ -1,10 +1,10 @@
 package android.example.tableforone.utils
 
+import android.example.tableforone.meal.select.MealSelectItem
 import android.example.tableforone.mealCateorySelect.MealCategory
-import android.util.Log
 import org.json.JSONObject
 
-fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<MealCategory> {
+fun parseMealCategoriesJsonResult(jsonResult: JSONObject): ArrayList<MealCategory> {
     val mealCategoriesJson = jsonResult.getJSONArray("categories")
     val mealCategoryList = ArrayList<MealCategory>()
 
@@ -17,4 +17,19 @@ fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<MealCategory> {
         mealCategoryList.add(mealCategory)
     }
     return mealCategoryList
+}
+
+fun parseMealSelectRecipesJsonResult(jsonResult: JSONObject): ArrayList<MealSelectItem> {
+    val mealSelectJSON = jsonResult.getJSONArray("meals")
+    val mealSelectList = ArrayList<MealSelectItem>()
+
+    for ( i in 0 until mealSelectJSON.length()){
+        val mealCategoryObj = mealSelectJSON.getJSONObject(i)
+        val mealName = mealCategoryObj.getString("strMeal")
+        val mealThumbUrl = mealCategoryObj.getString("strMealThumb")
+        val mealId = mealCategoryObj.getLong("idMeal")
+        val mealSelectItem = MealSelectItem(mealName, mealThumbUrl, mealId)
+        mealSelectList.add(mealSelectItem)
+    }
+    return mealSelectList
 }

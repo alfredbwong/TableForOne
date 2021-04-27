@@ -1,7 +1,9 @@
 package android.example.tableforone.mealCateorySelect
 
+import android.example.tableforone.meal.select.MealSelectItem
 import android.example.tableforone.network.MealApi
-import android.example.tableforone.utils.parseAsteroidsJsonResult
+import android.example.tableforone.utils.parseMealCategoriesJsonResult
+import android.example.tableforone.utils.parseMealSelectRecipesJsonResult
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,28 +14,53 @@ import retrofit2.Response
 
 class MealCategorySelectViewModel : ViewModel() {
 
-    private val _mealCategories = MutableLiveData<List<MealCategory>>()
+    var _mealCategorySelected = MutableLiveData<String>()
 
-    val mealCategories : LiveData<List<MealCategory>>
+    val mealCategorySelected: LiveData<String>
+        get() = _mealCategorySelected
+
+    private var _mealCategories = MutableLiveData<List<MealCategory>>()
+
+    val mealCategories: LiveData<List<MealCategory>>
         get() = _mealCategories
 
-    init{
-        getMealResponse()
+    private var _mealItems = MutableLiveData<List<MealSelectItem>>()
+
+    val mealItems: LiveData<List<MealSelectItem>>
+        get() = _mealItems
+
+    init {
+        getMealCategoriesResponse()
     }
 
-    private fun getMealResponse(){
-        MealApi.retrofitService.getMealCategories().enqueue( object: Callback<String> {
+    private fun getMealCategoriesResponse() {
+        MealApi.retrofitService.getMealCategories().enqueue(object : Callback<String> {
             override fun onFailure(call: Call<String>, t: Throwable) {
                 _mealCategories.value = mutableListOf()
             }
 
 
             override fun onResponse(call: Call<String>, response: Response<String>) {
-                _mealCategories.value = parseAsteroidsJsonResult(JSONObject(response.body()))
+                _mealCategories.value = parseMealCategoriesJsonResult(JSONObject(response.body()))
 
             }
         })
     }
 
+    fun getMealCategoryItemsResponse() {
+        _mealCategorySelected.value?.let {
+            MealApi.retrofitService.getMealCategoryItems(it).enqueue(object : Callback<String> {
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    _mealItems.value = mutableListOf()
+                }
+
+
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    _mealItems.value = parseMealSelectRecipesJsonResult(JSONObject(response.body()))
+
+                }
+            })
+        }
+    }
 
 }
