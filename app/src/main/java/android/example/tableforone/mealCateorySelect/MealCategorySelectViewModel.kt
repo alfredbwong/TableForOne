@@ -113,4 +113,8 @@ class MealCategorySelectViewModel : ViewModel() {
         _showTimePicker.value = false
     }
 
+    fun saveMealReminder() {
+        //Save to Room DB and setup broadcast Receiver
+    }
+
 }

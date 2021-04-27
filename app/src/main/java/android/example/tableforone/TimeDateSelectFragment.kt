@@ -15,7 +15,7 @@ import android.widget.TimePicker
 import androidx.fragment.app.activityViewModels
 import java.util.*
 import androidx.lifecycle.Observer
-
+import androidx.navigation.fragment.findNavController
 
 
 /**
@@ -54,6 +54,11 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
             }
 
         })
+        binding.nextButton.setOnClickListener{
+            viewModel.saveMealReminder()
+            val action = TimeDateSelectFragmentDirections.actionTimeDateSelectFragmentToMealListFragment()
+            findNavController().navigate(action)
+        }
         return binding.root
     }
 
@@ -66,7 +71,7 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         viewModel.onTimeSetFun(hourOfDay, minute)
 
         binding.textView.text = "Year: " + viewModel.myYear +
-                "\n" + "Month: " + viewModel.myMonth + 
+                "\n" + "Month: " + viewModel.myMonth +
                 "\n" + "Day: " + viewModel.myDay +
                 "\n" + "Hour: " + viewModel.myHour +
                 "\n" + "Minute: " + viewModel.myMinute
