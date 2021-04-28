@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 
 
 /**
@@ -26,7 +27,7 @@ class MealRecipeDetailFragment : Fragment() {
 
         viewModel.getMealRecipeResponse()
         binding = FragmentMealRecipeDetailBinding.inflate(inflater)
-        binding.mealRecipe = viewModel.mealRecipeItem.value
+        //binding.mealRecipe = viewModel.mealRecipeItem.value
 
         viewModel.mealRecipeItem.observe(viewLifecycleOwner, Observer {
             it ->
@@ -34,6 +35,11 @@ class MealRecipeDetailFragment : Fragment() {
             binding.mealRecipe = viewModel.mealRecipeItem.value
             binding.executePendingBindings()
         })
+
+        binding.saveRecipeButton.setOnClickListener{
+            val action = MealRecipeDetailFragmentDirections.actionMealRecipeDetailFragmentToTimeDateSelectFragment()
+            findNavController().navigate(action)
+        }
         return binding.root
     }
 
