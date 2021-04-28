@@ -4,6 +4,20 @@ buildscript {
     ext.version_retrofit = "2.9.0"
     ext.version_moshi = "1.12.0"
     ext.version_glide="4.12.0"
+    ext.roomVersion = '2.2.5'
+    ext.lifecycleVersion = '2.2.0'
+    ext.coroutines = '1.3.9'
+    ext.coreTestingVersion = '2.1.0'
+    ext.activityVersion = '1.1.0'
+
+
+
+
+    // testing
+    ext.junitVersion = '4.13.1'
+    ext.espressoVersion = '3.1.0'
+    ext.androidxJunitVersion = '1.1.2'
+
 
     repositories {
         google()

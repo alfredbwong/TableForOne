@@ -33,7 +33,9 @@ class MealSelectionFragment : Fragment() {
         binding.viewModelCategories = viewModel
 
         val adapter = MealSelectAdapter{
-            val action = MealSelectionFragmentDirections.actionMealSelectionFragmentToTimeDateSelectFragment()
+            it->
+            viewModel.mealRecipeItemSelected.value = it.idMeal
+            val action = MealSelectionFragmentDirections.actionMealSelectionFragmentToMealRecipeDetailFragment()
             findNavController().navigate(action)
         }
         binding.mealSelectRecyclerView.adapter = adapter

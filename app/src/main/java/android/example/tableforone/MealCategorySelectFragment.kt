@@ -35,7 +35,7 @@ class MealCategorySelectFragment : Fragment() {
         val adapter = MealCategoryAdapter{
             mealCategory->
             //Save the selection to the viewmodel
-            viewModel._mealCategorySelected.value = mealCategory.strCategory
+            viewModel.mealCategorySelected.value = mealCategory.strCategory
 
             val navController = findNavController()
             navController.navigate(MealCategorySelectFragmentDirections.actionMealCategorySelectFragmentToMealSelectionFragment())

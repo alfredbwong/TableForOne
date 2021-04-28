@@ -1,11 +1,11 @@
 package android.example.tableforone.meal.recipe
 
 data class MealRecipe (
+    val idMeal : Long,
     val strMeal : String,
     val strArea : String,
     val strInstructions : String,
     val strMealThumb : String,
-    val strYoutube : String,
     val strIngredient1 : String,
     val strIngredient2 : String,
     val strIngredient3 : String,

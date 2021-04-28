@@ -1,9 +1,12 @@
 package android.example.tableforone.mealCateorySelect
 
+import android.example.tableforone.meal.recipe.MealRecipe
 import android.example.tableforone.meal.select.MealSelectItem
 import android.example.tableforone.network.MealApi
 import android.example.tableforone.utils.parseMealCategoriesJsonResult
+import android.example.tableforone.utils.parseMealRecipeJsonResult
 import android.example.tableforone.utils.parseMealSelectRecipesJsonResult
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,20 +18,24 @@ import java.util.*
 
 class MealCategorySelectViewModel : ViewModel() {
 
-    var _mealCategorySelected = MutableLiveData<String>()
-
-    val mealCategorySelected: LiveData<String>
-        get() = _mealCategorySelected
+    var mealCategorySelected = MutableLiveData<String>()
+    var mealRecipeItemSelected = MutableLiveData<Long>()
 
     private var _mealCategories = MutableLiveData<List<MealCategory>>()
 
     val mealCategories: LiveData<List<MealCategory>>
         get() = _mealCategories
 
+
     private var _mealItems = MutableLiveData<List<MealSelectItem>>()
 
     val mealItems: LiveData<List<MealSelectItem>>
         get() = _mealItems
+
+    var _mealRecipeItem = MutableLiveData<MealRecipe>()
+
+    val mealRecipeItem: LiveData<MealRecipe>
+        get() = _mealRecipeItem
 
     private var _showDatePicker = MutableLiveData<Boolean>()
 
@@ -71,7 +78,7 @@ class MealCategorySelectViewModel : ViewModel() {
     }
 
     fun getMealCategoryItemsResponse() {
-        _mealCategorySelected.value?.let {
+        mealCategorySelected.value?.let {
             MealApi.retrofitService.getMealCategoryItems(it).enqueue(object : Callback<String> {
                 override fun onFailure(call: Call<String>, t: Throwable) {
                     _mealItems.value = mutableListOf()
@@ -80,6 +87,23 @@ class MealCategorySelectViewModel : ViewModel() {
 
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     _mealItems.value = parseMealSelectRecipesJsonResult(JSONObject(response.body()))
+
+                }
+            })
+        }
+    }
+
+    fun getMealRecipeResponse(){
+        mealRecipeItemSelected.value?.let {
+            MealApi.retrofitService.getMealRecipeById(it).enqueue(object : Callback<String> {
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Log.i("ViewModel", "Failed to get recipe")
+                    _mealRecipeItem.value = null
+                }
+
+
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    _mealRecipeItem.value = parseMealRecipeJsonResult(JSONObject(response.body()))
 
                 }
             })
@@ -116,5 +140,7 @@ class MealCategorySelectViewModel : ViewModel() {
     fun saveMealReminder() {
         //Save to Room DB and setup broadcast Receiver
     }
+
+
 
 }

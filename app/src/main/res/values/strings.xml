@@ -8,4 +8,7 @@
     <string name="date_time_select_info_text">Select a Time/Date:</string>
     <string name="date_time_select_button_text">Pick A Date/Time</string>
     <string name="save_button_text">Save</string>
+    <string name="instructions_title">Instructions</string>
+    <string name="ingredients_title">Ingredients</string>
+    <string name="ingredients">%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s</string>
 </resources>
