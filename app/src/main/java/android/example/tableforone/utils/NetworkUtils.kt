@@ -45,6 +45,8 @@ fun parseMealRecipeJsonResult(jsonResult: JSONObject): MealRecipe {
     val mealInstructions = mealRecipeJSON.getString("strInstructions")
     val mealImg = mealRecipeJSON.getString("strMealThumb")
 
+
+    val listOfIngredients = mutableListOf<String>()
     val ingredient1 = mealRecipeJSON.getString("strIngredient1")
     val ingredient2 = mealRecipeJSON.getString("strIngredient2")
     val ingredient3 = mealRecipeJSON.getString("strIngredient3")
@@ -65,7 +67,27 @@ fun parseMealRecipeJsonResult(jsonResult: JSONObject): MealRecipe {
     val ingredient18 = mealRecipeJSON.getString("strIngredient18")
     val ingredient19 = mealRecipeJSON.getString("strIngredient19")
     val ingredient20 = mealRecipeJSON.getString("strIngredient20")
-
+    listOfIngredients.add(ingredient1)
+    listOfIngredients.add(ingredient2)
+    listOfIngredients.add(ingredient3)
+    listOfIngredients.add(ingredient4)
+    listOfIngredients.add(ingredient5)
+    listOfIngredients.add(ingredient6)
+    listOfIngredients.add(ingredient7)
+    listOfIngredients.add(ingredient8)
+    listOfIngredients.add(ingredient9)
+    listOfIngredients.add(ingredient10)
+    listOfIngredients.add(ingredient11)
+    listOfIngredients.add(ingredient12)
+    listOfIngredients.add(ingredient13)
+    listOfIngredients.add(ingredient14)
+    listOfIngredients.add(ingredient15)
+    listOfIngredients.add(ingredient16)
+    listOfIngredients.add(ingredient17)
+    listOfIngredients.add(ingredient18)
+    listOfIngredients.add(ingredient19)
+    listOfIngredients.add(ingredient20)
+    val listOfMeasures = mutableListOf<String>()
     val measure1 = mealRecipeJSON.getString("strMeasure1")
     val measure2 = mealRecipeJSON.getString("strMeasure2")
     val measure3 = mealRecipeJSON.getString("strMeasure3")
@@ -86,51 +108,34 @@ fun parseMealRecipeJsonResult(jsonResult: JSONObject): MealRecipe {
     val measure18 = mealRecipeJSON.getString("strMeasure18")
     val measure19 = mealRecipeJSON.getString("strMeasure19")
     val measure20 = mealRecipeJSON.getString("strMeasure20")
+    listOfMeasures.add(ingredient1)
+    listOfMeasures.add(ingredient2)
+    listOfMeasures.add(ingredient3)
+    listOfMeasures.add(ingredient4)
+    listOfMeasures.add(ingredient5)
+    listOfMeasures.add(ingredient6)
+    listOfMeasures.add(ingredient7)
+    listOfMeasures.add(ingredient8)
+    listOfMeasures.add(ingredient9)
+    listOfMeasures.add(ingredient10)
+    listOfMeasures.add(ingredient11)
+    listOfMeasures.add(ingredient12)
+    listOfMeasures.add(ingredient13)
+    listOfMeasures.add(ingredient14)
+    listOfMeasures.add(ingredient15)
+    listOfMeasures.add(ingredient16)
+    listOfMeasures.add(ingredient17)
+    listOfMeasures.add(ingredient18)
+    listOfMeasures.add(ingredient19)
+    listOfMeasures.add(ingredient20)
+
 
     return MealRecipe(mealId,
         mealName,
         mealArea,
         mealInstructions,
         mealImg,
-        ingredient1,
-        ingredient2,
-        ingredient3,
-        ingredient4,
-        ingredient5,
-        ingredient6,
-        ingredient7,
-        ingredient8,
-        ingredient9,
-        ingredient10,
-        ingredient11,
-        ingredient12,
-        ingredient13,
-        ingredient14,
-        ingredient15,
-        ingredient16,
-        ingredient17,
-        ingredient18,
-        ingredient19,
-        ingredient20,
-        measure1,
-        measure2,
-        measure3,
-        measure4,
-        measure5,
-        measure6,
-        measure7,
-        measure8,
-        measure9,
-        measure10,
-        measure11,
-        measure12,
-        measure13,
-        measure14,
-        measure15,
-        measure16,
-        measure17,
-        measure18,
-        measure19,
-        measure20
+        listOfIngredients,
+            listOfMeasures
     )
 }

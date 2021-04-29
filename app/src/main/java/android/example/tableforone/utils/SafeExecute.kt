@@ -6,7 +6,7 @@ import retrofit2.Call
 import retrofit2.Response
 import java.io.IOException
 
-fun <T> Call<T>.safeExecute(): Response<T> {
+fun<T> Call<T>.safeExecute(): Response<T> {
     return try {
         this.execute()
     } catch (e: IOException) {

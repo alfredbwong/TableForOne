@@ -2,7 +2,10 @@ package android.example.tableforone
 
 import android.example.tableforone.databinding.FragmentMealSelectionBinding
 import android.example.tableforone.meal.select.MealSelectAdapter
+import android.example.tableforone.meal.select.MealSelectItem
+import android.example.tableforone.mealCateorySelect.MealCategory
 import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModel
+import android.example.tableforone.network.Status
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,10 +24,11 @@ import androidx.navigation.fragment.findNavController
 class MealSelectionFragment : Fragment() {
     private lateinit var binding : FragmentMealSelectionBinding
     private val viewModel: MealCategorySelectViewModel by activityViewModels()
+    private val mealCategoryItems: MutableList<MealSelectItem> = mutableListOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        viewModel.getMealCategoryItemsResponse()
+        viewModel.getMealCategoryItemsData()
         Log.i(TAG, "onCreateView")
         binding = FragmentMealSelectionBinding.inflate(inflater)
 
@@ -40,10 +44,29 @@ class MealSelectionFragment : Fragment() {
         }
         binding.mealSelectRecyclerView.adapter = adapter
 
-        viewModel.mealItems.observe(viewLifecycleOwner, Observer{
-            it->
-            Log.i(TAG,"INFO: $it")
-            adapter.submitList(it)
+        viewModel.mealCategoryItems.observe(viewLifecycleOwner, Observer{
+            resource->
+            when (resource.status) {
+                Status.SUCCESS -> {
+                    if (resource.data == null) {
+
+                    }
+                    //idle()
+
+                    mealCategoryItems.clear()
+                    mealCategoryItems.addAll(resource.data as List<MealSelectItem>)
+                    binding.mealSelectRecyclerView.adapter?.notifyDataSetChanged()
+                    adapter.submitList(mealCategoryItems)
+                }
+                Status.LOADING -> {
+
+
+                }
+                Status.ERROR -> {
+
+
+                }
+            }
         })
 
 
