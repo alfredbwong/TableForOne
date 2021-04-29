@@ -1,5 +1,9 @@
-package android.example.tableforone.network
+package android.example.tableforone
 
+import android.example.tableforone.network.Failure
+import android.example.tableforone.network.Resource
+import android.example.tableforone.network.Response
+import android.example.tableforone.network.Success
 import android.example.tableforone.utils.LogUtils
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread

@@ -7,8 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 
-private const val BASE_URL = "https://www.themealdb.com/"
-
+const val BASE_URL = "https://www.themealdb.com/"
 
 /**
  * Use the Retrofit builder to build a retrofit object using a Moshi converter with our Moshi

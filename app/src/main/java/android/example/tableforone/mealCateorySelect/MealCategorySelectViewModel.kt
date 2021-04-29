@@ -1,31 +1,46 @@
 package android.example.tableforone.mealCateorySelect
 
+import android.content.Context
+import android.example.tableforone.BASE_URL
+import android.example.tableforone.MealReminderRepository
+import android.example.tableforone.meal.database.MealCategoryDatabase
 import android.example.tableforone.meal.recipe.MealRecipe
 import android.example.tableforone.meal.select.MealSelectItem
 import android.example.tableforone.network.MealApi
+import android.example.tableforone.network.MealApiService
+import android.example.tableforone.network.Resource
+import android.example.tableforone.network.Success
 import android.example.tableforone.utils.parseMealCategoriesJsonResult
 import android.example.tableforone.utils.parseMealRecipeJsonResult
 import android.example.tableforone.utils.parseMealSelectRecipesJsonResult
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.*
 
-class MealCategorySelectViewModel : ViewModel() {
+class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
+
+
+    private val repository: MealReminderRepository =
+            MealReminderRepository(
+                    Retrofit.Builder().baseUrl(BASE_URL)
+                            .addConverterFactory(ScalarsConverterFactory.create())
+                            .build()
+                            .create(MealApiService::class.java),
+                    MealCategoryDatabase.getInstance(applicationContext)
+                            .mealCategoryDao(),
+                    viewModelScope
+            )
 
     var mealCategorySelected = MutableLiveData<String>()
     var mealRecipeItemSelected = MutableLiveData<Long>()
 
-    private var _mealCategories = MutableLiveData<List<MealCategory>>()
-
-    val mealCategories: LiveData<List<MealCategory>>
-        get() = _mealCategories
-
+    val mealCategories :MediatorLiveData<Resource<List<MealCategory>>> = MediatorLiveData()
 
     private var _mealItems = MutableLiveData<List<MealSelectItem>>()
 
@@ -59,23 +74,23 @@ class MealCategorySelectViewModel : ViewModel() {
     var myMinute: Int = 0
 
     init {
-        getMealCategoriesResponse()
+//        getMealCategoriesResponse()
         _showDatePicker.value = false
     }
 
-    private fun getMealCategoriesResponse() {
-        MealApi.retrofitService.getMealCategories().enqueue(object : Callback<String> {
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                _mealCategories.value = mutableListOf()
-            }
-
-
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                _mealCategories.value = parseMealCategoriesJsonResult(JSONObject(response.body()))
-
-            }
-        })
-    }
+//    private fun getMealCategoriesResponse() {
+//        MealApi.retrofitService.getMealCategories().enqueue(object : Callback<String> {
+//            override fun onFailure(call: Call<String>, t: Throwable) {
+//                _mealCategories.value = mutableListOf()
+//            }
+//
+//
+//            override fun onResponse(call: Call<String>, response: Response<String>) {
+//                _mealCategories.value = parseMealCategoriesJsonResult(JSONObject(response.body()))
+//
+//            }
+//        })
+//    }
 
     fun getMealCategoryItemsResponse() {
         mealCategorySelected.value?.let {
@@ -141,6 +156,23 @@ class MealCategorySelectViewModel : ViewModel() {
         //Save to Room DB and setup broadcast Receiver
     }
 
+    fun getMealCategoriesData() {
+        val response = repository.getMealCategoriesFeed()
+        mealCategories.addSource(response){
+            newData ->
+            if (mealCategories.value != newData){
+                mealCategories.value = newData
+            }
+        }
+    }
 
 
+}
+
+class MealCategorySelectViewModelFactory(private val applicationContext: Context?): ViewModelProvider.NewInstanceFactory() {
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T = applicationContext?.let {
+        MealCategorySelectViewModel(
+                it
+        )
+    } as T
 }

@@ -1,7 +1,9 @@
 package android.example.tableforone.meal.database
 
+import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+@Entity
 data class MealReminder(@PrimaryKey val id: Long,
                         val mealName: String,
                         val mealYear: Int,
