@@ -25,7 +25,7 @@ fun bindIngredient( view: TextView, recipe:MealRecipe?) {
 
         val sb : StringBuilder = StringBuilder()
         for (i in listIngredients.indices){
-            sb.append(listIngredients[i]).append(" ").append(listMeasures[i]).append("\n")
+            sb.append(listMeasures[i]).append(" ").append(listIngredients[i]).append("\n")
         }
         view.text = sb.toString()
     }
