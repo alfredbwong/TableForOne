@@ -1,4 +1,4 @@
-package android.example.tableforone.meal.database
+package android.example.tableforone.meal.reminder
 
 import android.content.Context
 import androidx.room.Database

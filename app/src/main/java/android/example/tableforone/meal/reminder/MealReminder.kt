@@ -1,4 +1,4 @@
-package android.example.tableforone.meal.database
+package android.example.tableforone.meal.reminder
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

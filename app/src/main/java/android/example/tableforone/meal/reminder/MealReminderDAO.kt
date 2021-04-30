@@ -1,8 +1,6 @@
-package android.example.tableforone.meal.database
+package android.example.tableforone.meal.reminder
 
 import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
