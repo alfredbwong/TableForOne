@@ -1,7 +1,10 @@
 package android.example.tableforone
 
 import android.example.tableforone.databinding.FragmentMealRecipeDetailBinding
+import android.example.tableforone.meal.recipe.MealRecipe
+import android.example.tableforone.mealCateorySelect.MealCategory
 import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModel
+import android.example.tableforone.network.Status
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -22,18 +25,32 @@ class MealRecipeDetailFragment : Fragment() {
 
     private val viewModel : MealCategorySelectViewModel by activityViewModels()
     private lateinit var binding : FragmentMealRecipeDetailBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        viewModel.getMealRecipeResponse()
+        viewModel.getMealRecipeDetailsData()
         binding = FragmentMealRecipeDetailBinding.inflate(inflater)
-        //binding.mealRecipe = viewModel.mealRecipeItem.value
 
-        viewModel.mealRecipeItem.observe(viewLifecycleOwner, Observer {
-            it ->
-            Log.i(TAG, "Got new meal recipe")
-            binding.mealRecipe = viewModel.mealRecipeItem.value
-            binding.executePendingBindings()
+        viewModel.mealRecipeItem.observe(viewLifecycleOwner, Observer { resource ->
+            when (resource.status) {
+                Status.SUCCESS -> {
+                    if (resource.data == null) {
+
+                    }
+
+                    binding.mealRecipe = resource.data
+                    binding.executePendingBindings()
+                }
+                Status.LOADING -> {
+
+
+                }
+                Status.ERROR -> {
+
+
+                }
+            }
         })
 
         binding.saveRecipeButton.setOnClickListener{

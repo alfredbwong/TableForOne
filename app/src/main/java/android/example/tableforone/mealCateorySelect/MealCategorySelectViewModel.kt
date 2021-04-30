@@ -5,21 +5,12 @@ import android.example.tableforone.BASE_URL
 import android.example.tableforone.MealReminderRepository
 import android.example.tableforone.meal.database.MealCategoryDatabase
 import android.example.tableforone.meal.recipe.MealRecipe
+import android.example.tableforone.meal.recipe.MealRecipeDatabase
 import android.example.tableforone.meal.select.MealSelectDatabase
 import android.example.tableforone.meal.select.MealSelectItem
-import android.example.tableforone.network.MealApi
 import android.example.tableforone.network.MealApiService
 import android.example.tableforone.network.Resource
-import android.example.tableforone.network.Success
-import android.example.tableforone.utils.parseMealCategoriesJsonResult
-import android.example.tableforone.utils.parseMealRecipeJsonResult
-import android.example.tableforone.utils.parseMealSelectRecipesJsonResult
-import android.util.Log
 import androidx.lifecycle.*
-import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.*
@@ -29,15 +20,17 @@ class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
 
     private val repository: MealReminderRepository =
             MealReminderRepository(
-                    Retrofit.Builder().baseUrl(BASE_URL)
-                            .addConverterFactory(ScalarsConverterFactory.create())
-                            .build()
-                            .create(MealApiService::class.java),
-                    MealCategoryDatabase.getInstance(applicationContext)
-                            .mealCategoryDao(),
-                    MealSelectDatabase.getInstance(applicationContext)
-                            .mealSelectDao(),
-                    viewModelScope
+                Retrofit.Builder().baseUrl(BASE_URL)
+                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .build()
+                    .create(MealApiService::class.java),
+                MealCategoryDatabase.getInstance(applicationContext)
+                    .mealCategoryDao(),
+                MealSelectDatabase.getInstance(applicationContext)
+                    .mealSelectDao(),
+                MealRecipeDatabase.getInstance(applicationContext)
+                    .mealRecipeDao(),
+                viewModelScope
             )
 
     var mealCategorySelected = MutableLiveData<String>()
@@ -47,11 +40,7 @@ class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
 
     val mealCategoryItems :MediatorLiveData<Resource<List<MealSelectItem>>> = MediatorLiveData()
 
-
-    var _mealRecipeItem = MutableLiveData<MealRecipe>()
-
-    val mealRecipeItem: LiveData<MealRecipe>
-        get() = _mealRecipeItem
+    val mealRecipeItem: MediatorLiveData<Resource<MealRecipe>> = MediatorLiveData()
 
     private var _showDatePicker = MutableLiveData<Boolean>()
 
@@ -78,22 +67,22 @@ class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
         _showDatePicker.value = false
     }
 
-    fun getMealRecipeResponse(){
-        mealRecipeItemSelected.value?.let {
-            MealApi.retrofitService.getMealRecipeById(it).enqueue(object : Callback<String> {
-                override fun onFailure(call: Call<String>, t: Throwable) {
-                    Log.i("ViewModel", "Failed to get recipe")
-                    _mealRecipeItem.value = null
-                }
-
-
-                override fun onResponse(call: Call<String>, response: Response<String>) {
-                    _mealRecipeItem.value = parseMealRecipeJsonResult(JSONObject(response.body()))
-
-                }
-            })
-        }
-    }
+//    fun getMealRecipeResponse(){
+//        mealRecipeItemSelected.value?.let {
+//            MealApi.retrofitService.getMealRecipeById(it).enqueue(object : Callback<String> {
+//                override fun onFailure(call: Call<String>, t: Throwable) {
+//                    Log.i("ViewModel", "Failed to get recipe")
+//                    _mealRecipeItem.value = null
+//                }
+//
+//
+//                override fun onResponse(call: Call<String>, response: Response<String>) {
+//                    _mealRecipeItem.value = parseMealRecipeJsonResult(JSONObject(response.body()))
+//
+//                }
+//            })
+//        }
+//    }
 
     fun setupDatePicker() {
         val calendar: Calendar = Calendar.getInstance()
@@ -151,7 +140,21 @@ class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
         }
 
     }
+    fun getMealRecipeDetailsData() {
 
+        val response = mealRecipeItemSelected.value?.let {
+            repository.getMealRecipeDetailsFeed(it)
+        }
+        if (response != null){
+            mealRecipeItem.addSource(response){
+                    newData ->
+                if (mealRecipeItem.value != newData){
+                    mealRecipeItem.value = newData
+                }
+            }
+        }
+
+    }
 
 }
 
