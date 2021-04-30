@@ -3,6 +3,8 @@ package android.example.tableforone
 import android.example.tableforone.meal.database.MealCategoryDAO
 import android.example.tableforone.meal.recipe.MealRecipe
 import android.example.tableforone.meal.recipe.MealRecipeDAO
+import android.example.tableforone.meal.reminder.MealReminder
+import android.example.tableforone.meal.reminder.MealReminderDAO
 import android.example.tableforone.meal.select.MealSelectDAO
 import android.example.tableforone.meal.select.MealSelectItem
 import android.example.tableforone.mealCateorySelect.MealCategory
@@ -11,15 +13,19 @@ import android.example.tableforone.utils.parseMealCategoriesJsonResult
 import android.example.tableforone.utils.parseMealRecipeJsonResult
 import android.example.tableforone.utils.parseMealSelectRecipesJsonResult
 import android.example.tableforone.utils.safeExecute
+import android.net.Network
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
 class MealReminderRepository(private val mealService: MealApiService,
                              private val mealCategoryDAO: MealCategoryDAO,
                              private val mealSelectDao: MealSelectDAO,
                              private val mealRecipeDao : MealRecipeDAO,
+                             private val mealReminderDao : MealReminderDAO,
                              private val viewModelScope: CoroutineScope) {
 
     fun getMealCategoriesFeed() : LiveData<Resource<List<MealCategory>>> {
@@ -122,5 +128,37 @@ class MealReminderRepository(private val mealService: MealApiService,
 
 
         }.asLiveData()
+    }
+
+    fun getMealRemindersFeed() : LiveData<Resource<List<MealReminder>>> {
+        return object : NetworkResource<List<MealReminder>, String>(viewModelScope){
+            override suspend fun loadFromDisk(): LiveData<List<MealReminder>> {
+                return MutableLiveData(mealReminderDao.getMealReminders())
+            }
+
+            override fun shouldFetch(diskResponse: List<MealReminder>?): Boolean {
+                return diskResponse.isNullOrEmpty()
+            }
+
+            override suspend fun fetchData(): Response<String> {
+
+                return Success(String())
+            }
+
+            override fun processResponse(response: String): List<MealReminder> {
+                return mutableListOf()
+            }
+
+            override suspend fun saveToDisk(data: List<MealReminder>): Boolean {
+                val ids = mealReminderDao.updateData(data)
+                return ids.isNotEmpty()
+            }
+
+        }.asLiveData()
+    }
+
+    fun addMealReminder(mealReminder: MealReminder) {
+            mealReminderDao.insert(mealReminder)
+
     }
 }

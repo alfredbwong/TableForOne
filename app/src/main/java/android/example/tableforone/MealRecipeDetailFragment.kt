@@ -40,6 +40,9 @@ class MealRecipeDetailFragment : Fragment() {
                     }
 
                     binding.mealRecipe = resource.data
+                    viewModel.mealRecipeDetails = resource.data
+
+
                     binding.executePendingBindings()
                 }
                 Status.LOADING -> {

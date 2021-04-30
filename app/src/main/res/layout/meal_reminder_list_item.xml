@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="mealReminder"
+            type="android.example.tableforone.meal.reminder.MealReminder" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mealReminderItemLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/mealReminderImg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:imageUrl="@{mealReminder.strMealThumb}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/mealReminderTitle"
+            android:layout_width="235dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@{mealReminder.mealName}"
+            app:layout_constraintStart_toEndOf="@+id/mealReminderImg"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/mealReminderDate"
+            android:layout_width="235dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{String.format(@string/meal_reminder_date_formatter,Integer.toString(mealReminder.mealDay), Integer.toString(mealReminder.mealMonth), Integer.toString(mealReminder.mealYear))}"
+            app:layout_constraintBottom_toTopOf="@+id/mealReminderTime"
+            app:layout_constraintStart_toEndOf="@+id/mealReminderImg"
+            app:layout_constraintTop_toBottomOf="@+id/mealReminderTitle" />
+
+        <TextView
+            android:id="@+id/mealReminderTime"
+            android:layout_width="235dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@{String.format(@string/meal_reminder_time_formatter,Integer.toString(mealReminder.mealHour), Integer.toString(mealReminder.mealMinute))}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/mealReminderImg" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

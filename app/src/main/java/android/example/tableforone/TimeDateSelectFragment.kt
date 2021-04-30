@@ -16,6 +16,8 @@ import androidx.fragment.app.activityViewModels
 import java.util.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 /**
@@ -55,7 +57,9 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
         })
         binding.nextButton.setOnClickListener{
+
             viewModel.saveMealReminder()
+
             val action = TimeDateSelectFragmentDirections.actionTimeDateSelectFragmentToMealListFragment()
             findNavController().navigate(action)
         }

@@ -12,4 +12,8 @@
     <string name="ingredients_title">Ingredients</string>
     <string name="ingredients">%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s</string>
     <string name="save_recipe_button_text">Save</string>
+    <string name="home_title_text">TableForOne Meal Reminders</string>
+    <string name="back_button">Back</string>
+    <string name="meal_reminder_date_formatter">Date: %s/%s/%s</string>
+    <string name="meal_reminder_time_formatter">Time: %s : %s</string>
 </resources>
