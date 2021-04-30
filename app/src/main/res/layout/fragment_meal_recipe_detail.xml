@@ -73,7 +73,8 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="64dp"
                     android:layout_marginEnd="16dp"
-                    android:text="@string/ingredients_title" />
+                    android:text="@string/ingredients_title"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/mealRecipeIngredients"
@@ -91,7 +92,8 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="64dp"
                     android:layout_marginEnd="16dp"
-                    android:text="@string/instructions_title" />
+                    android:text="@string/instructions_title"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/mealRecipeInstructions"
@@ -100,7 +102,8 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="16dp"
-                    android:text="@{mealRecipe.strInstructions}" />
+                    android:text="@{mealRecipe.strInstructions}"
+                    android:layout_marginBottom="100dp"/>
 
             </LinearLayout>
         </ScrollView>
