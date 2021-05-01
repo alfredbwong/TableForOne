@@ -4,7 +4,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class MealReminder(@PrimaryKey val id: Long,
+data class MealReminder(@PrimaryKey (autoGenerate = true)
+                        var id : Long =0,
+                        val mealId: Long,
                         val mealName: String,
                         val mealYear: Int,
                         val mealMonth: Int,

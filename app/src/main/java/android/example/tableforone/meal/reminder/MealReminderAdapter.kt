@@ -18,7 +18,6 @@ class MealReminderAdapter (private val listener: (MealReminder) -> Unit): ListAd
     class ViewHolder private constructor(val binding: MealReminderListItemBinding)
         : RecyclerView.ViewHolder(binding.root){
         fun bind(item: MealReminder?) {
-            Log.i(TAG, "new item $item")
             binding.mealReminder = item
             binding.executePendingBindings()
             

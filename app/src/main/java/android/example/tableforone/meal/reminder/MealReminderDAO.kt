@@ -15,4 +15,7 @@ interface MealReminderDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(reminders: MealReminder)
+
+    @Query( "SELECT * FROM MealReminder WHERE id = :mealId")
+    fun getMealReminderById(mealId: Long?): MealReminder
 }

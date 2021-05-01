@@ -52,12 +52,11 @@ class MealListFragment : Fragment() {
             viewModel.mealReminderItemSelected.value = mealReminder.id
 
             val navController = findNavController()
-//            navController.navigate(MealListFragmentDirections.actionMealListFragmentToMealReminderDetailFragment(mealReminder.id))
+            navController.navigate(MealListFragmentDirections.actionMealListFragmentToMealReminderDetailFragment(mealReminder.id))
         }
         binding.mealReminderRecyclerView.adapter = adapter
         viewModel.mealReminders.observe(viewLifecycleOwner, Observer {
             resource->
-//            Log.i(TAG, "meal Reminders : $resource.data")
 
             when (resource.status) {
                 Status.SUCCESS -> {
@@ -67,8 +66,8 @@ class MealListFragment : Fragment() {
                     //idle()
 
                     mealReminders.clear()
+                    val data = resource.data as List<MealReminder>
                     mealReminders.addAll(resource.data as List<MealReminder>)
-//                    Log.i(TAG, "$mealReminders")
                     binding.mealReminderRecyclerView.adapter?.notifyDataSetChanged()
                     adapter.submitList(mealReminders)
                 }

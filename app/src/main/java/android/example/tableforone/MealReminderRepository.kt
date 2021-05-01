@@ -13,13 +13,11 @@ import android.example.tableforone.utils.parseMealCategoriesJsonResult
 import android.example.tableforone.utils.parseMealRecipeJsonResult
 import android.example.tableforone.utils.parseMealSelectRecipesJsonResult
 import android.example.tableforone.utils.safeExecute
-import android.net.Network
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import org.json.JSONObject
+import java.util.*
 
 class MealReminderRepository(private val mealService: MealApiService,
                              private val mealCategoryDAO: MealCategoryDAO,
@@ -158,7 +156,31 @@ class MealReminderRepository(private val mealService: MealApiService,
     }
 
     fun addMealReminder(mealReminder: MealReminder) {
-            mealReminderDao.insert(mealReminder)
+        mealReminderDao.insert(mealReminder)
 
+    }
+
+    fun getMealReminderById(mealId: Long?): LiveData<Resource<MealReminder>> {
+        return object : NetworkResource<MealReminder, String>(viewModelScope) {
+
+            override suspend fun loadFromDisk(): LiveData<MealReminder> {
+                return MutableLiveData(mealReminderDao.getMealReminderById(mealId))
+            }
+
+            override fun shouldFetch(diskResponse: MealReminder?): Boolean {
+                return false
+            }
+
+            override suspend fun fetchData(): Response<String> {
+                return Success(String())
+
+            }
+            override fun processResponse(response: String): MealReminder {
+                return mealReminderDao.getMealReminderById(mealId)
+            }
+            override suspend fun saveToDisk(data: MealReminder): Boolean {
+                return true
+            }
+        }.asLiveData()
     }
 }

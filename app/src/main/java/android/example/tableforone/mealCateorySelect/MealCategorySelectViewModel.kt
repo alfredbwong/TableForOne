@@ -12,6 +12,7 @@ import android.example.tableforone.meal.select.MealSelectDatabase
 import android.example.tableforone.meal.select.MealSelectItem
 import android.example.tableforone.network.MealApiService
 import android.example.tableforone.network.Resource
+import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -53,6 +54,7 @@ class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
 
     val mealReminders: MediatorLiveData<Resource<List<MealReminder>>> = MediatorLiveData()
 
+    val mealReminder: MediatorLiveData<Resource<MealReminder>> = MediatorLiveData()
 
     private var _showDatePicker = MutableLiveData<Boolean>()
 
@@ -110,7 +112,8 @@ class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
     fun saveMealReminder() {
         //Save to Room DB and setup broadcast Receiver
         GlobalScope.launch(Dispatchers.IO){
-            repository.addMealReminder(MealReminder(
+            val id = repository.addMealReminder(MealReminder(
+                0,
                     mealRecipeDetails!!.idMeal,
                     mealRecipeDetails!!.strMeal,
                     myYear,
@@ -161,6 +164,7 @@ class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
                     mealRecipeDetails!!.strMeasure19,
                     mealRecipeDetails!!.strMeasure20)
             )
+            Log.i(TAG, "$id")
         }
 
 
@@ -224,6 +228,24 @@ class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
 
     }
 
+    fun getMealReminderById(mealId: Long?){
+        val response = repository.getMealReminderById(mealId)
+
+        if (response != null){
+            mealReminder.addSource(response){
+                    newData ->
+                if (mealReminder.value != newData){
+                    mealReminder.value = newData
+                }
+            }
+        }
+
+
+    }
+
+    companion object{
+        const val TAG ="ViewModel"
+    }
 }
 
 class MealCategorySelectViewModelFactory(private val applicationContext: Context?): ViewModelProvider.NewInstanceFactory() {
