@@ -1,7 +1,7 @@
 package android.example.tableforone.meal.database
 
 import android.content.Context
-import android.example.tableforone.mealCateorySelect.MealCategory
+import android.example.tableforone.meal.category.MealCategory
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase

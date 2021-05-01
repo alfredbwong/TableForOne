@@ -1,16 +1,12 @@
 package android.example.tableforone
 
 import android.example.tableforone.databinding.FragmentMealListBinding
-import android.example.tableforone.databinding.FragmentMealSelectionBinding
 import android.example.tableforone.meal.reminder.MealReminder
 import android.example.tableforone.meal.reminder.MealReminderAdapter
-import android.example.tableforone.mealCateorySelect.MealCategory
 import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModel
 import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModelFactory
-import android.example.tableforone.mealList.MealListViewModel
 import android.example.tableforone.network.Status
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

@@ -3,6 +3,7 @@ package android.example.tableforone.mealCateorySelect
 import android.content.Context
 import android.example.tableforone.BASE_URL
 import android.example.tableforone.MealReminderRepository
+import android.example.tableforone.meal.category.MealCategory
 import android.example.tableforone.meal.database.MealCategoryDatabase
 import android.example.tableforone.meal.recipe.MealRecipe
 import android.example.tableforone.meal.recipe.MealRecipeDatabase

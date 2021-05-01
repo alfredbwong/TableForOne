@@ -1,4 +1,4 @@
-package android.example.tableforone.mealCateorySelect
+package android.example.tableforone.meal.category
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

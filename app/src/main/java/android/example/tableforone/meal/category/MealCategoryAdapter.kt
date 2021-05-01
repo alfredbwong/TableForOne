@@ -1,4 +1,4 @@
-package android.example.tableforone.mealCateorySelect
+package android.example.tableforone.meal.category
 
 import android.example.tableforone.databinding.MealCategoryListItemBinding
 import android.view.LayoutInflater

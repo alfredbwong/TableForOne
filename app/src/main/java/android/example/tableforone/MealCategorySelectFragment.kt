@@ -1,20 +1,18 @@
 package android.example.tableforone
 
 import android.example.tableforone.databinding.FragmentMealCategorySelectBinding
-import android.example.tableforone.mealCateorySelect.MealCategory
-import android.example.tableforone.mealCateorySelect.MealCategoryAdapter
+import android.example.tableforone.meal.category.MealCategory
+import android.example.tableforone.meal.category.MealCategoryAdapter
 import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModel
 import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModelFactory
 import android.example.tableforone.network.Status
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 
 

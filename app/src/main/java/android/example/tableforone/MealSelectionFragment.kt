@@ -3,7 +3,6 @@ package android.example.tableforone
 import android.example.tableforone.databinding.FragmentMealSelectionBinding
 import android.example.tableforone.meal.select.MealSelectAdapter
 import android.example.tableforone.meal.select.MealSelectItem
-import android.example.tableforone.mealCateorySelect.MealCategory
 import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModel
 import android.example.tableforone.network.Status
 import android.os.Bundle
