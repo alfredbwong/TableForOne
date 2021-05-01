@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.TimePicker
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import java.util.*
 import androidx.lifecycle.Observer
@@ -57,11 +58,15 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
         })
         binding.nextButton.setOnClickListener{
+            if (viewModel.myYear != 0|| viewModel.myHour !=0 ) {
+                viewModel.saveMealReminder()
 
-            viewModel.saveMealReminder()
-
-            val action = TimeDateSelectFragmentDirections.actionTimeDateSelectFragmentToMealListFragment()
-            findNavController().navigate(action)
+                val action =
+                    TimeDateSelectFragmentDirections.actionTimeDateSelectFragmentToMealListFragment()
+                findNavController().navigate(action)
+            } else {
+                Toast.makeText(requireContext(), "You must enter a date/time!", Toast.LENGTH_SHORT).show()
+            }
         }
         return binding.root
     }
