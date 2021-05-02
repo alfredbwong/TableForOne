@@ -154,8 +154,8 @@ class MealReminderRepository(private val mealService: MealApiService,
         }.asLiveData()
     }
 
-    fun addMealReminder(mealReminder: MealReminder) {
-        mealReminderDao.insert(mealReminder)
+    fun addMealReminder(mealReminder: MealReminder) :Long {
+        return mealReminderDao.insert(mealReminder)
 
     }
 

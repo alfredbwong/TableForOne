@@ -16,4 +16,9 @@
     <string name="back_button">Back</string>
     <string name="meal_reminder_date_formatter">Date: %s/%s/%s</string>
     <string name="meal_reminder_time_formatter">Time: %s : %s</string>
+    <string name="meal_reminder_notification_channel_id" translatable="false">meal_reminder_channel</string>
+    <string name="meal_reminder_notification_channel_name" translatable="true">MealReminder</string>
+    <string name="meal_reminder_notification_channel_desc" >Meal Reminder</string>
+
+
 </resources>

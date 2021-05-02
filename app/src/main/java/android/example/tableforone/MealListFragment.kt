@@ -7,6 +7,7 @@ import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModel
 import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModelFactory
 import android.example.tableforone.network.Status
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,6 +64,7 @@ class MealListFragment : Fragment() {
 
                     mealReminders.clear()
                     val data = resource.data as List<MealReminder>
+
                     mealReminders.addAll(resource.data as List<MealReminder>)
                     binding.mealReminderRecyclerView.adapter?.notifyDataSetChanged()
                     adapter.submitList(mealReminders)

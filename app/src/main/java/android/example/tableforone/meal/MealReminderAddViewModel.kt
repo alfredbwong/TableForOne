@@ -13,7 +13,6 @@ import android.example.tableforone.meal.select.MealSelectDatabase
 import android.example.tableforone.meal.select.MealSelectItem
 import android.example.tableforone.network.MealApiService
 import android.example.tableforone.network.Resource
-import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -67,6 +66,7 @@ class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
     val showTimePicker: LiveData<Boolean>
         get() = _showTimePicker
 
+
     var day = 0
     var month: Int = 0
     var year: Int = 0
@@ -110,64 +110,13 @@ class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
         _showTimePicker.value = false
     }
 
-    fun saveMealReminder() {
+    fun saveMealReminder() : Long{
         //Save to Room DB and setup broadcast Receiver
+        var idMeal =0L
         GlobalScope.launch(Dispatchers.IO){
-            val id = repository.addMealReminder(MealReminder(
-                0,
-                    mealRecipeDetails!!.idMeal,
-                    mealRecipeDetails!!.strMeal,
-                    myYear,
-                    myMonth,
-                    myDay,
-                    myHour,
-                    myDay,
-                    mealRecipeDetails!!.strMealThumb,
-                    mealRecipeDetails!!.strInstructions,
-                    mealRecipeDetails!!.strIngredient1,
-                    mealRecipeDetails!!.strIngredient2,
-                    mealRecipeDetails!!.strIngredient3,
-                    mealRecipeDetails!!.strIngredient4,
-                    mealRecipeDetails!!.strIngredient5,
-                    mealRecipeDetails!!.strIngredient6,
-                    mealRecipeDetails!!.strIngredient7,
-                    mealRecipeDetails!!.strIngredient8,
-                    mealRecipeDetails!!.strIngredient9,
-                    mealRecipeDetails!!.strIngredient10,
-                    mealRecipeDetails!!.strIngredient11,
-                    mealRecipeDetails!!.strIngredient12,
-                    mealRecipeDetails!!.strIngredient13,
-                    mealRecipeDetails!!.strIngredient14,
-                    mealRecipeDetails!!.strIngredient15,
-                    mealRecipeDetails!!.strIngredient16,
-                    mealRecipeDetails!!.strIngredient17,
-                    mealRecipeDetails!!.strIngredient18,
-                    mealRecipeDetails!!.strIngredient19,
-                    mealRecipeDetails!!.strIngredient20,
-                    mealRecipeDetails!!.strMeasure1,
-                    mealRecipeDetails!!.strMeasure2,
-                    mealRecipeDetails!!.strMeasure3,
-                    mealRecipeDetails!!.strMeasure4,
-                    mealRecipeDetails!!.strMeasure5,
-                    mealRecipeDetails!!.strMeasure6,
-                    mealRecipeDetails!!.strMeasure7,
-                    mealRecipeDetails!!.strMeasure8,
-                    mealRecipeDetails!!.strMeasure9,
-                    mealRecipeDetails!!.strMeasure10,
-                    mealRecipeDetails!!.strMeasure11,
-                    mealRecipeDetails!!.strMeasure12,
-                    mealRecipeDetails!!.strMeasure13,
-                    mealRecipeDetails!!.strMeasure14,
-                    mealRecipeDetails!!.strMeasure15,
-                    mealRecipeDetails!!.strMeasure16,
-                    mealRecipeDetails!!.strMeasure17,
-                    mealRecipeDetails!!.strMeasure18,
-                    mealRecipeDetails!!.strMeasure19,
-                    mealRecipeDetails!!.strMeasure20)
-            )
-            Log.i(TAG, "$id")
+            idMeal = repository.addMealReminder(getMealReminderToBeSaved())
         }
-
+        return idMeal
 
     }
 
@@ -240,9 +189,63 @@ class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
                 }
             }
         }
-
-
     }
+
+    fun getMealReminderToBeSaved() : MealReminder{
+        return MealReminder(
+                0,
+                mealRecipeDetails!!.idMeal,
+                mealRecipeDetails!!.strMeal,
+                myYear,
+                myMonth,
+                myDay,
+                myHour,
+                myMinute,
+                mealRecipeDetails!!.strMealThumb,
+                mealRecipeDetails!!.strInstructions,
+                mealRecipeDetails!!.strIngredient1,
+                mealRecipeDetails!!.strIngredient2,
+                mealRecipeDetails!!.strIngredient3,
+                mealRecipeDetails!!.strIngredient4,
+                mealRecipeDetails!!.strIngredient5,
+                mealRecipeDetails!!.strIngredient6,
+                mealRecipeDetails!!.strIngredient7,
+                mealRecipeDetails!!.strIngredient8,
+                mealRecipeDetails!!.strIngredient9,
+                mealRecipeDetails!!.strIngredient10,
+                mealRecipeDetails!!.strIngredient11,
+                mealRecipeDetails!!.strIngredient12,
+                mealRecipeDetails!!.strIngredient13,
+                mealRecipeDetails!!.strIngredient14,
+                mealRecipeDetails!!.strIngredient15,
+                mealRecipeDetails!!.strIngredient16,
+                mealRecipeDetails!!.strIngredient17,
+                mealRecipeDetails!!.strIngredient18,
+                mealRecipeDetails!!.strIngredient19,
+                mealRecipeDetails!!.strIngredient20,
+                mealRecipeDetails!!.strMeasure1,
+                mealRecipeDetails!!.strMeasure2,
+                mealRecipeDetails!!.strMeasure3,
+                mealRecipeDetails!!.strMeasure4,
+                mealRecipeDetails!!.strMeasure5,
+                mealRecipeDetails!!.strMeasure6,
+                mealRecipeDetails!!.strMeasure7,
+                mealRecipeDetails!!.strMeasure8,
+                mealRecipeDetails!!.strMeasure9,
+                mealRecipeDetails!!.strMeasure10,
+                mealRecipeDetails!!.strMeasure11,
+                mealRecipeDetails!!.strMeasure12,
+                mealRecipeDetails!!.strMeasure13,
+                mealRecipeDetails!!.strMeasure14,
+                mealRecipeDetails!!.strMeasure15,
+                mealRecipeDetails!!.strMeasure16,
+                mealRecipeDetails!!.strMeasure17,
+                mealRecipeDetails!!.strMeasure18,
+                mealRecipeDetails!!.strMeasure19,
+                mealRecipeDetails!!.strMeasure20)
+    }
+
+
 
     companion object{
         const val TAG ="ViewModel"
