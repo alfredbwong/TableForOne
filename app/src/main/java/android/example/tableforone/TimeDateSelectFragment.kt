@@ -73,13 +73,10 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
                     launch(Dispatchers.IO) {
                         val mealIdSaved = viewModel.saveMealReminder()
                         //Notification
-                        createChannel(getString(R.string.meal_reminder_notification_channel_id),getString(R.string.meal_reminder_notification_channel_name))
                         createDataNotification(mealIdSaved, viewModel.getMealReminderToBeSaved())
 
                     }
                 }
-
-
 
                 val action = TimeDateSelectFragmentDirections.actionTimeDateSelectFragmentToMealListFragment()
                 findNavController().navigate(action)
@@ -137,7 +134,9 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
     }
 
-    fun createDataNotification(mealIdSaved: Long, mealReminderToBeSaved: MealReminder) {
+    private fun createDataNotification(mealIdSaved: Long, mealReminderToBeSaved: MealReminder) {
+        createChannel(getString(R.string.meal_reminder_notification_channel_id),getString(R.string.meal_reminder_notification_channel_name))
+
         //Replace mealReminderId
         mealReminderToBeSaved.id = mealIdSaved
 
