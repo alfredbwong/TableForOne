@@ -42,6 +42,7 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
     private lateinit var binding: FragmentTimeDateSelectBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
         binding = FragmentTimeDateSelectBinding.inflate(inflater)
         binding.dateTimeSelectButton.setOnClickListener{
             viewModel.setupDatePicker()
@@ -159,6 +160,12 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
                 datetimeToAlarm.timeInMillis, pendingIntent
         )
 
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.resetDateAndTime()
 
     }
 }

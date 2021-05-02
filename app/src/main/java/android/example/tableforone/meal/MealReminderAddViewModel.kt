@@ -246,6 +246,13 @@ class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
                 mealRecipeDetails!!.strMeasure20)
     }
 
+    fun resetDateAndTime() {
+        myYear = 0
+        myDay=0
+        myHour=0
+        myMinute =0
+        myMonth =0
+    }
 
 
     companion object{
