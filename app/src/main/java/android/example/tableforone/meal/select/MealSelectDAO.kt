@@ -1,16 +1,24 @@
 package android.example.tableforone.meal.select
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import android.example.tableforone.meal.recipe.MealRecipe
+import androidx.room.*
 
 @Dao
 interface MealSelectDAO {
-    @Query("SELECT * FROM MealSelectItem")
-    fun getMealSelectItem(): List<MealSelectItem>
+    @Query("SELECT * FROM MealSelectItem WHERE idCategoryStr = :category")
+    fun getMealSelectItem(category : String): List<MealSelectItem>
+
+
+    @Transaction
+    fun updateData(category: String, mealCategoryItems : List<MealSelectItem>): List<Long> {
+        deleteCategoryItems(category)
+        return insert(mealCategoryItems)
+    }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun updateData(data: List<MealSelectItem>): List<Long>
+    fun insert(data: List<MealSelectItem>): List<Long>
+
+    @Query("DELETE FROM MealSelectItem WHERE idCategoryStr = :category")
+    fun deleteCategoryItems(category : String)
 
 }

@@ -13,6 +13,7 @@ import android.example.tableforone.meal.select.MealSelectDatabase
 import android.example.tableforone.meal.select.MealSelectItem
 import android.example.tableforone.network.MealApiService
 import android.example.tableforone.network.Resource
+import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -133,13 +134,20 @@ class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
     }
 
     fun getMealCategoryItemsData() {
-
+        Log.i(TAG, "Meal category selected : ${mealCategorySelected.value}")
         val response = mealCategorySelected.value?.let {
-            repository.getMealSelectItemFeed(it)
+            category ->
+            Log.i(TAG, "Retreive from repo: ${category}")
+
+            repository.getMealSelectItemFeed(category)
         }
+        Log.i(TAG, "Meal category selected response: ${response?.value}")
+
         if (response != null){
             mealCategoryItems.addSource(response){
                 newData ->
+                Log.i(TAG, "Meal category selected newData: ${newData.data}")
+
                 if (mealCategoryItems.value != newData){
                     mealCategoryItems.value = newData
                 }

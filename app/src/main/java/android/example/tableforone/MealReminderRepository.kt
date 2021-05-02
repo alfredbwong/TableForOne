@@ -13,6 +13,7 @@ import android.example.tableforone.utils.parseMealCategoriesJsonResult
 import android.example.tableforone.utils.parseMealRecipeJsonResult
 import android.example.tableforone.utils.parseMealSelectRecipesJsonResult
 import android.example.tableforone.utils.safeExecute
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineScope
@@ -62,7 +63,7 @@ class MealReminderRepository(private val mealService: MealApiService,
     fun getMealSelectItemFeed(category : String): LiveData<Resource<List<MealSelectItem>>> {
         return object : NetworkResource<List<MealSelectItem>, String>(viewModelScope) {
             override suspend fun loadFromDisk(): LiveData<List<MealSelectItem>> {
-                return MutableLiveData(mealSelectDao.getMealSelectItem())
+                return MutableLiveData(mealSelectDao.getMealSelectItem(category))
             }
 
             override fun shouldFetch(diskResponse: List<MealSelectItem>?): Boolean {
@@ -70,23 +71,29 @@ class MealReminderRepository(private val mealService: MealApiService,
             }
 
             override suspend fun fetchData(): Response<String> {
+                Log.i(TAG, "Fetch data....")
+
                 val call = mealService.getMealCategoryItems(category)
                 val response = call.safeExecute()
 
                 if (!response.isSuccessful || response.body().isNullOrEmpty()) {
                     return Failure(400, "Invalid Response")
                 }
-
+                Log.i(TAG, "$response.body()")
                 return Success(response.body() as String)
             }
 
             override fun processResponse(response: String): List<MealSelectItem> {
+                Log.i(TAG, "Process response....${response}")
+
                 val json = JSONObject(response)
-                return parseMealSelectRecipesJsonResult(json)
+                return parseMealSelectRecipesJsonResult(json, category)
             }
 
             override suspend fun saveToDisk(data: List<MealSelectItem>): Boolean {
-                val ids = mealSelectDao.updateData(data)
+                Log.i(TAG, "Save to disk....${data.size}")
+
+                val ids = mealSelectDao.updateData(category, data)
                 return ids.isNotEmpty()
             }
         }.asLiveData()
@@ -119,8 +126,7 @@ class MealReminderRepository(private val mealService: MealApiService,
             }
 
             override suspend fun saveToDisk(data: MealRecipe): Boolean {
-                val id = mealRecipeDao.updateData(data)
-                return true
+                return mealRecipeDao.updateData(data) > 0
             }
 
 
@@ -181,5 +187,8 @@ class MealReminderRepository(private val mealService: MealApiService,
                 return true
             }
         }.asLiveData()
+    }
+    companion object{
+        const val TAG = "Repository"
     }
 }
