@@ -22,6 +22,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import java.util.*
 import java.util.Calendar.*
 
@@ -65,12 +69,18 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         })
         binding.nextButton.setOnClickListener{
             if (viewModel.myYear != 0|| viewModel.myHour !=0 ) {
-                val mealIdSaved = viewModel.saveMealReminder()
+                runBlocking{
+                    launch(Dispatchers.IO) {
+                        val mealIdSaved = viewModel.saveMealReminder()
+                        //Notification
+                        createChannel(getString(R.string.meal_reminder_notification_channel_id),getString(R.string.meal_reminder_notification_channel_name))
+                        createDataNotification(mealIdSaved, viewModel.getMealReminderToBeSaved())
 
-                //Notification
-                createChannel(getString(R.string.meal_reminder_notification_channel_id),getString(R.string.meal_reminder_notification_channel_name))
+                    }
+                }
 
-                createDataNotification(mealIdSaved, viewModel.getMealReminderToBeSaved())
+
+
                 val action = TimeDateSelectFragmentDirections.actionTimeDateSelectFragmentToMealListFragment()
                 findNavController().navigate(action)
             } else {

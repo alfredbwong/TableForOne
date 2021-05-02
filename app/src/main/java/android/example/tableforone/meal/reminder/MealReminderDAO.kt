@@ -1,9 +1,6 @@
 package android.example.tableforone.meal.reminder
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface MealReminderDAO {
@@ -14,8 +11,15 @@ interface MealReminderDAO {
     fun updateData(reminders: List<MealReminder>) : List<Long>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(reminders: MealReminder) : Long
+    fun insert(reminder: MealReminder) : Long
 
-    @Query( "SELECT * FROM MealReminder WHERE id = :mealId")
-    fun getMealReminderById(mealId: Long?): MealReminder
+    @Query( "SELECT * FROM MealReminder WHERE id = :mealReminderId")
+    fun getMealReminderById(mealReminderId: Long): MealReminder
+
+    @Query("DELETE FROM MealReminder")
+    fun deleteAll()
+
+    @Query("DELETE FROM MealReminder WHERE id = :mealReminderId")
+    fun deleteMealReminderById(mealReminderId: Long)
+
 }

@@ -41,7 +41,7 @@ class MealReminderDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel.getMealReminderById(mealId)
+        viewModel.getMealReminderById(mealId!!)
         binding = FragmentMealReminderDetailBinding.inflate(inflater)
         viewModel.mealReminder.observe(viewLifecycleOwner, Observer { resource ->
             when (resource.status) {

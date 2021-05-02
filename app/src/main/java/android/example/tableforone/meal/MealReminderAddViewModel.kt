@@ -15,9 +15,6 @@ import android.example.tableforone.network.MealApiService
 import android.example.tableforone.network.Resource
 import android.util.Log
 import androidx.lifecycle.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.*
@@ -113,11 +110,7 @@ class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
 
     fun saveMealReminder() : Long{
         //Save to Room DB and setup broadcast Receiver
-        var idMeal =0L
-        GlobalScope.launch(Dispatchers.IO){
-            idMeal = repository.addMealReminder(getMealReminderToBeSaved())
-        }
-        return idMeal
+        return repository.addMealReminder(getMealReminderToBeSaved())
 
     }
 
@@ -186,7 +179,7 @@ class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
 
     }
 
-    fun getMealReminderById(mealId: Long?){
+    fun getMealReminderById(mealId: Long){
         val response = repository.getMealReminderById(mealId)
 
         if (response != null){

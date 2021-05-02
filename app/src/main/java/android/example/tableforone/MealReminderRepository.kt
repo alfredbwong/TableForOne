@@ -134,58 +134,24 @@ class MealReminderRepository(private val mealService: MealApiService,
     }
 
     fun getMealRemindersFeed() : LiveData<Resource<List<MealReminder>>> {
-        return object : NetworkResource<List<MealReminder>, String>(viewModelScope){
+        return object : LocalResource<List<MealReminder>>(viewModelScope){
             override suspend fun loadFromDisk(): LiveData<List<MealReminder>> {
                 return MutableLiveData(mealReminderDao.getMealReminders())
             }
-
-            override fun shouldFetch(diskResponse: List<MealReminder>?): Boolean {
-                return diskResponse.isNullOrEmpty()
-            }
-
-            override suspend fun fetchData(): Response<String> {
-
-                return Success(String())
-            }
-
-            override fun processResponse(response: String): List<MealReminder> {
-                return mutableListOf()
-            }
-
-            override suspend fun saveToDisk(data: List<MealReminder>): Boolean {
-                val ids = mealReminderDao.updateData(data)
-                return ids.isNotEmpty()
-            }
-
         }.asLiveData()
     }
 
-    fun addMealReminder(mealReminder: MealReminder) :Long {
+    fun addMealReminder(mealReminder: MealReminder) : Long {
         return mealReminderDao.insert(mealReminder)
-
     }
 
-    fun getMealReminderById(mealId: Long?): LiveData<Resource<MealReminder>> {
-        return object : NetworkResource<MealReminder, String>(viewModelScope) {
+    fun getMealReminderById(mealId: Long): LiveData<Resource<MealReminder>> {
+        return object : LocalResource<MealReminder>(viewModelScope) {
 
             override suspend fun loadFromDisk(): LiveData<MealReminder> {
                 return MutableLiveData(mealReminderDao.getMealReminderById(mealId))
             }
 
-            override fun shouldFetch(diskResponse: MealReminder?): Boolean {
-                return false
-            }
-
-            override suspend fun fetchData(): Response<String> {
-                return Success(String())
-
-            }
-            override fun processResponse(response: String): MealReminder {
-                return mealReminderDao.getMealReminderById(mealId)
-            }
-            override suspend fun saveToDisk(data: MealReminder): Boolean {
-                return true
-            }
         }.asLiveData()
     }
     companion object{
