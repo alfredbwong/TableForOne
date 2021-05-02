@@ -1,10 +1,6 @@
 package android.example.tableforone.meal.reminder
 
-import android.example.tableforone.databinding.FragmentMealListBinding
-import android.example.tableforone.databinding.MealCategoryListItemBinding
 import android.example.tableforone.databinding.MealReminderListItemBinding
-import android.example.tableforone.databinding.MealSelectListItemBinding
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

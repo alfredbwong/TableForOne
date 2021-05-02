@@ -13,7 +13,7 @@
         android:id="@+id/mealSelectLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MealSelectionFragment">
+        tools:context=".MealCategoryItemFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mealSelectRecyclerView"

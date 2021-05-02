@@ -7,7 +7,7 @@
 
         <variable
             name="mealSelectItem"
-            type="android.example.tableforone.meal.select.MealSelectItem" />
+            type="android.example.tableforone.meal.select.MealCategoryItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,7 +1,6 @@
 package android.example.tableforone.meal.select
 
-import android.example.tableforone.databinding.MealCategoryListItemBinding
-import android.example.tableforone.databinding.MealSelectListItemBinding
+import android.example.tableforone.databinding.MealCategorySelectListItemBinding
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,12 +8,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 
-class MealSelectAdapter (private val listener: (MealSelectItem) -> Unit): ListAdapter<MealSelectItem,
-        MealSelectAdapter.ViewHolder>(MealSelectDiffCallback()) {
+class MealCategoryItemAdapter (private val listener: (MealCategoryItem) -> Unit): ListAdapter<MealCategoryItem,
+        MealCategoryItemAdapter.ViewHolder>(MealSelectDiffCallback()) {
 
-    class ViewHolder private constructor(val binding: MealSelectListItemBinding)
+    class ViewHolder private constructor(val binding: MealCategorySelectListItemBinding)
         : RecyclerView.ViewHolder(binding.root){
-        fun bind(item: MealSelectItem?) {
+        fun bind(item: MealCategoryItem?) {
             binding.mealSelectItem = item
             binding.executePendingBindings()
             
@@ -22,7 +21,7 @@ class MealSelectAdapter (private val listener: (MealSelectItem) -> Unit): ListAd
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = MealSelectListItemBinding.inflate(layoutInflater, parent, false)
+                val binding = MealCategorySelectListItemBinding.inflate(layoutInflater, parent, false)
 
                 return ViewHolder(binding)
             }
@@ -47,12 +46,12 @@ class MealSelectAdapter (private val listener: (MealSelectItem) -> Unit): ListAd
  * Used by ListAdapter to calculate the minumum number of changes between and old list and a new
  * list that's been passed to `submitList`.
  */
-class MealSelectDiffCallback : DiffUtil.ItemCallback<MealSelectItem>() {
-    override fun areItemsTheSame(oldItem: MealSelectItem, newItem: MealSelectItem): Boolean {
+class MealSelectDiffCallback : DiffUtil.ItemCallback<MealCategoryItem>() {
+    override fun areItemsTheSame(oldItem: MealCategoryItem, newItem: MealCategoryItem): Boolean {
         return oldItem.idMeal == newItem.idMeal
     }
 
-    override fun areContentsTheSame(oldItem: MealSelectItem, newItem: MealSelectItem): Boolean {
+    override fun areContentsTheSame(oldItem: MealCategoryItem, newItem: MealCategoryItem): Boolean {
         return oldItem == newItem
     }
 }

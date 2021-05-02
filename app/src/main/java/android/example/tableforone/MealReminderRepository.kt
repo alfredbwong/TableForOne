@@ -5,8 +5,8 @@ import android.example.tableforone.meal.recipe.MealRecipe
 import android.example.tableforone.meal.recipe.MealRecipeDAO
 import android.example.tableforone.meal.reminder.MealReminder
 import android.example.tableforone.meal.reminder.MealReminderDAO
-import android.example.tableforone.meal.select.MealSelectDAO
-import android.example.tableforone.meal.select.MealSelectItem
+import android.example.tableforone.meal.select.MealCategoryItemDAO
+import android.example.tableforone.meal.select.MealCategoryItem
 import android.example.tableforone.meal.category.MealCategory
 import android.example.tableforone.network.*
 import android.example.tableforone.utils.parseMealCategoriesJsonResult
@@ -21,7 +21,7 @@ import org.json.JSONObject
 
 class MealReminderRepository(private val mealService: MealApiService,
                              private val mealCategoryDAO: MealCategoryDAO,
-                             private val mealSelectDao: MealSelectDAO,
+                             private val mealCategoryItemDao: MealCategoryItemDAO,
                              private val mealRecipeDao : MealRecipeDAO,
                              private val mealReminderDao : MealReminderDAO,
                              private val viewModelScope: CoroutineScope) {
@@ -60,13 +60,13 @@ class MealReminderRepository(private val mealService: MealApiService,
         }.asLiveData()
     }
 
-    fun getMealSelectItemFeed(category : String): LiveData<Resource<List<MealSelectItem>>> {
-        return object : NetworkResource<List<MealSelectItem>, String>(viewModelScope) {
-            override suspend fun loadFromDisk(): LiveData<List<MealSelectItem>> {
-                return MutableLiveData(mealSelectDao.getMealSelectItem(category))
+    fun getMealSelectItemFeed(category : String): LiveData<Resource<List<MealCategoryItem>>> {
+        return object : NetworkResource<List<MealCategoryItem>, String>(viewModelScope) {
+            override suspend fun loadFromDisk(): LiveData<List<MealCategoryItem>> {
+                return MutableLiveData(mealCategoryItemDao.getMealSelectItem(category))
             }
 
-            override fun shouldFetch(diskResponse: List<MealSelectItem>?): Boolean {
+            override fun shouldFetch(diskResponse: List<MealCategoryItem>?): Boolean {
                 return diskResponse.isNullOrEmpty()
             }
 
@@ -83,17 +83,17 @@ class MealReminderRepository(private val mealService: MealApiService,
                 return Success(response.body() as String)
             }
 
-            override fun processResponse(response: String): List<MealSelectItem> {
+            override fun processResponse(response: String): List<MealCategoryItem> {
                 Log.i(TAG, "Process response....${response}")
 
                 val json = JSONObject(response)
                 return parseMealSelectRecipesJsonResult(json, category)
             }
 
-            override suspend fun saveToDisk(data: List<MealSelectItem>): Boolean {
+            override suspend fun saveToDisk(data: List<MealCategoryItem>): Boolean {
                 Log.i(TAG, "Save to disk....${data.size}")
 
-                val ids = mealSelectDao.updateData(category, data)
+                val ids = mealCategoryItemDao.updateData(category, data)
                 return ids.isNotEmpty()
             }
         }.asLiveData()

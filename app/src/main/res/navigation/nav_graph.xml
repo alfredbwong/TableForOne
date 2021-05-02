@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/mealSelectionFragment"
-        android:name="android.example.tableforone.MealSelectionFragment"
+        android:name="android.example.tableforone.MealCategoryItemFragment"
         android:label="fragment_meal_selection"
         tools:layout="@layout/fragment_meal_selection" >
         <action

@@ -5,19 +5,19 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [MealSelectItem::class], version = 1)
-abstract class MealSelectDatabase : RoomDatabase() {
-    abstract fun mealSelectDao(): MealSelectDAO
+@Database(entities = [MealCategoryItem::class], version = 1)
+abstract class MealCategoryItemDatabase : RoomDatabase() {
+    abstract fun mealSelectDao(): MealCategoryItemDAO
 
     companion object {
-        private var instance: MealSelectDatabase? = null
+        private var instance: MealCategoryItemDatabase? = null
 
-        fun getInstance(context: Context): MealSelectDatabase {
+        fun getInstance(context: Context): MealCategoryItemDatabase {
             if (instance == null) {
                 instance = Room
                         .databaseBuilder(
                                 context.applicationContext,
-                                MealSelectDatabase::class.java,
+                                MealCategoryItemDatabase::class.java,
                                 "meal-select-db"
                         )
                         .fallbackToDestructiveMigration()

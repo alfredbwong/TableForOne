@@ -1,8 +1,9 @@
 package android.example.tableforone
 
 import android.example.tableforone.databinding.FragmentMealSelectionBinding
-import android.example.tableforone.meal.select.MealSelectAdapter
-import android.example.tableforone.meal.select.MealSelectItem
+
+import android.example.tableforone.meal.select.MealCategoryItem
+import android.example.tableforone.meal.select.MealCategoryItemAdapter
 import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModel
 import android.example.tableforone.network.Status
 import android.os.Bundle
@@ -17,13 +18,13 @@ import androidx.navigation.fragment.findNavController
 
 /**
  * A simple [Fragment] subclass.
- * Use the [MealSelectionFragment.newInstance] factory method to
+ * Use the [MealCategoryItemFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MealSelectionFragment : Fragment() {
+class MealCategoryItemFragment : Fragment() {
     private lateinit var binding : FragmentMealSelectionBinding
     private val viewModel: MealCategorySelectViewModel by activityViewModels()
-    private val mealCategoryItems: MutableList<MealSelectItem> = mutableListOf()
+    private val mealCategoryItems: MutableList<MealCategoryItem> = mutableListOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -35,10 +36,10 @@ class MealSelectionFragment : Fragment() {
 
         binding.viewModelCategories = viewModel
 
-        val adapter = MealSelectAdapter{
+        val adapter = MealCategoryItemAdapter{
             it->
             viewModel.mealRecipeItemSelected.value = it.idMeal
-            val action = MealSelectionFragmentDirections.actionMealSelectionFragmentToMealRecipeDetailFragment()
+            val action = MealCategoryItemFragmentDirections.actionMealSelectionFragmentToMealRecipeDetailFragment()
             findNavController().navigate(action)
         }
         binding.mealSelectRecyclerView.adapter = adapter
@@ -54,7 +55,7 @@ class MealSelectionFragment : Fragment() {
                     //idle()
 
                     mealCategoryItems.clear()
-                    mealCategoryItems.addAll(resource.data as List<MealSelectItem>)
+                    mealCategoryItems.addAll(resource.data as List<MealCategoryItem>)
                     binding.mealSelectRecyclerView.adapter?.notifyDataSetChanged()
                     adapter.submitList(mealCategoryItems)
                 }

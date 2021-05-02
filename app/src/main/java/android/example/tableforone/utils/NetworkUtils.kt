@@ -1,7 +1,7 @@
 package android.example.tableforone.utils
 
 import android.example.tableforone.meal.recipe.MealRecipe
-import android.example.tableforone.meal.select.MealSelectItem
+import android.example.tableforone.meal.select.MealCategoryItem
 import android.example.tableforone.meal.category.MealCategory
 import android.util.Log
 import org.json.JSONObject
@@ -21,16 +21,16 @@ fun parseMealCategoriesJsonResult(jsonResult: JSONObject): ArrayList<MealCategor
     return mealCategoryList
 }
 
-fun parseMealSelectRecipesJsonResult(jsonResult: JSONObject, category: String): ArrayList<MealSelectItem> {
+fun parseMealSelectRecipesJsonResult(jsonResult: JSONObject, category: String): ArrayList<MealCategoryItem> {
     val mealSelectJSON = jsonResult.getJSONArray("meals")
-    val mealSelectList = ArrayList<MealSelectItem>()
+    val mealSelectList = ArrayList<MealCategoryItem>()
 
     for ( i in 0 until mealSelectJSON.length()){
         val mealCategoryObj = mealSelectJSON.getJSONObject(i)
         val mealName = mealCategoryObj.getString("strMeal")
         val mealThumbUrl = mealCategoryObj.getString("strMealThumb")
         val mealId = mealCategoryObj.getLong("idMeal")
-        val mealSelectItem = MealSelectItem(0,mealName, mealThumbUrl, mealId,category)
+        val mealSelectItem = MealCategoryItem(0,mealName, mealThumbUrl, mealId,category)
         mealSelectList.add(mealSelectItem)
     }
     Log.i("parseMealSelect", "Size : ${mealSelectList.size}")

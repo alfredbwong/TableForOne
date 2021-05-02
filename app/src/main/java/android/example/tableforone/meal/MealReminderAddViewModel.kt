@@ -9,8 +9,8 @@ import android.example.tableforone.meal.recipe.MealRecipe
 import android.example.tableforone.meal.recipe.MealRecipeDatabase
 import android.example.tableforone.meal.reminder.MealReminder
 import android.example.tableforone.meal.reminder.MealReminderDatabase
-import android.example.tableforone.meal.select.MealSelectDatabase
-import android.example.tableforone.meal.select.MealSelectItem
+import android.example.tableforone.meal.select.MealCategoryItemDatabase
+import android.example.tableforone.meal.select.MealCategoryItem
 import android.example.tableforone.network.MealApiService
 import android.example.tableforone.network.Resource
 import android.util.Log
@@ -31,7 +31,7 @@ class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
                             .create(MealApiService::class.java),
                     MealCategoryDatabase.getInstance(applicationContext)
                             .mealCategoryDao(),
-                    MealSelectDatabase.getInstance(applicationContext)
+                    MealCategoryItemDatabase.getInstance(applicationContext)
                             .mealSelectDao(),
                     MealRecipeDatabase.getInstance(applicationContext)
                             .mealRecipeDao(),
@@ -46,7 +46,7 @@ class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
 
     val mealCategories :MediatorLiveData<Resource<List<MealCategory>>> = MediatorLiveData()
 
-    val mealCategoryItems :MediatorLiveData<Resource<List<MealSelectItem>>> = MediatorLiveData()
+    val mealCategoryItems :MediatorLiveData<Resource<List<MealCategoryItem>>> = MediatorLiveData()
 
     val mealRecipeItem: MediatorLiveData<Resource<MealRecipe>> = MediatorLiveData()
 
