@@ -51,18 +51,11 @@
                     tools:src="@tools:sample/avatars" />
 
                 <TextView
-                    android:id="@+id/mealReminderDetailDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:text="@{String.format(@string/meal_reminder_date_formatter,Integer.toString(mealReminderDetail.mealDay), Integer.toString(mealReminderDetail.mealMonth), Integer.toString(mealReminderDetail.mealYear))}" />
-
-                <TextView
                     android:id="@+id/mealReminderDetailTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="@{String.format(@string/meal_reminder_time_formatter,Integer.toString(mealReminderDetail.mealHour), Integer.toString(mealReminderDetail.mealMinute))}" />
+                    app:mealReminderDateTime="@{mealReminderDetail}" />
 
                 <TextView
                     android:id="@+id/mealReminderDetailInstructionsTitle"
@@ -89,8 +82,10 @@
                     android:id="@+id/mealReminderDetailIngredients"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    app:ingredientsReminder="@{mealReminderDetail}" />
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    app:ingredientsReminder="@{mealReminderDetail}"
+                    android:layout_marginBottom="100dp"/>
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,6 @@ class MealReminderReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val notificationManager = ContextCompat.getSystemService(context, NotificationManager::class.java) as NotificationManager
 
-        notificationManager.setupNotificationAlarm(context.getString(R.string.hello_blank_fragment), context)
+        notificationManager.setupNotificationAlarm(context.getString(R.string.app_name), context)
     }
 }

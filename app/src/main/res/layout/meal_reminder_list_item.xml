@@ -36,26 +36,17 @@
             android:layout_marginTop="16dp"
             android:text="@{mealReminder.mealName}"
             app:layout_constraintStart_toEndOf="@+id/mealReminderImg"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/mealReminderImg" />
 
-        <TextView
-            android:id="@+id/mealReminderDate"
-            android:layout_width="235dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@{String.format(@string/meal_reminder_date_formatter,Integer.toString(mealReminder.mealDay), Integer.toString(mealReminder.mealMonth), Integer.toString(mealReminder.mealYear))}"
-            app:layout_constraintBottom_toTopOf="@+id/mealReminderTime"
-            app:layout_constraintStart_toEndOf="@+id/mealReminderImg"
-            app:layout_constraintTop_toBottomOf="@+id/mealReminderTitle" />
 
         <TextView
             android:id="@+id/mealReminderTime"
             android:layout_width="235dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="@{String.format(@string/meal_reminder_time_formatter,Integer.toString(mealReminder.mealHour), Integer.toString(mealReminder.mealMinute))}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/mealReminderImg" />
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toEndOf="@+id/mealReminderImg"
+            app:layout_constraintTop_toBottomOf="@+id/mealReminderTitle"
+            app:mealReminderDateTime="@{mealReminder}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
