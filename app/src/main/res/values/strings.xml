@@ -17,6 +17,6 @@
     <string name="meal_reminder_notification_channel_name" translatable="true">MealReminder</string>
     <string name="meal_reminder_notification_channel_desc" >Meal Reminder</string>
     <string name="meal_reminder_notification_body">Ready to cook for one? Tap here to launch the app.</string>
+    <string name="internet_required_error">Please turn on a network. You will not be able to add new reminders.</string>
 
 </resources>
-<!--<string name="meal_reminder_time_formatter">Time: %s : %s</string>-->
