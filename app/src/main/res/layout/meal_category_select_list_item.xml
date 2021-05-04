@@ -41,14 +41,13 @@
 
                 <TextView
                     android:id="@+id/textView"
-                    android:layout_width="250sp"
+                    android:layout_width="263dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="@{mealSelectItem.strMeal}"
                     android:maxLines="3"
+                    android:singleLine="false"
+                    android:text="@{mealSelectItem.strMeal}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/mealSelectImgView"
                     app:layout_constraintTop_toTopOf="parent" />
 
