@@ -54,6 +54,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
+                    android:adjustViewBounds="true"
                     app:imageUrl="@{mealRecipe.strMealThumb}"
                     tools:src="@tools:sample/avatars" />
 
