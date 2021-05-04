@@ -12,12 +12,14 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.format.DateFormat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.AlarmManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -67,8 +69,11 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
             }
 
         })
-        binding.nextButton.setOnClickListener{
-            if (viewModel.myYear != 0|| viewModel.myHour !=0 ) {
+
+        val motionLayout = binding.motionLayout
+        binding.motionLayout.setTransitionListener(object : MotionLayout.TransitionListener{
+            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
+                Log.i(TAG, "onTransitionStarted...")
                 runBlocking{
                     launch(Dispatchers.IO) {
                         val mealIdSaved = viewModel.saveMealReminder()
@@ -77,9 +82,27 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
                     }
                 }
+            }
 
+            override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
+                Log.i(TAG, "onTransitionChange...")
+            }
+
+            override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
+                Log.i(TAG, "onTransitionCompleted...")
                 val action = TimeDateSelectFragmentDirections.actionTimeDateSelectFragmentToMealListFragment()
                 findNavController().navigate(action)
+            }
+
+            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+                Log.i(TAG, "onTransitionTrigger...")
+            }
+
+        })
+        binding.nextButton.setOnClickListener{
+            if (viewModel.myYear != 0|| viewModel.myHour !=0 ) {
+
+                motionLayout.transitionToEnd()
             } else {
                 Toast.makeText(requireContext(), "You must enter a date/time!", Toast.LENGTH_SHORT).show()
             }
