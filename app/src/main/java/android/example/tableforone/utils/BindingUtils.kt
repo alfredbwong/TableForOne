@@ -1,5 +1,6 @@
 package android.example.tableforone.utils
 
+import android.example.tableforone.R
 import android.example.tableforone.meal.recipe.MealRecipe
 import android.example.tableforone.meal.reminder.MealReminder
 import android.widget.ImageView
@@ -14,7 +15,9 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
         val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
         Glide.with(imgView.context)
                 .load(imgUri)
+                .placeholder(R.drawable.baseline_cloud_off_black_24dp)
                 .into(imgView)
+
     }
 }
 
