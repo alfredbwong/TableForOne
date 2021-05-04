@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_mealListFragment_to_mealCategorySelectFragment"
             app:destination="@id/mealCategorySelectFragment" />
-        <action
-            android:id="@+id/action_mealListFragment_to_mealReminderDetailFragment"
-            app:destination="@id/mealReminderDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/mealCategorySelectFragment"
@@ -60,8 +57,9 @@
         tools:layout="@layout/fragment_meal_reminder_detail" >
         <argument android:name="mealId"
             app:argType="long" />
-        <action
-            android:id="@+id/action_mealReminderDetailFragment_to_mealListFragment"
-            app:destination="@id/mealListFragment" />
     </fragment>
+    <activity
+        android:id="@+id/mealReminderDetailActivity"
+        android:name="android.example.tableforone.MealReminderDetailActivity"
+        android:label="MealReminderDetailActivity" />
 </navigation>

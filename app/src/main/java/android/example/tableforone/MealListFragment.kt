@@ -1,11 +1,13 @@
 package android.example.tableforone
 
+import android.content.Intent
 import android.example.tableforone.databinding.FragmentMealListBinding
 import android.example.tableforone.meal.reminder.MealReminder
 import android.example.tableforone.meal.reminder.MealReminderAdapter
 import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModel
 import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModelFactory
 import android.example.tableforone.network.Status
+import android.example.tableforone.utils.MEAL_REMINDER_KEY_ID
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -48,8 +50,10 @@ class MealListFragment : Fragment() {
             //Save the selection to the viewmodel
             viewModel.mealReminderItemSelected.value = mealReminder.id
 
-            val navController = findNavController()
-            navController.navigate(MealListFragmentDirections.actionMealListFragmentToMealReminderDetailFragment(mealReminder.id))
+            val intent = Intent(requireActivity(), MealReminderDetailActivity::class.java )
+            Log.i(TAG, "${mealReminder.id}")
+            intent.putExtra(MEAL_REMINDER_KEY_ID, mealReminder.id)
+            startActivity(intent)
         }
         binding.mealReminderRecyclerView.adapter = adapter
         viewModel.mealReminders.observe(viewLifecycleOwner, Observer {

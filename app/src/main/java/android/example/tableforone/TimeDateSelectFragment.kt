@@ -7,6 +7,7 @@ import android.example.tableforone.databinding.FragmentTimeDateSelectBinding
 import android.example.tableforone.meal.reminder.MealReminder
 import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModel
 import android.example.tableforone.receiver.MealReminderReceiver
+import android.example.tableforone.utils.MEAL_REMINDER_KEY_ID
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -34,7 +35,6 @@ import java.util.Calendar.*
  * Use the [TimeDateSelectFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-private const val REMINDER_KEY_ID = "Reminder-Key"
 class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         TimePickerDialog.OnTimeSetListener {
     private val viewModel: MealCategorySelectViewModel by activityViewModels()
@@ -150,7 +150,7 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         datetimeToAlarm.set(Calendar.DAY_OF_MONTH, mealReminderToBeSaved.mealDay)
 
         val intent = Intent(requireActivity().applicationContext, MealReminderReceiver::class.java).apply {
-            putExtra(REMINDER_KEY_ID, mealIdSaved)
+            putExtra(MEAL_REMINDER_KEY_ID, mealIdSaved)
         }
         val pendingIntent = PendingIntent.getBroadcast(requireActivity().applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         val alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager

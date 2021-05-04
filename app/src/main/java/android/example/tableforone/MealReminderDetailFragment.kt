@@ -66,7 +66,7 @@ class MealReminderDetailFragment : Fragment() {
         })
 
         binding.backReminderButton.setOnClickListener{
-            findNavController().navigate(MealReminderDetailFragmentDirections.actionMealReminderDetailFragmentToMealListFragment())
+//            val intent =
         }
         return binding.root
     }

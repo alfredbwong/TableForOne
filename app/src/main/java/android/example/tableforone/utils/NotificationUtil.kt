@@ -5,14 +5,17 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.example.tableforone.MainActivity
+import android.example.tableforone.MealReminderDetailActivity
 import android.example.tableforone.R
 import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
 
+const val MEAL_REMINDER_KEY_ID = "MEAL_REMINDER_KEY"
 private val NOTIFICATION_ID = 0
-fun NotificationManager.setupNotificationAlarm(messageBody : String, applicationContext: Context) {
-    val intent = Intent(applicationContext, MainActivity::class.java).apply {
+fun NotificationManager.setupNotificationAlarm(messageBody : String, applicationContext: Context, mealReminderId: Long) {
+    val intent = Intent(applicationContext, MealReminderDetailActivity::class.java).apply {
         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        putExtra(MEAL_REMINDER_KEY_ID, mealReminderId)
     }
 
     val pendingIntent: PendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
