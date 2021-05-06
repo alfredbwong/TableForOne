@@ -39,14 +39,14 @@
                     android:id="@+id/mealReminderDetailTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_margin="@dimen/margin_default"
                     android:text="@{mealReminderDetail.mealName}" />
 
                 <ImageView
                     android:id="@+id/mealReminderDetailImg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_margin="@dimen/margin_default"
                     android:adjustViewBounds="true"
                     app:imageUrl="@{mealReminderDetail.strMealThumb}"
                     tools:src="@tools:sample/avatars"
@@ -56,36 +56,36 @@
                     android:id="@+id/mealReminderDetailTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_margin="@dimen/margin_default"
                     app:mealReminderDateTime="@{mealReminderDetail}" />
 
                 <TextView
                     android:id="@+id/mealReminderDetailInstructionsTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_margin="@dimen/margin_default"
                     android:text="@string/instructions_title" />
 
                 <TextView
                     android:id="@+id/mealReminderDetailInstructions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_margin="@dimen/margin_default"
                     android:text="@{mealReminderDetail.strInstructions}" />
 
                 <TextView
                     android:id="@+id/mealReminderDetailIngredientsTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_margin="@dimen/margin_default"
                     android:text="@string/ingredients_title" />
 
                 <TextView
                     android:id="@+id/mealReminderDetailIngredients"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_default"
                     app:ingredientsReminder="@{mealReminderDetail}"
                     android:layout_marginBottom="100dp"/>
             </LinearLayout>
