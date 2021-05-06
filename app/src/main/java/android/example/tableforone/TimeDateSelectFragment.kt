@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.example.tableforone.databinding.FragmentTimeDateSelectBinding
 import android.example.tableforone.meal.reminder.MealReminder
-import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModel
+import android.example.tableforone.mealCateorySelect.MealReminderAddViewModel
 import android.example.tableforone.receiver.MealReminderReceiver
 import android.example.tableforone.utils.MEAL_REMINDER_KEY_ID
 import android.graphics.Color
@@ -39,7 +39,7 @@ import java.util.Calendar.*
  */
 class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         TimePickerDialog.OnTimeSetListener {
-    private val viewModel: MealCategorySelectViewModel by activityViewModels()
+    private val viewModel: MealReminderAddViewModel by activityViewModels()
 
     private lateinit var binding: FragmentTimeDateSelectBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -82,6 +82,7 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
                     }
                 }
+                binding.nextButton.text = getString(R.string.meal_reminder_saving)
             }
 
             override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
@@ -90,6 +91,8 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
             override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
                 Log.i(TAG, "onTransitionCompleted...")
+                binding.nextButton.text = getString(R.string.meal_reminder_saved)
+
                 val action = TimeDateSelectFragmentDirections.actionTimeDateSelectFragmentToMealListFragment()
                 findNavController().navigate(action)
             }
@@ -104,7 +107,7 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
                 motionLayout.transitionToEnd()
             } else {
-                Toast.makeText(requireContext(), "You must enter a date/time!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.toast_missing_date_time), Toast.LENGTH_SHORT).show()
             }
         }
         return binding.root
@@ -120,11 +123,7 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         viewModel.onTimeSetFun(hourOfDay, minute)
 
-        binding.textView.text = "Year: " + viewModel.myYear +
-                "\n" + "Month: " + viewModel.myMonth +
-                "\n" + "Day: " + viewModel.myDay +
-                "\n" + "Hour: " + viewModel.myHour +
-                "\n" + "Minute: " + viewModel.myMinute
+        binding.textView.text = String.format(getString(R.string.time_date_display), viewModel.myYear, viewModel.myMonth, viewModel.myDay, viewModel.myHour, viewModel.myMinute)
     }
 
 

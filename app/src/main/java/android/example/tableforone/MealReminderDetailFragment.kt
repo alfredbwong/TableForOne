@@ -1,7 +1,7 @@
 package android.example.tableforone
 
 import android.example.tableforone.databinding.FragmentMealReminderDetailBinding
-import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModel
+import android.example.tableforone.mealCateorySelect.MealReminderAddViewModel
 import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModelFactory
 import android.example.tableforone.network.Status
 import android.os.Bundle
@@ -12,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 
 private const val MEAL_ID = "mealId"
 
@@ -24,7 +23,7 @@ private const val MEAL_ID = "mealId"
  */
 class MealReminderDetailFragment : Fragment() {
     private var mealId: Long? = null
-    private val viewModel: MealCategorySelectViewModel by activityViewModels() {
+    private val viewModel: MealReminderAddViewModel by activityViewModels() {
         MealCategorySelectViewModelFactory(activity?.applicationContext)
     }
     private lateinit var binding: FragmentMealReminderDetailBinding

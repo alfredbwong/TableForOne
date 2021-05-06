@@ -19,7 +19,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.*
 
-class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
+class MealReminderAddViewModel(applicationContext: Context) : ViewModel() {
 
 
     var mealRecipeDetails: MealRecipe? = null
@@ -262,7 +262,7 @@ class MealCategorySelectViewModel(applicationContext: Context) : ViewModel() {
 
 class MealCategorySelectViewModelFactory(private val applicationContext: Context?): ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T = applicationContext?.let {
-        MealCategorySelectViewModel(
+        MealReminderAddViewModel(
                 it
         )
     } as T

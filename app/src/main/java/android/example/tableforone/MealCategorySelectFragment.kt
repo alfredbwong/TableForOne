@@ -3,7 +3,7 @@ package android.example.tableforone
 import android.example.tableforone.databinding.FragmentMealCategorySelectBinding
 import android.example.tableforone.meal.category.MealCategory
 import android.example.tableforone.meal.category.MealCategoryAdapter
-import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModel
+import android.example.tableforone.mealCateorySelect.MealReminderAddViewModel
 import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModelFactory
 import android.example.tableforone.network.Status
 import android.os.Bundle
@@ -24,7 +24,7 @@ import androidx.navigation.fragment.findNavController
 class MealCategorySelectFragment : Fragment() {
 
     // Shared ViewModel
-    private val viewModel: MealCategorySelectViewModel by activityViewModels {
+    private val viewModel: MealReminderAddViewModel by activityViewModels {
         MealCategorySelectViewModelFactory(activity?.applicationContext)
     }
     private val mealCategories: MutableList<MealCategory> = mutableListOf()

@@ -4,7 +4,7 @@ import android.content.Intent
 import android.example.tableforone.databinding.FragmentMealListBinding
 import android.example.tableforone.meal.reminder.MealReminder
 import android.example.tableforone.meal.reminder.MealReminderAdapter
-import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModel
+import android.example.tableforone.mealCateorySelect.MealReminderAddViewModel
 import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModelFactory
 import android.example.tableforone.network.Status
 import android.example.tableforone.utils.MEAL_REMINDER_KEY_ID
@@ -26,7 +26,7 @@ import androidx.navigation.fragment.findNavController
  */
 class MealListFragment : Fragment() {
 
-    private val viewModel : MealCategorySelectViewModel by activityViewModels(){
+    private val viewModel : MealReminderAddViewModel by activityViewModels(){
 
             MealCategorySelectViewModelFactory(activity?.applicationContext)
 

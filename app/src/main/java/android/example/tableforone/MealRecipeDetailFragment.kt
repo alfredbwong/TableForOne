@@ -1,7 +1,7 @@
 package android.example.tableforone
 
 import android.example.tableforone.databinding.FragmentMealRecipeDetailBinding
-import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModel
+import android.example.tableforone.mealCateorySelect.MealReminderAddViewModel
 import android.example.tableforone.network.Status
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -20,7 +20,7 @@ import androidx.navigation.fragment.findNavController
  */
 class MealRecipeDetailFragment : Fragment() {
 
-    private val viewModel : MealCategorySelectViewModel by activityViewModels()
+    private val viewModel : MealReminderAddViewModel by activityViewModels()
     private lateinit var binding : FragmentMealRecipeDetailBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
