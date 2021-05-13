@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-
+/**
+ * List Adapter class for binding the list of meal categories and placing them in a ViewHolder
+ */
 class MealCategoryAdapter (private val listener: (MealCategory) -> Unit): ListAdapter<MealCategory,
         MealCategoryAdapter.ViewHolder>(MealCategoryDiffCallback()) {
 
@@ -54,7 +56,4 @@ class MealCategoryDiffCallback : DiffUtil.ItemCallback<MealCategory>() {
     override fun areContentsTheSame(oldItem: MealCategory, newItem: MealCategory): Boolean {
         return oldItem == newItem
     }
-}
-interface OnItemClickListener {
-    fun onItemClick(item: MealCategory)
 }

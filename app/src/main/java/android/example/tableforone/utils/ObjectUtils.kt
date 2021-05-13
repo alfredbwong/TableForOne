@@ -2,7 +2,6 @@ package android.example.tableforone.utils
 
 import android.example.tableforone.meal.recipe.MealRecipe
 import android.example.tableforone.meal.reminder.MealReminder
-import android.util.Log
 
 fun convertRawMealRecipeIngredients(recipe: MealRecipe) :  List<String> {
 

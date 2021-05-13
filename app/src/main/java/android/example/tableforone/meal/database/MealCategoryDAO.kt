@@ -2,7 +2,9 @@ package android.example.tableforone.meal.database
 
 import android.example.tableforone.meal.category.MealCategory
 import androidx.room.*
-
+/**
+ * Data Access Object interface for the meal categories.
+ */
 @Dao
 interface MealCategoryDAO {
     @Query("SELECT * FROM MealCategory")

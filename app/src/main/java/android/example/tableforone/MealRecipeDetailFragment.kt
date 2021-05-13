@@ -1,9 +1,10 @@
 package android.example.tableforone
 
 import android.example.tableforone.databinding.FragmentMealRecipeDetailBinding
-import android.example.tableforone.mealCateorySelect.MealReminderAddViewModel
+import android.example.tableforone.meal.MealReminderAddViewModel
 import android.example.tableforone.network.Status
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +15,7 @@ import androidx.navigation.fragment.findNavController
 
 
 /**
- * A simple [Fragment] subclass.
- * Use the [MealRecipeDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * A simple [Fragment] subclass. This fragment displays the recipe information.
  */
 class MealRecipeDetailFragment : Fragment() {
 
@@ -24,15 +23,16 @@ class MealRecipeDetailFragment : Fragment() {
     private lateinit var binding : FragmentMealRecipeDetailBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
 
         viewModel.getMealRecipeDetailsData()
         binding = FragmentMealRecipeDetailBinding.inflate(inflater)
 
-        viewModel.mealRecipeItem.observe(viewLifecycleOwner, Observer { resource ->
+        viewModel.mealRecipeItem.observe(viewLifecycleOwner, { resource ->
             when (resource.status) {
                 Status.SUCCESS -> {
                     if (resource.data == null) {
+                        Log.i(TAG, "Missing resource data")
 
                     }
 

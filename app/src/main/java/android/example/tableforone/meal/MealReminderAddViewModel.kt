@@ -1,4 +1,4 @@
-package android.example.tableforone.mealCateorySelect
+package android.example.tableforone.meal
 
 import android.content.Context
 import android.example.tableforone.BASE_URL
@@ -130,7 +130,7 @@ class MealReminderAddViewModel(applicationContext: Context) : ViewModel() {
         Log.i(TAG, "Meal category selected : ${mealCategorySelected.value}")
         val response = mealCategorySelected.value?.let {
             category ->
-            Log.i(TAG, "Retreive from repo: ${category}")
+            Log.i(TAG, "Retreive from repo: $category")
 
             repository.getMealSelectItemFeed(category)
         }

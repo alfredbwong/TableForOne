@@ -50,14 +50,6 @@
             android:id="@+id/action_mealRecipeDetailFragment_to_timeDateSelectFragment"
             app:destination="@id/timeDateSelectFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/mealReminderDetailFragment"
-        android:name="android.example.tableforone.MealReminderDetailFragment"
-        android:label="fragment_meal_reminder_detail"
-        tools:layout="@layout/fragment_meal_reminder_detail" >
-        <argument android:name="mealId"
-            app:argType="long" />
-    </fragment>
     <activity
         android:id="@+id/mealReminderDetailActivity"
         android:name="android.example.tableforone.MealReminderDetailActivity"

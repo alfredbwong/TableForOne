@@ -4,7 +4,7 @@ import android.example.tableforone.databinding.FragmentMealSelectionBinding
 
 import android.example.tableforone.meal.select.MealCategoryItem
 import android.example.tableforone.meal.select.MealCategoryItemAdapter
-import android.example.tableforone.mealCateorySelect.MealReminderAddViewModel
+import android.example.tableforone.meal.MealReminderAddViewModel
 import android.example.tableforone.network.Status
 import android.os.Bundle
 import android.util.Log
@@ -17,9 +17,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 
 /**
- * A simple [Fragment] subclass.
- * Use the [MealCategoryItemFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * A simple [Fragment] subclass. This fragment displays the list of category recipe items.
  */
 class MealCategoryItemFragment : Fragment() {
     private lateinit var binding : FragmentMealSelectionBinding
@@ -27,7 +25,7 @@ class MealCategoryItemFragment : Fragment() {
     private val mealCategoryItems: MutableList<MealCategoryItem> = mutableListOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         Log.i(TAG, "onCreateView")
         viewModel.getMealCategoryItemsData()
         binding = FragmentMealSelectionBinding.inflate(inflater)
@@ -37,20 +35,19 @@ class MealCategoryItemFragment : Fragment() {
         binding.viewModelCategories = viewModel
 
         val adapter = MealCategoryItemAdapter{
-            it->
             viewModel.mealRecipeItemSelected.value = it.idMeal
             val action = MealCategoryItemFragmentDirections.actionMealSelectionFragmentToMealRecipeDetailFragment()
             findNavController().navigate(action)
         }
         binding.mealSelectRecyclerView.adapter = adapter
 
-        viewModel.mealCategoryItems.observe(viewLifecycleOwner, Observer{
+        viewModel.mealCategoryItems.observe(viewLifecycleOwner, {
             resource->
             Log.i(TAG, "$resource")
             when (resource.status) {
                 Status.SUCCESS -> {
                     if (resource.data == null) {
-
+                        Log.i(TAG, "Missing resource data")
                     }
                     //idle()
 

@@ -1,18 +1,12 @@
 package android.example.tableforone
 
-import android.Manifest
 import android.content.Context
-import android.content.pm.PackageManager
 import android.example.tableforone.databinding.ActivityMainBinding
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.NetworkInfo
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.snackbar.Snackbar
 
@@ -39,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         }.show()
     }
 
-    fun isInternetConnected()  {
+    private fun isInternetConnected()  {
         var isInternetConnected = false
         val cm = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

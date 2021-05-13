@@ -58,7 +58,7 @@ fun mealReminderTime(view: TextView, mealReminder: MealReminder?){
         val hour = (mealReminder.mealHour).toString()
         val minute = (mealReminder.mealMinute).toString()
 
-        var sb = StringBuilder()
+        val sb = StringBuilder()
         sb.append("You have scheduled this meal for: ")
         sb.append(day).append("/").append(month).append("/").append(year)
         sb.append(" at ")

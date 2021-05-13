@@ -4,14 +4,10 @@ import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.example.tableforone.MealReminderRepository
 import android.example.tableforone.R
 import android.example.tableforone.utils.MEAL_REMINDER_KEY_ID
 import android.example.tableforone.utils.setupNotificationAlarm
 import androidx.core.content.ContextCompat
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.coroutineContext
 
 class MealReminderReceiver : BroadcastReceiver() {
 

@@ -3,10 +3,11 @@ package android.example.tableforone
 import android.example.tableforone.databinding.FragmentMealCategorySelectBinding
 import android.example.tableforone.meal.category.MealCategory
 import android.example.tableforone.meal.category.MealCategoryAdapter
-import android.example.tableforone.mealCateorySelect.MealReminderAddViewModel
-import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModelFactory
+import android.example.tableforone.meal.MealReminderAddViewModel
+import android.example.tableforone.meal.MealCategorySelectViewModelFactory
 import android.example.tableforone.network.Status
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,9 +18,7 @@ import androidx.navigation.fragment.findNavController
 
 
 /**
- * A simple [Fragment] subclass.
- * Use the [MealCategorySelectFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * A simple [Fragment] subclass. This fragment displays the list of categories.
  */
 class MealCategorySelectFragment : Fragment() {
 
@@ -30,7 +29,7 @@ class MealCategorySelectFragment : Fragment() {
     private val mealCategories: MutableList<MealCategory> = mutableListOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
 
         viewModel.getMealCategoriesData()
         val binding = FragmentMealCategorySelectBinding.inflate(inflater)
@@ -49,11 +48,12 @@ class MealCategorySelectFragment : Fragment() {
         }
         binding.mealCategoryRecyclerView.adapter = adapter
 
-        viewModel.mealCategories.observe(viewLifecycleOwner, Observer { resource ->
+        viewModel.mealCategories.observe(viewLifecycleOwner, { resource ->
 //            Log.i(TAG, "Observe categories ${resource.data} ${resource.status}")
             when (resource.status) {
                 Status.SUCCESS -> {
                     if (resource.data == null) {
+                        Log.i(TAG, "Missing resource data")
 
                     }
                     //idle()

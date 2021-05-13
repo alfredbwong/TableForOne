@@ -4,8 +4,8 @@ import android.content.Intent
 import android.example.tableforone.databinding.FragmentMealListBinding
 import android.example.tableforone.meal.reminder.MealReminder
 import android.example.tableforone.meal.reminder.MealReminderAdapter
-import android.example.tableforone.mealCateorySelect.MealReminderAddViewModel
-import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModelFactory
+import android.example.tableforone.meal.MealReminderAddViewModel
+import android.example.tableforone.meal.MealCategorySelectViewModelFactory
 import android.example.tableforone.network.Status
 import android.example.tableforone.utils.MEAL_REMINDER_KEY_ID
 import android.os.Bundle
@@ -20,13 +20,11 @@ import androidx.navigation.fragment.findNavController
 
 
 /**
- * A simple [Fragment] subclass.
- * Use the [MealListFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * A simple [Fragment] subclass. This fragment displays the meal reminder list.
  */
 class MealListFragment : Fragment() {
 
-    private val viewModel : MealReminderAddViewModel by activityViewModels(){
+    private val viewModel : MealReminderAddViewModel by activityViewModels {
 
             MealCategorySelectViewModelFactory(activity?.applicationContext)
 
@@ -37,7 +35,7 @@ class MealListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentMealListBinding.inflate(inflater)
 
@@ -56,12 +54,13 @@ class MealListFragment : Fragment() {
             startActivity(intent)
         }
         binding.mealReminderRecyclerView.adapter = adapter
-        viewModel.mealReminders.observe(viewLifecycleOwner, Observer {
+        viewModel.mealReminders.observe(viewLifecycleOwner, {
             resource->
 
             when (resource.status) {
                 Status.SUCCESS -> {
                     if (resource.data == null) {
+                        Log.i(TAG, "Missing resource data")
 
                     }
                     //idle()
@@ -69,7 +68,7 @@ class MealListFragment : Fragment() {
                     mealReminders.clear()
                     val data = resource.data as List<MealReminder>
 
-                    mealReminders.addAll(resource.data as List<MealReminder>)
+                    mealReminders.addAll(resource.data)
                     binding.mealReminderRecyclerView.adapter?.notifyDataSetChanged()
                     adapter.submitList(mealReminders)
                 }

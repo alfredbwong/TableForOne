@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.example.tableforone.databinding.FragmentTimeDateSelectBinding
 import android.example.tableforone.meal.reminder.MealReminder
-import android.example.tableforone.mealCateorySelect.MealReminderAddViewModel
+import android.example.tableforone.meal.MealReminderAddViewModel
 import android.example.tableforone.receiver.MealReminderReceiver
 import android.example.tableforone.utils.MEAL_REMINDER_KEY_ID
 import android.graphics.Color
@@ -33,9 +33,7 @@ import java.util.Calendar.*
 
 
 /**
- * A simple [Fragment] subclass.
- * Use the [TimeDateSelectFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * A simple [Fragment] subclass. This fragment displays option for user to select a time/date through dialog and save.
  */
 class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         TimePickerDialog.OnTimeSetListener {
@@ -43,14 +41,14 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
     private lateinit var binding: FragmentTimeDateSelectBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
 
         binding = FragmentTimeDateSelectBinding.inflate(inflater)
         binding.dateTimeSelectButton.setOnClickListener{
             viewModel.setupDatePicker()
         }
 
-        viewModel.showDatePicker.observe(viewLifecycleOwner, Observer {
+        viewModel.showDatePicker.observe(viewLifecycleOwner, {
             showDatePicker->
             if (showDatePicker){
                 val datePickerDialog =
@@ -60,7 +58,7 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
         })
 
-        viewModel.showTimePicker.observe(viewLifecycleOwner, Observer {
+        viewModel.showTimePicker.observe(viewLifecycleOwner, {
             showTimePicker->
             if (showTimePicker){
                 val timePickerDialog = TimePickerDialog(requireContext(), this, viewModel.hour, viewModel.minute,
@@ -163,13 +161,13 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         mealReminderToBeSaved.id = mealIdSaved
 
         //Set date/time
-        val datetimeToAlarm = Calendar.getInstance(Locale.getDefault())
+        val datetimeToAlarm = getInstance(Locale.getDefault())
         datetimeToAlarm.timeInMillis = System.currentTimeMillis()
-        datetimeToAlarm.set(Calendar.HOUR_OF_DAY, mealReminderToBeSaved.mealHour)
-        datetimeToAlarm.set(Calendar.MINUTE, mealReminderToBeSaved.mealMinute)
-        datetimeToAlarm.set(Calendar.YEAR, mealReminderToBeSaved.mealYear)
-        datetimeToAlarm.set(Calendar.MONTH, mealReminderToBeSaved.mealMonth)
-        datetimeToAlarm.set(Calendar.DAY_OF_MONTH, mealReminderToBeSaved.mealDay)
+        datetimeToAlarm.set(HOUR_OF_DAY, mealReminderToBeSaved.mealHour)
+        datetimeToAlarm.set(MINUTE, mealReminderToBeSaved.mealMinute)
+        datetimeToAlarm.set(YEAR, mealReminderToBeSaved.mealYear)
+        datetimeToAlarm.set(MONTH, mealReminderToBeSaved.mealMonth)
+        datetimeToAlarm.set(DAY_OF_MONTH, mealReminderToBeSaved.mealDay)
 
         val intent = Intent(requireActivity().applicationContext, MealReminderReceiver::class.java).apply {
             putExtra(MEAL_REMINDER_KEY_ID, mealIdSaved)

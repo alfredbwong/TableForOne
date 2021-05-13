@@ -2,11 +2,12 @@ package android.example.tableforone
 
 import android.content.Intent
 import android.example.tableforone.databinding.ActivityMealReminderDetailBinding
-import android.example.tableforone.mealCateorySelect.MealReminderAddViewModel
-import android.example.tableforone.mealCateorySelect.MealCategorySelectViewModelFactory
+import android.example.tableforone.meal.MealReminderAddViewModel
+import android.example.tableforone.meal.MealCategorySelectViewModelFactory
 import android.example.tableforone.network.Status
 import android.example.tableforone.utils.MEAL_REMINDER_KEY_ID
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -15,7 +16,7 @@ import androidx.lifecycle.Observer
 class MealReminderDetailActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMealReminderDetailBinding
-    private val viewModel: MealReminderAddViewModel by viewModels(){
+    private val viewModel: MealReminderAddViewModel by viewModels {
         MealCategorySelectViewModelFactory(applicationContext)
     }
 
@@ -28,10 +29,11 @@ class MealReminderDetailActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_meal_reminder_detail)
 
         viewModel.getMealReminderById(mealId)
-        viewModel.mealReminder.observe(this, Observer { resource ->
+        viewModel.mealReminder.observe(this, { resource ->
             when (resource.status) {
                 Status.SUCCESS -> {
                     if (resource.data == null) {
+                        Log.i(TAG, "Missing resource data")
 
                     }
                     binding.mealReminderDetail = resource.data

@@ -1,7 +1,6 @@
 package android.example.tableforone
 
 import android.example.tableforone.network.Resource
-import android.example.tableforone.utils.LogUtils
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData

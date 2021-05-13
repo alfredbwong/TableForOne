@@ -30,11 +30,3 @@ interface MealApiService {
 }
 
 
-/**
- * A public Api object that exposes the lazy-initialized Retrofit service
- */
-object MealApi {
-    val retrofitService: MealApiService by lazy {
-        retrofit.create(MealApiService::class.java)
-    }
-}

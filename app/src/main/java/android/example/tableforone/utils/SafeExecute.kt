@@ -10,7 +10,7 @@ fun<T> Call<T>.safeExecute(): Response<T> {
     return try {
         this.execute()
     } catch (e: IOException) {
-        Response.error<T>(400,
+        Response.error(400,
                 ResponseBody.create(MediaType.parse("text/plain"),
                         "Error: No Network"))
     }
