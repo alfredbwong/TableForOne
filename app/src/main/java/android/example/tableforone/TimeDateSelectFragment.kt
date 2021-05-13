@@ -4,8 +4,8 @@ import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.example.tableforone.databinding.FragmentTimeDateSelectBinding
-import android.example.tableforone.meal.reminder.MealReminder
 import android.example.tableforone.meal.MealReminderAddViewModel
+import android.example.tableforone.meal.reminder.MealReminder
 import android.example.tableforone.receiver.MealReminderReceiver
 import android.example.tableforone.utils.MEAL_REMINDER_KEY_ID
 import android.graphics.Color
@@ -23,7 +23,6 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.AlarmManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

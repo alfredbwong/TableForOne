@@ -1,10 +1,9 @@
 package android.example.tableforone
 
 import android.example.tableforone.databinding.FragmentMealSelectionBinding
-
+import android.example.tableforone.meal.MealReminderAddViewModel
 import android.example.tableforone.meal.select.MealCategoryItem
 import android.example.tableforone.meal.select.MealCategoryItemAdapter
-import android.example.tableforone.meal.MealReminderAddViewModel
 import android.example.tableforone.network.Status
 import android.os.Bundle
 import android.util.Log
@@ -13,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 
 /**

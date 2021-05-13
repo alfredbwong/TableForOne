@@ -2,8 +2,8 @@ package android.example.tableforone
 
 import android.content.Intent
 import android.example.tableforone.databinding.ActivityMealReminderDetailBinding
-import android.example.tableforone.meal.MealReminderAddViewModel
 import android.example.tableforone.meal.MealCategorySelectViewModelFactory
+import android.example.tableforone.meal.MealReminderAddViewModel
 import android.example.tableforone.network.Status
 import android.example.tableforone.utils.MEAL_REMINDER_KEY_ID
 import android.os.Bundle
@@ -11,7 +11,6 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 
 class MealReminderDetailActivity : AppCompatActivity() {
 
