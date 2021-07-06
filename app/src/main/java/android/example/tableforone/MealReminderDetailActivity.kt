@@ -1,6 +1,8 @@
 package android.example.tableforone
 
 import android.content.Intent
+import android.example.tableforone.adapter.RecipeIngredientAdapter
+import android.example.tableforone.adapter.RecipeInstructionAdapter
 import android.example.tableforone.databinding.ActivityMealReminderDetailBinding
 import android.example.tableforone.meal.MealCategorySelectViewModelFactory
 import android.example.tableforone.meal.MealReminderAddViewModel
@@ -11,6 +13,8 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 
 class MealReminderDetailActivity : AppCompatActivity() {
 
@@ -34,9 +38,13 @@ class MealReminderDetailActivity : AppCompatActivity() {
                     if (resource.data == null) {
                         Log.i(TAG, "Missing resource data")
 
+                    } else {
+                        binding.mealReminderDetail = resource.data
+                        viewModel.convertListOfInstructions(resource.data.strInstructions)
+                        viewModel.createListOfIngredients(resource.data)
+                        binding.executePendingBindings()
                     }
-                    binding.mealReminderDetail = resource.data
-                    binding.executePendingBindings()
+
                 }
                 Status.LOADING -> {
 
@@ -48,6 +56,19 @@ class MealReminderDetailActivity : AppCompatActivity() {
                 }
             }
         })
+        val instructionAdapter = RecipeInstructionAdapter()
+        binding.mealReminderInstructions.adapter = instructionAdapter
+        viewModel.mealRecipeItemInstructions.observe(this, Observer{
+            listInstructions->
+            instructionAdapter.submitList(listInstructions)
+        })
+        val ingredientAdapter = RecipeIngredientAdapter()
+        binding.mealReminderIngredients.adapter = ingredientAdapter
+        viewModel.mealRecipeItemIngredients.observe(this, Observer{
+            listIngredients->
+            ingredientAdapter.submitList(listIngredients)
+        })
+        binding.mealReminderIngredients.addItemDecoration(DividerItemDecoration(applicationContext, DividerItemDecoration.VERTICAL))
 
         binding.backReminderButton.setOnClickListener{
             val intent = Intent(applicationContext, MainActivity::class.java)

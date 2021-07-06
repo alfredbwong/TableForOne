@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 
 
 /**
@@ -67,9 +68,9 @@ class MealRecipeDetailFragment : Fragment() {
         binding.ingredientsRecyclerView.adapter = ingredientAdapter
         viewModel.mealRecipeItemIngredients.observe(viewLifecycleOwner, Observer{
             listIngredients->
-            Log.i(TAG,"listIngredients-> ${listIngredients}")
             ingredientAdapter.submitList(listIngredients)
         })
+        binding.ingredientsRecyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
 
         binding.saveRecipeButton.setOnClickListener{
             val action = MealRecipeDetailFragmentDirections.actionMealRecipeDetailFragmentToTimeDateSelectFragment()

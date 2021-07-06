@@ -48,7 +48,6 @@ class MealListFragment : Fragment() {
             viewModel.mealReminderItemSelected.value = mealReminder.id
 
             val intent = Intent(requireActivity(), MealReminderDetailActivity::class.java )
-            Log.i(TAG, "${mealReminder.id}")
             intent.putExtra(MEAL_REMINDER_KEY_ID, mealReminder.id)
             startActivity(intent)
         }

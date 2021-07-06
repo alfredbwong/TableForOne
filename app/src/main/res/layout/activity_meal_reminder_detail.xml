@@ -40,7 +40,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_default"
-                    android:text="@{mealReminderDetail.mealName}" />
+                    android:text="@{mealReminderDetail.mealName}"
+                    android:textSize="@dimen/title_size_default"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/mealReminderDetailImg"
@@ -57,21 +59,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_default"
+                    android:textSize="@dimen/section_size"
                     app:mealReminderDateTime="@{mealReminderDetail}" />
-
-                <TextView
-                    android:id="@+id/mealReminderDetailInstructionsTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_default"
-                    android:text="@string/instructions_title" />
-
-                <TextView
-                    android:id="@+id/mealReminderDetailInstructions"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_default"
-                    android:text="@{mealReminderDetail.strInstructions}" />
 
                 <TextView
                     android:id="@+id/mealReminderDetailIngredientsTitle"
@@ -80,14 +69,39 @@
                     android:layout_margin="@dimen/margin_default"
                     android:text="@string/ingredients_title" />
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/mealReminderIngredients"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                </RelativeLayout>
+
                 <TextView
-                    android:id="@+id/mealReminderDetailIngredients"
+                    android:id="@+id/mealReminderDetailInstructionsTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/margin_default"
-                    android:layout_marginTop="@dimen/margin_default"
-                    app:ingredientsReminder="@{mealReminderDetail}"
-                    android:layout_marginBottom="100dp"/>
+                    android:layout_margin="@dimen/margin_default"
+                    android:text="@string/instructions_title" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mealReminderInstructions"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <RelativeLayout
+                    android:id="@+id/bufferLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp">
+
+                </RelativeLayout>
+
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

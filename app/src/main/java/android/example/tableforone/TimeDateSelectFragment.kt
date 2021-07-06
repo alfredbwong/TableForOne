@@ -70,7 +70,6 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         val motionLayout = binding.motionLayout
         binding.motionLayout.setTransitionListener(object : MotionLayout.TransitionListener{
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
-                Log.i(TAG, "onTransitionStarted...")
                 runBlocking{
                     launch(Dispatchers.IO) {
                         val mealIdSaved = viewModel.saveMealReminder()
@@ -83,11 +82,9 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
             }
 
             override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
-                Log.i(TAG, "onTransitionChange...")
             }
 
             override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
-                Log.i(TAG, "onTransitionCompleted...")
                 binding.nextButton.text = getString(R.string.meal_reminder_saved)
 
                 val action = TimeDateSelectFragmentDirections.actionTimeDateSelectFragmentToMealListFragment()
@@ -95,7 +92,6 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
             }
 
             override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
-                Log.i(TAG, "onTransitionTrigger...")
             }
 
         })

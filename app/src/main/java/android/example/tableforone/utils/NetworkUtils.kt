@@ -33,7 +33,6 @@ fun parseMealSelectRecipesJsonResult(jsonResult: JSONObject, category: String): 
         val mealSelectItem = MealCategoryItem(0,mealName, mealThumbUrl, mealId,category)
         mealSelectList.add(mealSelectItem)
     }
-    Log.i("parseMealSelect", "Size : ${mealSelectList.size}")
     return mealSelectList
 }
 fun parseMealRecipeJsonResult(jsonResult: JSONObject): MealRecipe {

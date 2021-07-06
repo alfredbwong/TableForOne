@@ -24,7 +24,6 @@ class MealCategoryItemFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        Log.i(TAG, "onCreateView")
         viewModel.getMealCategoryItemsData()
         binding = FragmentMealSelectionBinding.inflate(inflater)
 
@@ -41,7 +40,6 @@ class MealCategoryItemFragment : Fragment() {
 
         viewModel.mealCategoryItems.observe(viewLifecycleOwner, {
             resource->
-            Log.i(TAG, "$resource")
             when (resource.status) {
                 Status.SUCCESS -> {
                     if (resource.data == null) {
