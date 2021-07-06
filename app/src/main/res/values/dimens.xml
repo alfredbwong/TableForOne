@@ -4,4 +4,7 @@
     <dimen name="card_elevation_default">6dp</dimen>
     <dimen name="title_size_default">24sp</dimen>
     <dimen name="section_size">18sp</dimen>
+    <dimen name="margin_instruction_default">8dp</dimen>
+    <dimen name="padding_default">8dp</dimen>
+    <dimen name="ingredient_list_spacing">2dp</dimen>
 </resources>

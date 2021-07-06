@@ -35,7 +35,7 @@ fun bindIngredient( view: TextView, recipe:MealRecipe?) {
 }
 
 @BindingAdapter("ingredientsReminder")
-fun bindIngredient( view: TextView, recipe: MealReminder?) {
+fun bindIngredientsReminder( view: TextView, recipe: MealReminder?) {
     recipe?.let{
         val listIngredients = convertRawMealReminderIngredients(recipe)
         val listMeasures = convertRawMealReminderMeasurements(recipe)

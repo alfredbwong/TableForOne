@@ -1,5 +1,7 @@
 package android.example.tableforone
 
+import android.example.tableforone.adapter.RecipeIngredientAdapter
+import android.example.tableforone.adapter.RecipeInstructionAdapter
 import android.example.tableforone.databinding.FragmentMealRecipeDetailBinding
 import android.example.tableforone.meal.MealReminderAddViewModel
 import android.example.tableforone.network.Status
@@ -10,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 
 
@@ -33,13 +36,14 @@ class MealRecipeDetailFragment : Fragment() {
                     if (resource.data == null) {
                         Log.i(TAG, "Missing resource data")
 
+                    } else {
+
+                        binding.mealRecipe = resource.data
+                        viewModel.mealRecipeDetails = resource.data
+                        viewModel.convertListOfInstructions(resource.data.strInstructions)
+                        viewModel.createListOfIngredients(resource.data)
+                        binding.executePendingBindings()
                     }
-
-                    binding.mealRecipe = resource.data
-                    viewModel.mealRecipeDetails = resource.data
-
-
-                    binding.executePendingBindings()
                 }
                 Status.LOADING -> {
 
@@ -50,6 +54,21 @@ class MealRecipeDetailFragment : Fragment() {
 
                 }
             }
+        })
+
+        val instructionAdapter = RecipeInstructionAdapter()
+        binding.instructionRecyclerView.adapter = instructionAdapter
+        viewModel.mealRecipeItemInstructions.observe(viewLifecycleOwner, Observer{
+            listInstructions->
+            instructionAdapter.submitList(listInstructions)
+        })
+
+        val ingredientAdapter = RecipeIngredientAdapter()
+        binding.ingredientsRecyclerView.adapter = ingredientAdapter
+        viewModel.mealRecipeItemIngredients.observe(viewLifecycleOwner, Observer{
+            listIngredients->
+            Log.i(TAG,"listIngredients-> ${listIngredients}")
+            ingredientAdapter.submitList(listIngredients)
         })
 
         binding.saveRecipeButton.setOnClickListener{
