@@ -13,7 +13,6 @@ import android.example.tableforone.meal.select.MealCategoryItemDatabase
 import android.example.tableforone.meal.select.MealCategoryItem
 import android.example.tableforone.network.MealApiService
 import android.example.tableforone.network.Resource
-import android.util.Log
 import androidx.lifecycle.*
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -348,6 +347,12 @@ class MealReminderAddViewModel(applicationContext: Context) : ViewModel() {
             ingredient.measure.isNotBlank() && ingredient.ingredient.isNotBlank() && ingredient.ingredient != "null" && ingredient.measure != "null"
         }
         mealRecipeItemIngredients.value = filteredList
+    }
+
+    fun deleteMealReminder(mealReminderId: Long) {
+        repository.deleteMealReminder(mealReminderId)
+        getMealRemindersData()
+
     }
 
     companion object {

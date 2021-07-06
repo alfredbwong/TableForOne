@@ -17,6 +17,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
 class MealReminderRepository(private val mealService: MealApiService,
@@ -153,6 +156,12 @@ class MealReminderRepository(private val mealService: MealApiService,
             }
 
         }.asLiveData()
+    }
+    fun deleteMealReminder(mealId: Long)  {
+        viewModelScope.launch(Dispatchers.IO){
+            mealReminderDao.deleteMealReminderById(mealId)
+
+        }
     }
     companion object{
         const val TAG = "Repository"

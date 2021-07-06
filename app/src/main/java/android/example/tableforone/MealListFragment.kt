@@ -41,7 +41,7 @@ class MealListFragment : Fragment() {
         binding.lifecycleOwner = this
         viewModel.getMealRemindersData()
 
-        val adapter = MealReminderAdapter{
+        val adapter = MealReminderAdapter({
             mealReminder ->
 
             //Save the selection to the ViewModel
@@ -50,7 +50,10 @@ class MealListFragment : Fragment() {
             val intent = Intent(requireActivity(), MealReminderDetailActivity::class.java )
             intent.putExtra(MEAL_REMINDER_KEY_ID, mealReminder.id)
             startActivity(intent)
-        }
+        },{
+            mealReminder ->
+            viewModel.deleteMealReminder(mealReminder.id)
+        })
         binding.mealReminderRecyclerView.adapter = adapter
         viewModel.mealReminders.observe(viewLifecycleOwner, {
             resource->

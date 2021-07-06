@@ -8,13 +8,18 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 
-class MealReminderAdapter (private val listener: (MealReminder) -> Unit): ListAdapter<MealReminder,
+class MealReminderAdapter (private val listener: (MealReminder) -> Unit, private val deleteListener: (MealReminder) -> Unit): ListAdapter<MealReminder,
         MealReminderAdapter.ViewHolder>(MealReminderDiffCallback()) {
 
     class ViewHolder private constructor(val binding: MealReminderListItemBinding)
         : RecyclerView.ViewHolder(binding.root){
-        fun bind(item: MealReminder?) {
+        fun bind(item: MealReminder?, deleteListener: (MealReminder) -> Unit) {
             binding.mealReminder = item
+            binding.deleteReminderButton.setOnClickListener{
+                if (item != null) {
+                    deleteListener(item)
+                }
+            }
             binding.executePendingBindings()
             
         }
@@ -36,8 +41,10 @@ class MealReminderAdapter (private val listener: (MealReminder) -> Unit): ListAd
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
-        holder.itemView.setOnClickListener{listener(item)}
+        holder.bind(item, deleteListener)
+        holder.itemView.setOnClickListener{
+            listener(item)
+        }
     }
 
 }
