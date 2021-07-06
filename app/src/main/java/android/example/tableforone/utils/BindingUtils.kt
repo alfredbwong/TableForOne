@@ -20,34 +20,6 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
     }
 }
 
-@BindingAdapter("ingredient")
-fun bindIngredient( view: TextView, recipe:MealRecipe?) {
-    recipe?.let{
-        val listIngredients = convertRawMealRecipeIngredients(recipe)
-        val listMeasures = convertRawMealRecipeMeasurements(recipe)
-
-        val sb : StringBuilder = StringBuilder()
-        for (i in listIngredients.indices){
-            sb.append(listMeasures[i]).append(" ").append(listIngredients[i]).append("\n")
-        }
-        view.text = sb.toString()
-    }
-}
-
-@BindingAdapter("ingredientsReminder")
-fun bindIngredientsReminder( view: TextView, recipe: MealReminder?) {
-    recipe?.let{
-        val listIngredients = convertRawMealReminderIngredients(recipe)
-        val listMeasures = convertRawMealReminderMeasurements(recipe)
-
-        val sb : StringBuilder = StringBuilder()
-        for (i in listIngredients.indices){
-            sb.append(listMeasures[i]).append(" ").append(listIngredients[i]).append("\n")
-        }
-        view.text = sb.toString()
-    }
-}
-
 @BindingAdapter("mealReminderDateTime")
 fun mealReminderTime(view: TextView, mealReminder: MealReminder?){
     mealReminder?.let{

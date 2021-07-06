@@ -247,7 +247,10 @@ class MealReminderAddViewModel(applicationContext: Context) : ViewModel() {
     }
 
     fun convertListOfInstructions(strInstructions: String) {
-        mealRecipeItemInstructions.value = strInstructions.split("\r\n")
+        mealRecipeItemInstructions.value = strInstructions.split("\r\n").filter {
+            instruction ->
+            instruction.isNotBlank()
+        }
     }
 
     fun createListOfIngredients(data: MealRecipe) {
