@@ -8,6 +8,12 @@ import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -21,6 +27,12 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
 
         isInternetConnected()
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val navController = findNavController(R.id.nav_host_fragment)
+        val appBarConfig = AppBarConfiguration(setOf(R.id.mealListFragment))
+        setupActionBarWithNavController(navController, appBarConfig)
+        NavigationUI.setupActionBarWithNavController(this, navController)
 
     }
 
@@ -46,6 +58,11 @@ class MainActivity : AppCompatActivity() {
         if (!isInternetConnected){
             turnOnInternetPermission()
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = this.findNavController(R.id.nav_host_fragment)
+        return navController.navigateUp()
     }
     companion object{
         const val TAG = "MainActivity"

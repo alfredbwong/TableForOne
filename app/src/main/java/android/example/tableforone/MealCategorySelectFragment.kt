@@ -74,7 +74,9 @@ class MealCategorySelectFragment : Fragment() {
 
         return binding.root
     }
-companion object{
+
+
+    companion object{
     const val TAG = "MealCategory"
 }
 }

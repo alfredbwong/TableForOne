@@ -45,7 +45,9 @@
                     android:layout_marginStart="@dimen/margin_default"
                     android:layout_marginTop="@dimen/margin_default"
                     android:layout_marginEnd="@dimen/margin_default"
-                    android:text="@{mealRecipe.strMeal}" />
+                    android:text="@{mealRecipe.strMeal}"
+                    android:textSize="@dimen/title_size_default"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/mealRecipeImg"
@@ -63,49 +65,50 @@
                     android:id="@+id/mealRecipeArea"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_default"
-                    android:layout_marginTop="@dimen/margin_default"
-                    android:layout_marginEnd="@dimen/margin_default"
-                    android:text="@{mealRecipe.strArea}" />
+                    android:layout_margin="@dimen/margin_default"
+                    android:text="@{mealRecipe.strArea}"
+                    android:textSize="@dimen/section_size"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/mealRecipeIngredientsTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default"
-                    android:layout_marginTop="64dp"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:text="@string/ingredients_title"
+                    android:textSize="@dimen/section_size"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/mealRecipeIngredients"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_default"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="@dimen/margin_default"
+                    android:layout_margin="@dimen/margin_default"
                     app:ingredient="@{mealRecipe}" />
 
                 <TextView
                     android:id="@+id/mealRecipeInstructionsTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_default"
-                    android:layout_marginTop="64dp"
-                    android:layout_marginEnd="@dimen/margin_default"
+                    android:layout_margin="@dimen/margin_default"
                     android:text="@string/instructions_title"
+                    android:textSize="@dimen/section_size"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/mealRecipeInstructions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_default"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="@dimen/margin_default"
-                    android:text="@{mealRecipe.strInstructions}"
-                    android:layout_marginBottom="100dp"/>
+                    android:layout_margin="@dimen/margin_default"
+                    android:text="@{mealRecipe.strInstructions}" />
+
+                <RelativeLayout
+                    android:id="@+id/bufferLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp">
+
+                </RelativeLayout>
 
             </LinearLayout>
         </ScrollView>

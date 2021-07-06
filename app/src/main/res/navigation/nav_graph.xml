@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/mealListFragment"
         android:name="android.example.tableforone.MealListFragment"
-        android:label="fragment_meal_list"
-        tools:layout="@layout/fragment_meal_list" >
+        android:label="@string/meal_list_title"
+        tools:layout="@layout/fragment_meal_list">
         <action
             android:id="@+id/action_mealListFragment_to_mealCategorySelectFragment"
             app:destination="@id/mealCategorySelectFragment" />
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/mealCategorySelectFragment"
         android:name="android.example.tableforone.MealCategorySelectFragment"
-        android:label="fragment_meal_category_select"
+        android:label="@string/select_meal_category_label"
         tools:layout="@layout/fragment_meal_category_select" >
         <action
             android:id="@+id/action_mealCategorySelectFragment_to_mealSelectionFragment"
@@ -26,8 +26,8 @@
     <fragment
         android:id="@+id/mealSelectionFragment"
         android:name="android.example.tableforone.MealCategoryItemFragment"
-        android:label="fragment_meal_selection"
-        tools:layout="@layout/fragment_meal_selection" >
+        android:label="@string/meal_recipe_select_title"
+        tools:layout="@layout/fragment_meal_selection">
         <action
             android:id="@+id/action_mealSelectionFragment_to_mealRecipeDetailFragment"
             app:destination="@id/mealRecipeDetailFragment" />
@@ -35,8 +35,8 @@
     <fragment
         android:id="@+id/timeDateSelectFragment"
         android:name="android.example.tableforone.TimeDateSelectFragment"
-        android:label="fragment_time_date_select"
-        tools:layout="@layout/fragment_time_date_select" >
+        android:label="@string/time_date_select_title"
+        tools:layout="@layout/fragment_time_date_select">
         <action
             android:id="@+id/action_timeDateSelectFragment_to_mealListFragment"
             app:destination="@id/mealListFragment" />
@@ -44,8 +44,8 @@
     <fragment
         android:id="@+id/mealRecipeDetailFragment"
         android:name="android.example.tableforone.MealRecipeDetailFragment"
-        android:label="fragment_meal_recipe_detail"
-        tools:layout="@layout/fragment_meal_recipe_detail" >
+        android:label="@string/recipe_detail_title"
+        tools:layout="@layout/fragment_meal_recipe_detail">
         <action
             android:id="@+id/action_mealRecipeDetailFragment_to_timeDateSelectFragment"
             app:destination="@id/timeDateSelectFragment" />

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_default">16dp</dimen>
+    <dimen name="card_elevation_default">6dp</dimen>
+    <dimen name="title_size_default">24sp</dimen>
+    <dimen name="section_size">18sp</dimen>
 </resources>
