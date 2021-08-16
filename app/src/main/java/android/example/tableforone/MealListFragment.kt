@@ -60,18 +60,18 @@ class MealListFragment : Fragment() {
 
             when (resource.status) {
                 Status.SUCCESS -> {
-                    if (resource.data == null) {
-                        Log.i(TAG, "Missing resource data")
+                    if (resource.data.isNullOrEmpty()) {
+                        binding.emptyListText.visibility = View.VISIBLE
+                        binding.scrollView4.visibility = View.GONE
 
+                    } else {
+                        binding.scrollView4.visibility = View.VISIBLE
+                        binding.emptyListText.visibility = View.GONE
+                        mealReminders.clear()
+                        mealReminders.addAll(resource.data)
+                        binding.mealReminderRecyclerView.adapter?.notifyDataSetChanged()
+                        adapter.submitList(mealReminders)
                     }
-                    //idle()
-
-                    mealReminders.clear()
-                    val data = resource.data as List<MealReminder>
-
-                    mealReminders.addAll(resource.data)
-                    binding.mealReminderRecyclerView.adapter?.notifyDataSetChanged()
-                    adapter.submitList(mealReminders)
                 }
                 Status.LOADING -> {
 

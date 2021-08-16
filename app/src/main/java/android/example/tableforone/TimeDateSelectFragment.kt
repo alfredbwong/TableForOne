@@ -13,12 +13,14 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.format.DateFormat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.AlarmManagerCompat
 import androidx.fragment.app.Fragment
@@ -27,6 +29,11 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 import java.util.*
 import java.util.Calendar.*
 
@@ -113,10 +120,14 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         viewModel.onDateSetFun( year, month, dayOfMonth)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         viewModel.onTimeSetFun(hourOfDay, minute)
-
-        binding.textView.text = String.format(getString(R.string.time_date_display), viewModel.myDay, viewModel.myMonth, viewModel.myYear, viewModel.myHour, viewModel.myMinute)
+        //Set date/time
+        val datetimeToAlarm = LocalDateTime.of(viewModel.myYear, viewModel.myMonth, viewModel.myDay, viewModel.myHour, viewModel.myMinute)
+        val formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)
+        val formattedDateTime = formatter.format(datetimeToAlarm)
+        binding.textView.text = String.format(getString(R.string.time_date_display),formattedDateTime)
     }
 
 
@@ -149,6 +160,7 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun createDataNotification(mealIdSaved: Long, mealReminderToBeSaved: MealReminder) {
         createChannel(getString(R.string.meal_reminder_notification_channel_id),getString(R.string.meal_reminder_notification_channel_name))
 
@@ -156,13 +168,8 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         mealReminderToBeSaved.id = mealIdSaved
 
         //Set date/time
-        val datetimeToAlarm = getInstance(Locale.getDefault())
-        datetimeToAlarm.timeInMillis = System.currentTimeMillis()
-        datetimeToAlarm.set(HOUR_OF_DAY, mealReminderToBeSaved.mealHour)
-        datetimeToAlarm.set(MINUTE, mealReminderToBeSaved.mealMinute)
-        datetimeToAlarm.set(YEAR, mealReminderToBeSaved.mealYear)
-        datetimeToAlarm.set(MONTH, mealReminderToBeSaved.mealMonth)
-        datetimeToAlarm.set(DAY_OF_MONTH, mealReminderToBeSaved.mealDay)
+        val datetimeToAlarm = LocalDateTime.of(viewModel.myYear, viewModel.myMonth, viewModel.myDay, viewModel.myHour, viewModel.myMinute).atZone(ZoneId.systemDefault())
+
         val intent = Intent(requireActivity().applicationContext, MealReminderReceiver::class.java).apply {
             putExtra(MEAL_REMINDER_KEY_ID, mealIdSaved)
 
@@ -174,7 +181,7 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         AlarmManagerCompat.setExactAndAllowWhileIdle(
                 alarmManager,
                 AlarmManager.RTC_WAKEUP,
-                datetimeToAlarm.timeInMillis, pendingIntent
+                datetimeToAlarm.toInstant().toEpochMilli(), pendingIntent
         )
 
 
