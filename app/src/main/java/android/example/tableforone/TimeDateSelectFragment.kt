@@ -8,11 +8,11 @@ import android.example.tableforone.meal.MealReminderAddViewModel
 import android.example.tableforone.meal.reminder.MealReminder
 import android.example.tableforone.receiver.MealReminderReceiver
 import android.example.tableforone.utils.MEAL_REMINDER_KEY_ID
+import android.example.tableforone.utils.MEAL_REMINDER_NAME
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.format.DateFormat
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -116,7 +116,7 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         viewModel.onTimeSetFun(hourOfDay, minute)
 
-        binding.textView.text = String.format(getString(R.string.time_date_display), viewModel.myYear, viewModel.myMonth, viewModel.myDay, viewModel.myHour, viewModel.myMinute)
+        binding.textView.text = String.format(getString(R.string.time_date_display), viewModel.myDay, viewModel.myMonth, viewModel.myYear, viewModel.myHour, viewModel.myMinute)
     }
 
 
@@ -163,9 +163,11 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         datetimeToAlarm.set(YEAR, mealReminderToBeSaved.mealYear)
         datetimeToAlarm.set(MONTH, mealReminderToBeSaved.mealMonth)
         datetimeToAlarm.set(DAY_OF_MONTH, mealReminderToBeSaved.mealDay)
-
         val intent = Intent(requireActivity().applicationContext, MealReminderReceiver::class.java).apply {
             putExtra(MEAL_REMINDER_KEY_ID, mealIdSaved)
+
+            putExtra(MEAL_REMINDER_NAME, mealReminderToBeSaved.mealName)
+
         }
         val pendingIntent = PendingIntent.getBroadcast(requireActivity().applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         val alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager

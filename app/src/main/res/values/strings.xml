@@ -12,12 +12,13 @@
     <string name="meal_reminder_saved">Meal Reminder Saved!</string>
     <string name="meal_reminder_saving">Saving meal reminder...</string>
     <string name="toast_missing_date_time">You must enter a date/time!</string>
-    <string name="time_date_display">Year: %d %n Month: %d %n Day: %d %n Hour: %d %n Minute: %d</string>
+    <string name="time_date_display">You have chosen: %d/%d/%d at %d:%d</string>
     <string name="meal_img_description">A picture of the meal image</string>
     <string name="select_meal_category_label">Select A Category</string>
     <string name="meal_list_title">Meal List Reminders</string>
     <string name="meal_recipe_select_title">Select A Recipe</string>
     <string name="recipe_detail_title">Recipe Details</string>
     <string name="time_date_select_title"><![CDATA[Pick A Date & Time]]></string>
+    <string name="notification_body_message">You are scheduled to make %s </string>
 
 </resources>
