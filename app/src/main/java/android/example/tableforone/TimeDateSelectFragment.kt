@@ -168,8 +168,13 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         mealReminderToBeSaved.id = mealIdSaved
 
         //Set date/time
-        val datetimeToAlarm = LocalDateTime.of(viewModel.myYear, viewModel.myMonth, viewModel.myDay, viewModel.myHour, viewModel.myMinute).atZone(ZoneId.systemDefault())
-
+        val datetimeToAlarm = getInstance(Locale.getDefault())
+        datetimeToAlarm.timeInMillis = System.currentTimeMillis()
+        datetimeToAlarm.set(HOUR_OF_DAY, mealReminderToBeSaved.mealHour)
+        datetimeToAlarm.set(MINUTE, mealReminderToBeSaved.mealMinute)
+        datetimeToAlarm.set(YEAR, mealReminderToBeSaved.mealYear)
+        datetimeToAlarm.set(MONTH, mealReminderToBeSaved.mealMonth)
+        datetimeToAlarm.set(DAY_OF_MONTH, mealReminderToBeSaved.mealDay)
         val intent = Intent(requireActivity().applicationContext, MealReminderReceiver::class.java).apply {
             putExtra(MEAL_REMINDER_KEY_ID, mealIdSaved)
 
@@ -181,7 +186,7 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         AlarmManagerCompat.setExactAndAllowWhileIdle(
                 alarmManager,
                 AlarmManager.RTC_WAKEUP,
-                datetimeToAlarm.toInstant().toEpochMilli(), pendingIntent
+                datetimeToAlarm.timeInMillis, pendingIntent
         )
 
 
