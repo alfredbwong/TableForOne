@@ -76,6 +76,7 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
         val motionLayout = binding.motionLayout
         binding.motionLayout.setTransitionListener(object : MotionLayout.TransitionListener{
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
                 runBlocking{
                     launch(Dispatchers.IO) {

@@ -98,7 +98,7 @@ class MealReminderAddViewModel(applicationContext: Context) : ViewModel() {
         myYear = year
         myMonth = month
         val calendar: Calendar = Calendar.getInstance()
-        hour = calendar.get(Calendar.HOUR)
+        hour = calendar.get(Calendar.HOUR_OF_DAY)
         minute = calendar.get(Calendar.MINUTE)
         _showDatePicker.value = false
         _showTimePicker.value = true
