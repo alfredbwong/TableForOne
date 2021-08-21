@@ -8,7 +8,6 @@ import android.example.tableforone.utils.MEAL_REMINDER_KEY_ID
 import android.example.tableforone.utils.MEAL_REMINDER_NAME
 import android.example.tableforone.utils.setupNotificationAlarm
 import androidx.core.content.ContextCompat
-import androidx.room.util.StringUtil
 
 class MealReminderReceiver : BroadcastReceiver() {
 

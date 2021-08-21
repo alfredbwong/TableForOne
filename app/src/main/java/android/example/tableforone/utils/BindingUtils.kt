@@ -1,7 +1,5 @@
 package android.example.tableforone.utils
 
-import android.example.tableforone.R
-import android.example.tableforone.meal.recipe.MealRecipe
 import android.example.tableforone.meal.reminder.MealReminder
 import android.widget.ImageView
 import android.widget.TextView

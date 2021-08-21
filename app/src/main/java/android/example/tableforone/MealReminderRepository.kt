@@ -1,13 +1,13 @@
 package android.example.tableforone
 
+import android.example.tableforone.meal.category.MealCategory
 import android.example.tableforone.meal.database.MealCategoryDAO
 import android.example.tableforone.meal.recipe.MealRecipe
 import android.example.tableforone.meal.recipe.MealRecipeDAO
 import android.example.tableforone.meal.reminder.MealReminder
 import android.example.tableforone.meal.reminder.MealReminderDAO
-import android.example.tableforone.meal.select.MealCategoryItemDAO
 import android.example.tableforone.meal.select.MealCategoryItem
-import android.example.tableforone.meal.category.MealCategory
+import android.example.tableforone.meal.select.MealCategoryItemDAO
 import android.example.tableforone.network.*
 import android.example.tableforone.utils.parseMealCategoriesJsonResult
 import android.example.tableforone.utils.parseMealRecipeJsonResult
@@ -19,7 +19,6 @@ import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
 class MealReminderRepository(private val mealService: MealApiService,

@@ -13,7 +13,6 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 
 class MealReminderDetailActivity : AppCompatActivity() {
@@ -58,13 +57,13 @@ class MealReminderDetailActivity : AppCompatActivity() {
         })
         val instructionAdapter = RecipeInstructionAdapter()
         binding.mealReminderInstructions.adapter = instructionAdapter
-        viewModel.mealRecipeItemInstructions.observe(this, Observer{
+        viewModel.mealRecipeItemInstructions.observe(this, {
             listInstructions->
             instructionAdapter.submitList(listInstructions)
         })
         val ingredientAdapter = RecipeIngredientAdapter()
         binding.mealReminderIngredients.adapter = ingredientAdapter
-        viewModel.mealRecipeItemIngredients.observe(this, Observer{
+        viewModel.mealRecipeItemIngredients.observe(this, {
             listIngredients->
             ingredientAdapter.submitList(listIngredients)
         })

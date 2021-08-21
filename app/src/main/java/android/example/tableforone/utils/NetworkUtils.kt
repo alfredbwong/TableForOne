@@ -1,9 +1,8 @@
 package android.example.tableforone.utils
 
+import android.example.tableforone.meal.category.MealCategory
 import android.example.tableforone.meal.recipe.MealRecipe
 import android.example.tableforone.meal.select.MealCategoryItem
-import android.example.tableforone.meal.category.MealCategory
-import android.util.Log
 import org.json.JSONObject
 
 fun parseMealCategoriesJsonResult(jsonResult: JSONObject): ArrayList<MealCategory> {

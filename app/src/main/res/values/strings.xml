@@ -4,13 +4,12 @@
     <string name="save_button_text">Save</string>
     <string name="instructions_title">Instructions</string>
     <string name="ingredients_title">Ingredients</string>
-    <string name="home_title_text">TableForOne Meal Reminders</string>
     <string name="back_button">Back</string>
     <string name="meal_reminder_notification_channel_id" translatable="false">meal_reminder_channel</string>
     <string name="meal_reminder_notification_channel_name" translatable="true">MealReminder</string>
     <string name="internet_required_error">Please turn on a network. You will not be able to add new reminders.</string>
     <string name="meal_reminder_saved">Meal Reminder Saved!</string>
-    <string name="meal_reminder_saving">Saving meal reminder...</string>
+    <string name="meal_reminder_saving">Saving meal reminder&#8230;</string>
     <string name="toast_missing_date_time">You must enter a date/time!</string>
     <string name="time_date_display">You have chosen %s for this meal.</string>
     <string name="meal_img_description">A picture of the meal image</string>
@@ -21,5 +20,6 @@
     <string name="time_date_select_title"><![CDATA[Pick A Date & Time]]></string>
     <string name="notification_body_message">You are scheduled to make %s </string>
     <string name="empty_meal_list">Click + to add a new meal reminder!</string>
+    <string name="delete_button">Delete the meal reminder icon.</string>
 
 </resources>

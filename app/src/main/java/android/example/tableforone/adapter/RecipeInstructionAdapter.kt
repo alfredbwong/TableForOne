@@ -1,7 +1,6 @@
 package android.example.tableforone.adapter
 
 import android.example.tableforone.databinding.RecipeInstructionBinding
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -18,7 +17,7 @@ class RecipeInstructionAdapter : ListAdapter<String, RecipeInstructionAdapter.Vi
 
         }
         companion object {
-            fun from(parent: ViewGroup): RecipeInstructionAdapter.ViewHolder {
+            fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = RecipeInstructionBinding.inflate(layoutInflater, parent, false)
 

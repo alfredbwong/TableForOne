@@ -1,12 +1,8 @@
 package android.example.tableforone.adapter
 
 import android.example.tableforone.databinding.RecipeIngredientBinding
-import android.example.tableforone.databinding.RecipeInstructionBinding
 import android.example.tableforone.meal.Ingredient
-import android.opengl.Visibility
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -24,7 +20,7 @@ class RecipeIngredientAdapter : ListAdapter<Ingredient, RecipeIngredientAdapter.
         }
 
         companion object {
-            fun from(parent: ViewGroup): RecipeIngredientAdapter.ViewHolder {
+            fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = RecipeIngredientBinding.inflate(layoutInflater, parent, false)
 

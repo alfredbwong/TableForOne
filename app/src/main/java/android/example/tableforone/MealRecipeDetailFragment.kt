@@ -12,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 
@@ -59,14 +58,14 @@ class MealRecipeDetailFragment : Fragment() {
 
         val instructionAdapter = RecipeInstructionAdapter()
         binding.instructionRecyclerView.adapter = instructionAdapter
-        viewModel.mealRecipeItemInstructions.observe(viewLifecycleOwner, Observer{
+        viewModel.mealRecipeItemInstructions.observe(viewLifecycleOwner, {
             listInstructions->
             instructionAdapter.submitList(listInstructions)
         })
 
         val ingredientAdapter = RecipeIngredientAdapter()
         binding.ingredientsRecyclerView.adapter = ingredientAdapter
-        viewModel.mealRecipeItemIngredients.observe(viewLifecycleOwner, Observer{
+        viewModel.mealRecipeItemIngredients.observe(viewLifecycleOwner, {
             listIngredients->
             ingredientAdapter.submitList(listIngredients)
         })

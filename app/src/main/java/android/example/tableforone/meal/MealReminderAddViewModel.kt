@@ -254,7 +254,7 @@ class MealReminderAddViewModel(applicationContext: Context) : ViewModel() {
     }
 
     fun createListOfIngredients(data: MealRecipe) {
-        var listIngredient = mutableListOf<Ingredient>()
+        val listIngredient = mutableListOf<Ingredient>()
         val ingredient1 = Ingredient(data.strMeasure1, data.strIngredient1)
         val ingredient2 = Ingredient(data.strMeasure2, data.strIngredient2)
         val ingredient3 = Ingredient(data.strMeasure3, data.strIngredient3)
@@ -303,7 +303,7 @@ class MealReminderAddViewModel(applicationContext: Context) : ViewModel() {
         mealRecipeItemIngredients.value = filteredList
     }
     fun createListOfIngredients(data: MealReminder) {
-        var listIngredient = mutableListOf<Ingredient>()
+        val listIngredient = mutableListOf<Ingredient>()
         val ingredient1 = Ingredient(data.strMeasure1, data.strIngredient1)
         val ingredient2 = Ingredient(data.strMeasure2, data.strIngredient2)
         val ingredient3 = Ingredient(data.strMeasure3, data.strIngredient3)
