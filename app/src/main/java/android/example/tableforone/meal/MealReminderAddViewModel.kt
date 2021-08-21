@@ -23,21 +23,21 @@ class MealReminderAddViewModel(applicationContext: Context) : ViewModel() {
 
     var mealRecipeDetails: MealRecipe? = null
     private val repository: MealReminderRepository =
-            MealReminderRepository(
-                    Retrofit.Builder().baseUrl(BASE_URL)
-                            .addConverterFactory(ScalarsConverterFactory.create())
-                            .build()
-                            .create(MealApiService::class.java),
-                    MealCategoryDatabase.getInstance(applicationContext)
-                            .mealCategoryDao(),
-                    MealCategoryItemDatabase.getInstance(applicationContext)
-                            .mealSelectDao(),
-                    MealRecipeDatabase.getInstance(applicationContext)
-                            .mealRecipeDao(),
-                    MealReminderDatabase.getInstance(applicationContext)
-                            .mealReminderDao(),
-                    viewModelScope
-            )
+        MealReminderRepository(
+            Retrofit.Builder().baseUrl(BASE_URL)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build()
+                .create(MealApiService::class.java),
+            MealCategoryDatabase.getInstance(applicationContext)
+                .mealCategoryDao(),
+            MealCategoryItemDatabase.getInstance(applicationContext)
+                .mealSelectDao(),
+            MealRecipeDatabase.getInstance(applicationContext)
+                .mealRecipeDao(),
+            MealReminderDatabase.getInstance(applicationContext)
+                .mealReminderDao(),
+            viewModelScope
+        )
 
     var mealCategorySelected = MutableLiveData<String>()
     var mealRecipeItemSelected = MutableLiveData<Long>()
@@ -162,11 +162,9 @@ class MealReminderAddViewModel(applicationContext: Context) : ViewModel() {
 
         val response = repository.getMealRemindersFeed()
 
-        if (response != null) {
-            mealReminders.addSource(response) { newData ->
-                if (mealReminders.value != newData) {
-                    mealReminders.value = newData
-                }
+        mealReminders.addSource(response) { newData ->
+            if (mealReminders.value != newData) {
+                mealReminders.value = newData
             }
         }
 
@@ -175,67 +173,67 @@ class MealReminderAddViewModel(applicationContext: Context) : ViewModel() {
     fun getMealReminderById(mealId: Long) {
         val response = repository.getMealReminderById(mealId)
 
-        if (response != null) {
-            mealReminder.addSource(response) { newData ->
-                if (mealReminder.value != newData) {
-                    mealReminder.value = newData
-                }
+        mealReminder.addSource(response) { newData ->
+            if (mealReminder.value != newData) {
+                mealReminder.value = newData
             }
         }
+        
     }
 
     fun getMealReminderToBeSaved(): MealReminder {
         return MealReminder(
-                0,
-                mealRecipeDetails!!.idMeal,
-                mealRecipeDetails!!.strMeal,
-                myYear,
-                myMonth,
-                myDay,
-                myHour,
-                myMinute,
-                mealRecipeDetails!!.strMealThumb,
-                mealRecipeDetails!!.strInstructions,
-                mealRecipeDetails!!.strIngredient1,
-                mealRecipeDetails!!.strIngredient2,
-                mealRecipeDetails!!.strIngredient3,
-                mealRecipeDetails!!.strIngredient4,
-                mealRecipeDetails!!.strIngredient5,
-                mealRecipeDetails!!.strIngredient6,
-                mealRecipeDetails!!.strIngredient7,
-                mealRecipeDetails!!.strIngredient8,
-                mealRecipeDetails!!.strIngredient9,
-                mealRecipeDetails!!.strIngredient10,
-                mealRecipeDetails!!.strIngredient11,
-                mealRecipeDetails!!.strIngredient12,
-                mealRecipeDetails!!.strIngredient13,
-                mealRecipeDetails!!.strIngredient14,
-                mealRecipeDetails!!.strIngredient15,
-                mealRecipeDetails!!.strIngredient16,
-                mealRecipeDetails!!.strIngredient17,
-                mealRecipeDetails!!.strIngredient18,
-                mealRecipeDetails!!.strIngredient19,
-                mealRecipeDetails!!.strIngredient20,
-                mealRecipeDetails!!.strMeasure1,
-                mealRecipeDetails!!.strMeasure2,
-                mealRecipeDetails!!.strMeasure3,
-                mealRecipeDetails!!.strMeasure4,
-                mealRecipeDetails!!.strMeasure5,
-                mealRecipeDetails!!.strMeasure6,
-                mealRecipeDetails!!.strMeasure7,
-                mealRecipeDetails!!.strMeasure8,
-                mealRecipeDetails!!.strMeasure9,
-                mealRecipeDetails!!.strMeasure10,
-                mealRecipeDetails!!.strMeasure11,
-                mealRecipeDetails!!.strMeasure12,
-                mealRecipeDetails!!.strMeasure13,
-                mealRecipeDetails!!.strMeasure14,
-                mealRecipeDetails!!.strMeasure15,
-                mealRecipeDetails!!.strMeasure16,
-                mealRecipeDetails!!.strMeasure17,
-                mealRecipeDetails!!.strMeasure18,
-                mealRecipeDetails!!.strMeasure19,
-                mealRecipeDetails!!.strMeasure20)
+            0,
+            mealRecipeDetails!!.idMeal,
+            mealRecipeDetails!!.strMeal,
+            myYear,
+            myMonth,
+            myDay,
+            myHour,
+            myMinute,
+            mealRecipeDetails!!.strMealThumb,
+            mealRecipeDetails!!.strInstructions,
+            mealRecipeDetails!!.strIngredient1,
+            mealRecipeDetails!!.strIngredient2,
+            mealRecipeDetails!!.strIngredient3,
+            mealRecipeDetails!!.strIngredient4,
+            mealRecipeDetails!!.strIngredient5,
+            mealRecipeDetails!!.strIngredient6,
+            mealRecipeDetails!!.strIngredient7,
+            mealRecipeDetails!!.strIngredient8,
+            mealRecipeDetails!!.strIngredient9,
+            mealRecipeDetails!!.strIngredient10,
+            mealRecipeDetails!!.strIngredient11,
+            mealRecipeDetails!!.strIngredient12,
+            mealRecipeDetails!!.strIngredient13,
+            mealRecipeDetails!!.strIngredient14,
+            mealRecipeDetails!!.strIngredient15,
+            mealRecipeDetails!!.strIngredient16,
+            mealRecipeDetails!!.strIngredient17,
+            mealRecipeDetails!!.strIngredient18,
+            mealRecipeDetails!!.strIngredient19,
+            mealRecipeDetails!!.strIngredient20,
+            mealRecipeDetails!!.strMeasure1,
+            mealRecipeDetails!!.strMeasure2,
+            mealRecipeDetails!!.strMeasure3,
+            mealRecipeDetails!!.strMeasure4,
+            mealRecipeDetails!!.strMeasure5,
+            mealRecipeDetails!!.strMeasure6,
+            mealRecipeDetails!!.strMeasure7,
+            mealRecipeDetails!!.strMeasure8,
+            mealRecipeDetails!!.strMeasure9,
+            mealRecipeDetails!!.strMeasure10,
+            mealRecipeDetails!!.strMeasure11,
+            mealRecipeDetails!!.strMeasure12,
+            mealRecipeDetails!!.strMeasure13,
+            mealRecipeDetails!!.strMeasure14,
+            mealRecipeDetails!!.strMeasure15,
+            mealRecipeDetails!!.strMeasure16,
+            mealRecipeDetails!!.strMeasure17,
+            mealRecipeDetails!!.strMeasure18,
+            mealRecipeDetails!!.strMeasure19,
+            mealRecipeDetails!!.strMeasure20
+        )
     }
 
     fun resetDateAndTime() {
@@ -247,8 +245,7 @@ class MealReminderAddViewModel(applicationContext: Context) : ViewModel() {
     }
 
     fun convertListOfInstructions(strInstructions: String) {
-        mealRecipeItemInstructions.value = strInstructions.split("\r\n").filter {
-            instruction ->
+        mealRecipeItemInstructions.value = strInstructions.split("\r\n").filter { instruction ->
             instruction.isNotBlank()
         }
     }
@@ -296,12 +293,12 @@ class MealReminderAddViewModel(applicationContext: Context) : ViewModel() {
             add(ingredient18)
             add(ingredient19)
             add(ingredient20)
-        }.filter {
-            ingredient ->
+        }.filter { ingredient ->
             ingredient.measure.isNotBlank() && ingredient.ingredient.isNotBlank() && ingredient.ingredient != "null" && ingredient.measure != "null"
         }
         mealRecipeItemIngredients.value = filteredList
     }
+
     fun createListOfIngredients(data: MealReminder) {
         val listIngredient = mutableListOf<Ingredient>()
         val ingredient1 = Ingredient(data.strMeasure1, data.strIngredient1)
@@ -345,8 +342,7 @@ class MealReminderAddViewModel(applicationContext: Context) : ViewModel() {
             add(ingredient18)
             add(ingredient19)
             add(ingredient20)
-        }.filter {
-            ingredient ->
+        }.filter { ingredient ->
             ingredient.measure.isNotBlank() && ingredient.ingredient.isNotBlank() && ingredient.ingredient != "null" && ingredient.measure != "null"
         }
         mealRecipeItemIngredients.value = filteredList
@@ -363,10 +359,11 @@ class MealReminderAddViewModel(applicationContext: Context) : ViewModel() {
     }
 }
 
-class MealCategorySelectViewModelFactory(private val applicationContext: Context?) : ViewModelProvider.NewInstanceFactory() {
+class MealCategorySelectViewModelFactory(private val applicationContext: Context?) :
+    ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T = applicationContext?.let {
         MealReminderAddViewModel(
-                it
+            it
         )
     } as T
 }

@@ -12,7 +12,7 @@ class RecipeIngredientAdapter : ListAdapter<Ingredient, RecipeIngredientAdapter.
     class ViewHolder private constructor(val binding: RecipeIngredientBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(ingredient: Ingredient, position: Int) {
+        fun bind(ingredient: Ingredient) {
             binding.ingredientMeasure.text = ingredient.measure
             binding.ingredientName.text = ingredient.ingredient
             binding.executePendingBindings()
@@ -36,7 +36,7 @@ class RecipeIngredientAdapter : ListAdapter<Ingredient, RecipeIngredientAdapter.
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, position)
+        holder.bind(item)
     }
 
     companion object {
