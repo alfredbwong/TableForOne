@@ -6,7 +6,6 @@ import android.alphared.tableforone.meal.select.MealCategoryItem
 import android.alphared.tableforone.meal.select.MealCategoryItemAdapter
 import android.alphared.tableforone.network.Status
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,7 +42,6 @@ class MealCategoryItemFragment : Fragment() {
             when (resource.status) {
                 Status.SUCCESS -> {
                     if (resource.data == null) {
-                        Log.i(TAG, "Missing resource data")
                     }
                     //idle()
 

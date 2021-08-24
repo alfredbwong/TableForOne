@@ -13,7 +13,6 @@ import android.alphared.tableforone.utils.parseMealCategoriesJsonResult
 import android.alphared.tableforone.utils.parseMealRecipeJsonResult
 import android.alphared.tableforone.utils.parseMealSelectRecipesJsonResult
 import android.alphared.tableforone.utils.safeExecute
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineScope
@@ -73,7 +72,6 @@ class MealReminderRepository(private val mealService: MealApiService,
             }
 
             override suspend fun fetchData(): Response<String> {
-                Log.i(TAG, "Fetch data....")
 
                 val call = mealService.getMealCategoryItems(category)
                 val response = call.safeExecute()
@@ -81,19 +79,16 @@ class MealReminderRepository(private val mealService: MealApiService,
                 if (!response.isSuccessful || response.body().isNullOrEmpty()) {
                     return Failure(400, "Invalid Response")
                 }
-                Log.i(TAG, "$response.body()")
                 return Success(response.body() as String)
             }
 
             override fun processResponse(response: String): List<MealCategoryItem> {
-                Log.i(TAG, "Process response....${response}")
 
                 val json = JSONObject(response)
                 return parseMealSelectRecipesJsonResult(json, category)
             }
 
             override suspend fun saveToDisk(data: List<MealCategoryItem>): Boolean {
-                Log.i(TAG, "Save to disk....${data.size}")
 
                 val ids = mealCategoryItemDao.updateData(category, data)
                 return ids.isNotEmpty()

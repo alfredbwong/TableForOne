@@ -4,7 +4,6 @@ import android.alphared.tableforone.network.Failure
 import android.alphared.tableforone.network.Resource
 import android.alphared.tableforone.network.Response
 import android.alphared.tableforone.network.Success
-import android.alphared.tableforone.utils.LogUtils
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
@@ -52,7 +51,6 @@ abstract class NetworkResource<T, K>(private val viewModelScope: CoroutineScope)
             val diskSource =  withContext(Dispatchers.IO) {loadFromDisk()}
 
             if (shouldFetch(diskSource.value)) {
-                LogUtils.debug("Disk data is invalid. Fetching from network...")
 
                 // re-attach the disk source and dispatch a loading value,
                 result.addSource(diskSource) { newData ->
@@ -68,8 +66,6 @@ abstract class NetworkResource<T, K>(private val viewModelScope: CoroutineScope)
                 when (val response = fetchTask.await()) {
                     is Success -> {
                         val str = response.data.toString()
-                        LogUtils.debug("Success fetching ${str.slice(0..if(str.length < 151) str.length - 1 else 150)}")
-                        LogUtils.debug("Saving data to disk...")
                         // save new data to disk and dispatch fresh disk value,
                         withContext(Dispatchers.IO) {
                             saveToDisk(processResponse(response.data))
@@ -83,7 +79,6 @@ abstract class NetworkResource<T, K>(private val viewModelScope: CoroutineScope)
                         }
                     }
                     is Failure -> {
-                        LogUtils.debug("Error fetching data: ${response.code} ${response.message}")
                         // re-use the disk data and send the error response,
                         result.addSource(diskSource) { newData ->
                             setValue(Resource.error(response.message, newData))
@@ -91,7 +86,6 @@ abstract class NetworkResource<T, K>(private val viewModelScope: CoroutineScope)
                     }
                 }
             } else {
-                LogUtils.debug("Disk data is valid. Returning disk source data...")
                 // re-use disk source and send a success value,
                 result.addSource(diskSource) { data ->
                     setValue(Resource.success(data))

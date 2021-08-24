@@ -1,6 +1,5 @@
 package android.alphared.tableforone.utils
 
-import android.util.Log
 import retrofit2.Call
 import androidx.viewbinding.BuildConfig
 
@@ -12,13 +11,15 @@ object LogUtils {
     private const val LOG_TAG = "asteroid:"
 
     fun debug(msg: String) {
-        if (BuildConfig.DEBUG)
-            Log.d(LOG_TAG, msg)
+        if (BuildConfig.DEBUG){
+            //Do nothing configure in subclass
+        }
     }
 
     fun warn(msg: String) {
-        if (BuildConfig.DEBUG)
-            Log.w(LOG_TAG, msg)
+        if (BuildConfig.DEBUG){
+            //Do nothing configure in subclass
+        }
     }
 
     fun <T> debugRetrofitCall(call: Call<T>) {

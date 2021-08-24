@@ -9,7 +9,6 @@ import android.alphared.tableforone.meal.MealReminderAddViewModel
 import android.alphared.tableforone.network.Status
 import android.alphared.tableforone.utils.MEAL_REMINDER_KEY_ID
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -35,7 +34,6 @@ class MealReminderDetailActivity : AppCompatActivity() {
             when (resource.status) {
                 Status.SUCCESS -> {
                     if (resource.data == null) {
-                        Log.i(TAG, "Missing resource data")
 
                     } else {
                         binding.mealReminderDetail = resource.data
