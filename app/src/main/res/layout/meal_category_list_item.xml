@@ -7,7 +7,7 @@
 
         <variable
             name="mealCategory"
-            type="android.example.tableforone.meal.category.MealCategory" />
+            type="android.alphared.tableforone.meal.category.MealCategory" />
     </data>
 
     <androidx.cardview.widget.CardView

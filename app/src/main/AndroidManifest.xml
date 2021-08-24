@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="android.example.tableforone">
+    package="android.alphared.tableforone">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,18 +13,18 @@
         android:supportsRtl="true"
         android:fullBackupContent="@xml/backup_rules"
         android:theme="@style/Theme.TableForOne">
-        <activity android:name=".MainActivity">
+        <activity android:name="android.alphared.tableforone.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MealReminderDetailActivity">
+        <activity android:name="android.alphared.tableforone.MealReminderDetailActivity">
 
         </activity>
         <receiver
-            android:name=".receiver.MealReminderReceiver"
+            android:name="android.alphared.tableforone.receiver.MealReminderReceiver"
             android:enabled="true"
             android:exported="false">
         </receiver>
