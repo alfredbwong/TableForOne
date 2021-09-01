@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mealListFragment"
-        android:name="android.alphared.tableforone.MealListFragment"
+        android:name="studio.alphared.tableforone.MealListFragment"
         android:label="@string/meal_list_title"
         tools:layout="@layout/fragment_meal_list">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/mealCategorySelectFragment"
-        android:name="android.alphared.tableforone.MealCategorySelectFragment"
+        android:name="studio.alphared.tableforone.MealCategorySelectFragment"
         android:label="@string/select_meal_category_label"
         tools:layout="@layout/fragment_meal_category_select" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/mealSelectionFragment"
-        android:name="android.alphared.tableforone.MealCategoryItemFragment"
+        android:name="studio.alphared.tableforone.MealCategoryItemFragment"
         android:label="@string/meal_recipe_select_title"
         tools:layout="@layout/fragment_meal_selection">
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/timeDateSelectFragment"
-        android:name="android.alphared.tableforone.TimeDateSelectFragment"
+        android:name="studio.alphared.tableforone.TimeDateSelectFragment"
         android:label="@string/time_date_select_title"
         tools:layout="@layout/fragment_time_date_select">
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/mealRecipeDetailFragment"
-        android:name="android.alphared.tableforone.MealRecipeDetailFragment"
+        android:name="studio.alphared.tableforone.MealRecipeDetailFragment"
         android:label="@string/recipe_detail_title"
         tools:layout="@layout/fragment_meal_recipe_detail">
         <action
@@ -52,6 +52,6 @@
     </fragment>
     <activity
         android:id="@+id/mealReminderDetailActivity"
-        android:name="android.alphared.tableforone.MealReminderDetailActivity"
+        android:name="studio.alphared.tableforone.MealReminderDetailActivity"
         android:label="MealReminderDetailActivity" />
 </navigation>

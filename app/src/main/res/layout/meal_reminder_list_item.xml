@@ -7,7 +7,7 @@
 
         <variable
             name="mealReminder"
-            type="android.alphared.tableforone.meal.reminder.MealReminder" />
+            type="studio.alphared.tableforone.meal.reminder.MealReminder" />
     </data>
 
     <androidx.cardview.widget.CardView
