@@ -165,7 +165,6 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
         //Replace mealReminderId
         mealReminderToBeSaved.id = mealIdSaved
-        Log.i(TAG, "${mealReminderToBeSaved.mealMonth - 1}")
         //Set date/time
         val datetimeToAlarm = getInstance(Locale.getDefault())
         datetimeToAlarm.timeInMillis = System.currentTimeMillis()
