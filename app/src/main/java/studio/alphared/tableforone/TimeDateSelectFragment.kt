@@ -161,7 +161,8 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createDataNotification(mealIdSaved: Long, mealReminderToBeSaved: MealReminder) {
-        createChannel(getString(R.string.meal_reminder_notification_channel_id),getString(R.string.meal_reminder_notification_channel_name))
+        //createChannelGroup();
+        createChannel(getString(R.string.meal_reminder_notification_channel_id) ,getString(R.string.meal_reminder_notification_channel_name) )
 
         //Replace mealReminderId
         mealReminderToBeSaved.id = mealIdSaved
@@ -175,20 +176,21 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         datetimeToAlarm.set(DAY_OF_MONTH, mealReminderToBeSaved.mealDay)
         val intent = Intent(requireActivity().applicationContext, MealReminderReceiver::class.java).apply {
             putExtra(MEAL_REMINDER_KEY_ID, mealIdSaved)
-
             putExtra(MEAL_REMINDER_NAME, mealReminderToBeSaved.mealName)
 
         }
-        val pendingIntent = PendingIntent.getBroadcast(requireActivity().applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = PendingIntent.getBroadcast(requireActivity().applicationContext, mealIdSaved.toInt(), intent, 0)
         val alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
         AlarmManagerCompat.setExactAndAllowWhileIdle(
                 alarmManager,
                 AlarmManager.RTC_WAKEUP,
-                datetimeToAlarm.timeInMillis, pendingIntent
+                datetimeToAlarm.timeInMillis,
+                pendingIntent
         )
 
 
     }
+
 
     override fun onResume() {
         super.onResume()

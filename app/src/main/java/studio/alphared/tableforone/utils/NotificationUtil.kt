@@ -4,10 +4,10 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import studio.alphared.tableforone.MealReminderDetailActivity
-import studio.alphared.tableforone.R
 import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
+import studio.alphared.tableforone.MealReminderDetailActivity
+import studio.alphared.tableforone.R
 
 const val MEAL_REMINDER_KEY_ID = "MEAL_REMINDER_KEY"
 const val MEAL_REMINDER_NAME = "MEAL_REMINDER_NAME"
@@ -19,7 +19,7 @@ fun NotificationManager.setupNotificationAlarm(applicationContext: Context, meal
         putExtra(MEAL_REMINDER_KEY_ID, mealReminderId)
     }
 
-    val pendingIntent: PendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+    val pendingIntent: PendingIntent = PendingIntent.getActivity(applicationContext, mealReminderId.toInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
     //Picture
     val mealImage = BitmapFactory.decodeResource(
@@ -30,8 +30,7 @@ fun NotificationManager.setupNotificationAlarm(applicationContext: Context, meal
     val bigPicStyle = NotificationCompat.BigPictureStyle()
             .bigPicture(mealImage)
             .bigLargeIcon(null)
-
-    val builder = NotificationCompat.Builder(applicationContext, applicationContext.getString(R.string.meal_reminder_notification_channel_id))
+    val builder = NotificationCompat.Builder(applicationContext,  applicationContext.getString(R.string.meal_reminder_notification_channel_id))
             .setSmallIcon(R.drawable.baseline_restaurant_24)
             .setContentTitle(applicationContext.getString(R.string.app_name))
             .setContentText(String.format(applicationContext.getString(R.string.notification_body_message, mealName)))
@@ -43,3 +42,4 @@ fun NotificationManager.setupNotificationAlarm(applicationContext: Context, meal
             .setLargeIcon(mealImage)
     notify(NOTIFICATION_ID, builder.build())
 }
+
