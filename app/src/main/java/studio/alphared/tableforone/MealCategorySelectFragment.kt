@@ -25,12 +25,13 @@ class MealCategorySelectFragment : Fragment() {
         MealCategorySelectViewModelFactory(activity?.applicationContext)
     }
     private val mealCategories: MutableList<MealCategory> = mutableListOf()
+    private lateinit var binding : FragmentMealCategorySelectBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
         viewModel.getMealCategoriesData()
-        val binding = FragmentMealCategorySelectBinding.inflate(inflater)
+        binding = FragmentMealCategorySelectBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
         binding.viewModelCategories = viewModel
@@ -50,27 +51,31 @@ class MealCategorySelectFragment : Fragment() {
 
             when (resource.status) {
                 Status.SUCCESS -> {
-                    if (resource.data == null) {
-
-                    }
-
                     mealCategories.clear()
                     mealCategories.addAll(resource.data as List<MealCategory>)
                     binding.mealCategoryRecyclerView.adapter?.notifyDataSetChanged()
                     adapter.submitList(mealCategories)
+                    showMealCategoryComponents()
                 }
                 Status.LOADING -> {
-
+                    showLoadingComponents()
 
                 }
                 Status.ERROR -> {
-
-
                 }
             }
         })
 
         return binding.root
+    }
+
+    private fun showLoadingComponents() {
+        binding.loadingProgressBar.visibility = View.VISIBLE
+        binding.mealCategoryRecyclerView.visibility = View.GONE
+    }
+    private fun showMealCategoryComponents() {
+        binding.loadingProgressBar.visibility = View.GONE
+        binding.mealCategoryRecyclerView.visibility = View.VISIBLE
     }
 
 

@@ -35,18 +35,17 @@ class MealRecipeDetailFragment : Fragment() {
                 Status.SUCCESS -> {
                     if (resource.data == null) {
                         Log.i(TAG, "Missing resource data")
-
                     } else {
-
                         binding.mealRecipe = resource.data
                         viewModel.mealRecipeDetails = resource.data
                         viewModel.convertListOfInstructions(resource.data.strInstructions)
                         viewModel.createListOfIngredients(resource.data)
                         binding.executePendingBindings()
+                        showMealRecipeDetailComponents()
                     }
                 }
                 Status.LOADING -> {
-
+                    showMealRecipeLoadingComponents()
 
                 }
                 Status.ERROR -> {
@@ -76,6 +75,16 @@ class MealRecipeDetailFragment : Fragment() {
             findNavController().navigate(action)
         }
         return binding.root
+    }
+
+    private fun showMealRecipeLoadingComponents() {
+        binding.recipeLayout.visibility = View.GONE
+        binding.loadingRecipeDetailProgressBar.visibility = View.VISIBLE
+    }
+
+    private fun showMealRecipeDetailComponents() {
+        binding.recipeLayout.visibility = View.VISIBLE
+        binding.loadingRecipeDetailProgressBar.visibility = View.GONE
     }
 
     companion object {

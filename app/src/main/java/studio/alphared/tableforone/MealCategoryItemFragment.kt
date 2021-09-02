@@ -41,31 +41,29 @@ class MealCategoryItemFragment : Fragment() {
             resource->
             when (resource.status) {
                 Status.SUCCESS -> {
-                    if (resource.data == null) {
-                    }
-                    //idle()
-
                     mealCategoryItems.clear()
                     mealCategoryItems.addAll(resource.data as List<MealCategoryItem>)
                     binding.mealSelectRecyclerView.adapter?.notifyDataSetChanged()
                     adapter.submitList(mealCategoryItems)
+                    showMealCategoryComponents()
                 }
                 Status.LOADING -> {
-
-
+                    showLoadingComponents()
                 }
                 Status.ERROR -> {
-
-
                 }
             }
         })
-
-
-
         return binding.root
     }
-
+    private fun showLoadingComponents() {
+        binding.loadingRecipeSelectProgressBar.visibility = View.VISIBLE
+        binding.mealSelectRecyclerView.visibility = View.GONE
+    }
+    private fun showMealCategoryComponents() {
+        binding.loadingRecipeSelectProgressBar.visibility = View.GONE
+        binding.mealSelectRecyclerView.visibility = View.VISIBLE
+    }
     companion object {
         const val TAG = "MealSelect"
     }

@@ -15,10 +15,24 @@
         android:layout_height="match_parent"
         tools:context=".MealCategoryItemFragment">
 
+        <ProgressBar
+            android:id="@+id/loadingRecipeSelectProgressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/mealSelectRecyclerView"
+            app:layout_constraintEnd_toStartOf="@+id/mealSelectRecyclerView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/mealSelectRecyclerView"
+            app:layout_constraintTop_toBottomOf="@+id/mealSelectRecyclerView" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mealSelectRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:layout_editor_absoluteX="162dp"
+            tools:layout_editor_absoluteY="287dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
