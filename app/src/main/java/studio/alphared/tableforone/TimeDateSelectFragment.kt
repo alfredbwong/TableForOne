@@ -74,7 +74,6 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
         val motionLayout = binding.motionLayout
         binding.motionLayout.setTransitionListener(object : MotionLayout.TransitionListener{
-            @RequiresApi(Build.VERSION_CODES.O)
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
                 runBlocking{
                     launch(Dispatchers.IO) {
@@ -119,7 +118,6 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         viewModel.onDateSetFun( year, month, dayOfMonth)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         viewModel.onTimeSetFun(hourOfDay, minute)
         //Set date/time
@@ -159,7 +157,6 @@ class TimeDateSelectFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun createDataNotification(mealIdSaved: Long, mealReminderToBeSaved: MealReminder) {
         //createChannelGroup();
         createChannel(getString(R.string.meal_reminder_notification_channel_id) ,getString(R.string.meal_reminder_notification_channel_name) )
