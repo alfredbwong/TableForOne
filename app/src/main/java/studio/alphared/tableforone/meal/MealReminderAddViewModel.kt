@@ -16,6 +16,7 @@ import studio.alphared.tableforone.meal.select.MealCategoryItem
 import studio.alphared.tableforone.meal.select.MealCategoryItemDatabase
 import studio.alphared.tableforone.network.MealApiService
 import studio.alphared.tableforone.network.Resource
+import studio.alphared.tableforone.utils.TimeDateComparator
 import java.util.*
 
 class MealReminderAddViewModel(applicationContext: Context) : ViewModel() {
@@ -164,6 +165,8 @@ class MealReminderAddViewModel(applicationContext: Context) : ViewModel() {
 
         mealReminders.addSource(response) { newData ->
             if (mealReminders.value != newData) {
+                //Sort the newData by chronological time
+                Collections.sort(newData.data, TimeDateComparator())
                 mealReminders.value = newData
             }
         }
