@@ -42,7 +42,6 @@ class MealReminderAddViewModel(applicationContext: Context) : ViewModel() {
 
     var mealCategorySelected = MutableLiveData<String>()
     var mealRecipeItemSelected = MutableLiveData<Long>()
-    var mealReminderItemSelected = MutableLiveData<Long>()
 
     val mealCategories: MediatorLiveData<Resource<List<MealCategory>>> = MediatorLiveData()
 
@@ -351,11 +350,7 @@ class MealReminderAddViewModel(applicationContext: Context) : ViewModel() {
         mealRecipeItemIngredients.value = filteredList
     }
 
-    fun deleteMealReminder(mealReminderId: Long) {
-        repository.deleteMealReminder(mealReminderId)
-        getMealRemindersData()
 
-    }
 
     companion object {
         const val TAG = "ViewModel"

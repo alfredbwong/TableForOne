@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mealListFragment"
-        android:name="studio.alphared.tableforone.MealListFragment"
+        android:name="studio.alphared.tableforone.views.mealreminderlist.MealListFragment"
         android:label="@string/meal_list_title"
         tools:layout="@layout/fragment_meal_list">
         <action

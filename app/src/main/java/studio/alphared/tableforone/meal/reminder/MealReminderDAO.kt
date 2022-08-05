@@ -5,7 +5,7 @@ import androidx.room.*
 @Dao
 interface MealReminderDAO {
     @Query("SELECT * FROM MealReminder")
-    fun getMealReminders(): List<MealReminder>
+    fun getMealReminders(): MutableList<MealReminder>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun updateData(reminders: List<MealReminder>) : List<Long>

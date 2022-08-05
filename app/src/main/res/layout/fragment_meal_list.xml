@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="studio.alphared.tableforone.views.mealreminderlist.MealListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mealListConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MealListFragment">
+        tools:context=".views.mealreminderlist.MealListFragment">
 
         <ScrollView
-            android:id="@+id/scrollView4"
+            android:id="@+id/scrollViewMealReminder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/margin_default"

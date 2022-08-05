@@ -130,9 +130,9 @@ class MealReminderRepository(private val mealService: MealApiService,
         }.asLiveData()
     }
 
-    fun getMealRemindersFeed() : LiveData<Resource<List<MealReminder>>> {
-        return object : LocalResource<List<MealReminder>>(viewModelScope){
-            override suspend fun loadFromDisk(): LiveData<List<MealReminder>> {
+    fun getMealRemindersFeed() : LiveData<Resource<MutableList<MealReminder>>> {
+        return object : LocalResource<MutableList<MealReminder>>(viewModelScope){
+            override suspend fun loadFromDisk(): LiveData<MutableList<MealReminder>> {
                 return MutableLiveData(mealReminderDao.getMealReminders())
             }
         }.asLiveData()
