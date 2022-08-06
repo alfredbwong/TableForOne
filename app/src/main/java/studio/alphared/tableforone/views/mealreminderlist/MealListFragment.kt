@@ -11,9 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import studio.alphared.tableforone.MealReminderDetailActivity
 import studio.alphared.tableforone.databinding.FragmentMealListBinding
-import studio.alphared.tableforone.meal.MealCategorySelectViewModelFactory
-import studio.alphared.tableforone.meal.reminder.MealReminder
-import studio.alphared.tableforone.meal.reminder.MealReminderAdapter
+import studio.alphared.tableforone.objects.reminder.MealReminderAdapter
 import studio.alphared.tableforone.network.Status
 import studio.alphared.tableforone.utils.MEAL_REMINDER_KEY_ID
 
@@ -34,7 +32,6 @@ class MealListFragment : Fragment() {
     ): View {
 
         binding = FragmentMealListBinding.inflate(inflater)
-
         binding.lifecycleOwner = this
 
         val adapter = MealReminderAdapter({

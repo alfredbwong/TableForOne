@@ -1,8 +1,8 @@
 package studio.alphared.tableforone.utils
 
-import studio.alphared.tableforone.meal.category.MealCategory
-import studio.alphared.tableforone.meal.recipe.MealRecipe
-import studio.alphared.tableforone.meal.select.MealCategoryItem
+import studio.alphared.tableforone.objects.category.MealCategory
+import studio.alphared.tableforone.objects.recipe.MealRecipe
+import studio.alphared.tableforone.objects.select.MealCategoryItem
 import org.json.JSONObject
 
 fun parseMealCategoriesJsonResult(jsonResult: JSONObject): ArrayList<MealCategory> {

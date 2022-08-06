@@ -7,7 +7,7 @@
 
         <variable
             name="mealReminderDetail"
-            type="studio.alphared.tableforone.meal.reminder.MealReminder" />
+            type="studio.alphared.tableforone.objects.reminder.MealReminder" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

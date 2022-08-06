@@ -7,14 +7,14 @@
 
         <variable
             name="mealRecipe"
-            type="studio.alphared.tableforone.meal.recipe.MealRecipe" />
+            type="studio.alphared.tableforone.objects.recipe.MealRecipe" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mealRecipeDetailLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MealRecipeDetailFragment">
+        tools:context=".views.mealrecipedetail.MealRecipeDetailFragment">
 
         <ProgressBar
             android:id="@+id/loadingRecipeDetailProgressBar"

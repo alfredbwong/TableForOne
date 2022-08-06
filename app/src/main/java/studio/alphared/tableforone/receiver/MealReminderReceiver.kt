@@ -8,6 +8,7 @@ import studio.alphared.tableforone.utils.MEAL_REMINDER_KEY_ID
 import studio.alphared.tableforone.utils.MEAL_REMINDER_NAME
 import studio.alphared.tableforone.utils.setupNotificationAlarm
 import androidx.core.content.ContextCompat
+import studio.alphared.tableforone.utils.MEAL_REMINDER_DATE_TIME
 
 class MealReminderReceiver : BroadcastReceiver() {
 
@@ -16,8 +17,9 @@ class MealReminderReceiver : BroadcastReceiver() {
 
         val mealReminderId = intent.getLongExtra(MEAL_REMINDER_KEY_ID, 0L)
         val mealName =intent.getStringExtra(MEAL_REMINDER_NAME)
+        val mealDateTime = intent.getLongExtra(MEAL_REMINDER_DATE_TIME,0L)
         if (mealReminderId != 0L){
-            notificationManager.setupNotificationAlarm(context, mealReminderId, mealName)
+            notificationManager.setupNotificationAlarm(context, mealReminderId, mealName, mealDateTime)
 
         }
     }

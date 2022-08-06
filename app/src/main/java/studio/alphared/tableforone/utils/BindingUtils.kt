@@ -5,7 +5,7 @@ import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import studio.alphared.tableforone.meal.reminder.MealReminder
+import studio.alphared.tableforone.objects.reminder.MealReminder
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {

@@ -1,20 +1,16 @@
 package studio.alphared.tableforone.views.mealreminderlist
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.*
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import studio.alphared.tableforone.BASE_URL
-import studio.alphared.tableforone.MealReminderRepository
-import studio.alphared.tableforone.meal.MealReminderAddViewModel
-import studio.alphared.tableforone.meal.database.MealCategoryDatabase
-import studio.alphared.tableforone.meal.recipe.MealRecipeDatabase
-import studio.alphared.tableforone.meal.reminder.MealReminder
-import studio.alphared.tableforone.meal.reminder.MealReminderDatabase
-import studio.alphared.tableforone.meal.select.MealCategoryItemDatabase
+import studio.alphared.tableforone.repository.MealReminderRepository
+import studio.alphared.tableforone.objects.category.MealCategoryDatabase
+import studio.alphared.tableforone.objects.recipe.MealRecipeDatabase
+import studio.alphared.tableforone.objects.reminder.MealReminder
+import studio.alphared.tableforone.objects.reminder.MealReminderDatabase
+import studio.alphared.tableforone.objects.select.MealCategoryItemDatabase
 import studio.alphared.tableforone.network.MealApiService
 import studio.alphared.tableforone.network.Resource
 import studio.alphared.tableforone.utils.TimeDateComparator

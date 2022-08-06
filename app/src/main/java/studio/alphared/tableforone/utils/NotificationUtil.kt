@@ -11,8 +11,15 @@ import studio.alphared.tableforone.R
 
 const val MEAL_REMINDER_KEY_ID = "MEAL_REMINDER_KEY"
 const val MEAL_REMINDER_NAME = "MEAL_REMINDER_NAME"
+const val MEAL_REMINDER_DATE_TIME = "MEAL_REMINDER_DATE_TIME"
+
 private const val NOTIFICATION_ID = 0
-fun NotificationManager.setupNotificationAlarm(applicationContext: Context, mealReminderId: Long, mealName: String?) {
+fun NotificationManager.setupNotificationAlarm(
+    applicationContext: Context,
+    mealReminderId: Long,
+    mealName: String?,
+    mealDateTime: Long
+) {
 
     val intent = Intent(applicationContext, MealReminderDetailActivity::class.java).apply {
         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -40,6 +47,7 @@ fun NotificationManager.setupNotificationAlarm(applicationContext: Context, meal
             .setAutoCancel(true)
             .setStyle(bigPicStyle)
             .setLargeIcon(mealImage)
-    notify(NOTIFICATION_ID, builder.build())
+    val notificationId= (NOTIFICATION_ID+mealReminderId+mealDateTime).toInt()
+    notify(notificationId, builder.build())
 }
 

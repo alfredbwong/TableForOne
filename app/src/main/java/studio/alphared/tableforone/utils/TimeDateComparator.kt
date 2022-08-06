@@ -1,6 +1,6 @@
 package studio.alphared.tableforone.utils
 
-import studio.alphared.tableforone.meal.reminder.MealReminder
+import studio.alphared.tableforone.objects.reminder.MealReminder
 
 class TimeDateComparator : Comparator<MealReminder>{
     override fun compare(o1: MealReminder, o2: MealReminder): Int {

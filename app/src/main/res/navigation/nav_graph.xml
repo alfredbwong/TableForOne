@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/mealCategorySelectFragment"
-        android:name="studio.alphared.tableforone.MealCategorySelectFragment"
+        android:name="studio.alphared.tableforone.views.mealcategoryselect.MealCategorySelectFragment"
         android:label="@string/select_meal_category_label"
         tools:layout="@layout/fragment_meal_category_select" >
         <action
@@ -25,16 +25,19 @@
     </fragment>
     <fragment
         android:id="@+id/mealSelectionFragment"
-        android:name="studio.alphared.tableforone.MealCategoryItemFragment"
+        android:name="studio.alphared.tableforone.views.mealcategoryitemselect.MealCategoryItemSelectFragment"
         android:label="@string/meal_recipe_select_title"
         tools:layout="@layout/fragment_meal_selection">
         <action
             android:id="@+id/action_mealSelectionFragment_to_mealRecipeDetailFragment"
             app:destination="@id/mealRecipeDetailFragment" />
+        <argument
+            android:name="categoryId"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/timeDateSelectFragment"
-        android:name="studio.alphared.tableforone.TimeDateSelectFragment"
+        android:name="studio.alphared.tableforone.views.timedateselect.TimeDateSelectFragment"
         android:label="@string/time_date_select_title"
         tools:layout="@layout/fragment_time_date_select">
         <action
@@ -43,12 +46,15 @@
     </fragment>
     <fragment
         android:id="@+id/mealRecipeDetailFragment"
-        android:name="studio.alphared.tableforone.MealRecipeDetailFragment"
+        android:name="studio.alphared.tableforone.views.mealrecipedetail.MealRecipeDetailFragment"
         android:label="@string/recipe_detail_title"
         tools:layout="@layout/fragment_meal_recipe_detail">
         <action
             android:id="@+id/action_mealRecipeDetailFragment_to_timeDateSelectFragment"
             app:destination="@id/timeDateSelectFragment" />
+        <argument
+            android:name="mealId"
+            app:argType="long" />
     </fragment>
     <activity
         android:id="@+id/mealReminderDetailActivity"

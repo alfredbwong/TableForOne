@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidKotlin/TableForOne/app/src/main/res/layout/fragment_meal_list.xml" value="0.2758152173913043" />
+        <entry key="..\:/AndroidKotlin/TableForOne/app/src/main/res/layout/fragment_meal_recipe_detail.xml" value="0.15" />
         <entry key="..\:/AndroidKotlin/TableForOne/app/src/main/res/layout/meal_reminder_list_item.xml" value="0.18802083333333333" />
       </map>
     </option>

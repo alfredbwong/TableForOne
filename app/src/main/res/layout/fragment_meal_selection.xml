@@ -6,14 +6,14 @@
     <data>
         <variable
             name="viewModelCategories"
-            type="studio.alphared.tableforone.meal.MealReminderAddViewModel" />
+            type="studio.alphared.tableforone.objects.MealReminderAddViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mealSelectLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MealCategoryItemFragment">
+        tools:context=".views.mealcategoryitemselect.MealCategoryItemSelectFragment">
 
         <ProgressBar
             android:id="@+id/loadingRecipeSelectProgressBar"

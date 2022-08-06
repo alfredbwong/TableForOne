@@ -1,6 +1,6 @@
 package studio.alphared.tableforone.adapter
 
-import studio.alphared.tableforone.meal.Ingredient
+import studio.alphared.tableforone.objects.Ingredient
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

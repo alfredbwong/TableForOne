@@ -6,12 +6,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DividerItemDecoration
-import studio.alphared.tableforone.MainActivity
 import studio.alphared.tableforone.adapter.RecipeIngredientAdapter
 import studio.alphared.tableforone.adapter.RecipeInstructionAdapter
 import studio.alphared.tableforone.databinding.ActivityMealReminderDetailBinding
-import studio.alphared.tableforone.meal.MealCategorySelectViewModelFactory
-import studio.alphared.tableforone.meal.MealReminderAddViewModel
+import studio.alphared.tableforone.objects.MealReminderAddViewModel
+import studio.alphared.tableforone.objects.MealReminderAddViewModelFactory
 import studio.alphared.tableforone.network.Status
 import studio.alphared.tableforone.utils.MEAL_REMINDER_KEY_ID
 
@@ -19,7 +18,7 @@ class MealReminderDetailActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMealReminderDetailBinding
     private val viewModel: MealReminderAddViewModel by viewModels {
-        MealCategorySelectViewModelFactory(applicationContext)
+        MealReminderAddViewModelFactory(applicationContext)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,15 +30,15 @@ class MealReminderDetailActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_meal_reminder_detail)
 
         viewModel.getMealReminderById(mealId)
-        viewModel.mealReminder.observe(this, { resource ->
+        viewModel.mealReminder.observe(this) { resource ->
             when (resource.status) {
                 Status.SUCCESS -> {
                     if (resource.data == null) {
 
                     } else {
                         binding.mealReminderDetail = resource.data
-                        viewModel.convertListOfInstructions(resource.data.strInstructions)
-                        viewModel.createListOfIngredients(resource.data)
+                        viewModel.processAndSaveListOfInstructions(resource.data.strInstructions)
+                        viewModel.processAndSaveListOfIngredients(resource.data)
                         binding.executePendingBindings()
                     }
 
@@ -53,7 +52,7 @@ class MealReminderDetailActivity : AppCompatActivity() {
 
                 }
             }
-        })
+        }
         val instructionAdapter = RecipeInstructionAdapter()
         binding.mealReminderInstructions.adapter = instructionAdapter
         viewModel.mealRecipeItemInstructions.observe(this, {
