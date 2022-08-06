@@ -25,16 +25,18 @@ fun parseMealCategoriesJsonResult(jsonResult: JSONObject): ArrayList<MealCategor
 }
 
 fun parseMealSelectRecipesJsonResult(jsonResult: JSONObject, category: String): ArrayList<MealCategoryItem> {
-    val mealSelectJSON = jsonResult.getJSONArray("meals")
     val mealSelectList = ArrayList<MealCategoryItem>()
+    if (!jsonResult.isNull("meals")) {
+        val mealSelectJSON = jsonResult.getJSONArray("meals")
 
-    for ( i in 0 until mealSelectJSON.length()){
-        val mealCategoryObj = mealSelectJSON.getJSONObject(i)
-        val mealName = mealCategoryObj.getString("strMeal")
-        val mealThumbUrl = mealCategoryObj.getString("strMealThumb")
-        val mealId = mealCategoryObj.getLong("idMeal")
-        val mealSelectItem = MealCategoryItem(0,mealName, mealThumbUrl, mealId,category)
-        mealSelectList.add(mealSelectItem)
+        for (i in 0 until mealSelectJSON.length()) {
+            val mealCategoryObj = mealSelectJSON.getJSONObject(i)
+            val mealName = mealCategoryObj.getString("strMeal")
+            val mealThumbUrl = mealCategoryObj.getString("strMealThumb")
+            val mealId = mealCategoryObj.getLong("idMeal")
+            val mealSelectItem = MealCategoryItem(0, mealName, mealThumbUrl, mealId, category)
+            mealSelectList.add(mealSelectItem)
+        }
     }
     return mealSelectList
 }
